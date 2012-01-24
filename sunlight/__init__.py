@@ -19,5 +19,7 @@
 # SOFTWARE.
 
 import sunlight.services.openstates
+OpenStates   = sunlight.services.openstates.OpenStates
 
-OpenStates = sunlight.services.openstates.OpenStates
+import sunlight.services.capitolwords
+CapitolWords = sunlight.services.capitolwords
