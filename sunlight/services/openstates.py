@@ -19,14 +19,12 @@
 # SOFTWARE.
 
 import sunlight.service
-import sunlight.registry
-
 import json
 
 module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
-class OpenStates:
+class OpenStates(sunlight.service.Service):
     def get_url( self, obj, apikey, **kwargs ):
         ret = "%s/%s?apikey=%s" % (
             service_url,
@@ -51,5 +49,3 @@ class OpenStates:
             return "Unknown error code!!! Recieved a %s from the server." % (
                 str( code )
             )
-
-sunlight.registry.registered_objects[module_name] = OpenStates

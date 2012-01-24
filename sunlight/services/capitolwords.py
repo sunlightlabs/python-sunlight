@@ -19,14 +19,13 @@
 # SOFTWARE.
 
 import sunlight.service
-import sunlight.registry
 
 import json
 
 module_name = "capitolwords"
 service_url = "http://capitolwords.org/api"
 
-class CapitolWords:
+class CapitolWords(sunlight.service.Service):
     def get_url( self, obj, apikey, **kwargs ):
         ret = "%s/%s.json?apikey=%s" % (
             service_url,
@@ -48,5 +47,3 @@ class CapitolWords:
             return "Unknown error code!!! Recieved a %s from the server." % (
                 str( code )
             )
-
-sunlight.registry.registered_objects[module_name] = CapitolWords

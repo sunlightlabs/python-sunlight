@@ -25,35 +25,29 @@ in a single blow.
 
 import sunlight.common
 import sunlight.errors
-import sunlight.registry
 
 import urllib2
 
 API_KEY = None
 
 class Service:
-    def __init__(self, service):
+    def __init__(self):
         if API_KEY == None:
             raise sunlight.errors.NoAPIKeyException(
                 "Please set `sunlight.service.API_KEY` :)"
             )
-        if service not in sunlight.registry.registered_objects:
-            raise sunlight.errors.NoSuchServiceException(
-                "Error: No such service: `%s'" % service
-            )
-        self.service = sunlight.registry.registered_objects[service]()
         self.apikey = API_KEY
 
     def get( self, top_level_object, **kwargs ):
-        url = self.service.get_url( top_level_object, self.apikey, **kwargs)
+        url = self.get_url( top_level_object, self.apikey, **kwargs)
         req = urllib2.Request(url)
         try:
             r = urllib2.urlopen(req)
             return_data = r.read()
-            return self.service.decode_response( return_data )
+            return self.decode_response( return_data )
         except urllib2.HTTPError as e:
             code = e.getcode()
             ex = sunlight.errors.BadRequestException(
-                self.service.handle_bad_http_code( code ))
+                self.handle_bad_http_code( code ))
             ex.url = e.geturl()
             raise ex

@@ -18,10 +18,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""
-Common defs for the Sunlight API.
-"""
-
 API_SIGNUP_PAGE = "http://services.sunlightlabs.com/accounts/register/"
 
-import sunlight.services
