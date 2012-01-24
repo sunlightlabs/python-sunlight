@@ -25,20 +25,42 @@ module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
 class OpenStates(sunlight.service.Service):
+    """
+    Bindings into the OpenStates project
+
+    API Ref:            http://openstates.org/api/
+    About the project:  http://openstates.org/
+    """
 
     def metadata(self, **kwargs):
+        """
+        Get basic information on a given state.
+        """
         return self.get( "metadata", **kwargs )
 
     def bills(self, **kwargs):
+        """
+        Get information on a state-level bill
+        """
         return self.get( "bills", **kwargs )
 
     def legislators(self, **kwargs):
+        """
+        Get information on a state-level legislator
+        """
         return self.get( "legislators", **kwargs )
 
     def committees(self, **kwargs):
+        """
+        Get information on a state-level committee
+        """
         return self.get( "committees", **kwargs )
 
     def events(self, **kwargs):
+        """
+        Get information on an event coming up soon (such as a public hearining, 
+        or bill vote)
+        """
         return self.get( "events" **kwargs )
 
     def get_url( self, obj, apikey, **kwargs ):
