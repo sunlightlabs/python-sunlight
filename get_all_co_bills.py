@@ -2,8 +2,5 @@
 
 import sunlight
 
-#os = sunlight.OpenStates()
-#print os.bills(state="co")
-
-cw = sunlight.CapitolWords()
-print cw.text(phrase="united states")
+os = sunlight.OpenStates()
+print os.bills(state="co")
