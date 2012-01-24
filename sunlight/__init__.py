@@ -19,10 +19,26 @@
 # SOFTWARE.
 
 import sunlight.services.openstates
-OpenStates   = sunlight.services.openstates.OpenStates
-
 import sunlight.services.capitolwords
+
+OpenStates   = sunlight.services.openstates.OpenStates
 CapitolWords = sunlight.services.capitolwords
 
+import os.path
+import sunlight.common
+import sunlight.service
+
 def attempt_to_load_apikey():
-    pass
+    try:
+        fd = open(os.path.expanduser(sunlight.common.KEY_LOCATION), 'r')
+        API_KEY = fd.read().strip()
+    except IOError as e:
+        if e.errno != 2:
+            print "W: Warning! " + e
+    try:
+        sunlight.service.API_KEY = \
+            os.environ[sunlight.common.KEY_ENVVAR].strip()
+    except KeyError as e:
+        pass
+
+attempt_to_load_apikey()

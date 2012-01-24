@@ -20,3 +20,5 @@
 
 API_SIGNUP_PAGE = "http://services.sunlightlabs.com/accounts/register/"
 
+KEY_LOCATION    = "~/.sunlight.foo"
+KEY_ENVVAR      = "SUNLIGHT_API_KEY"
