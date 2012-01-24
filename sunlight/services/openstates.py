@@ -25,6 +25,22 @@ module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
 class OpenStates(sunlight.service.Service):
+
+    def metadata(self, **kwargs):
+        return self.get( "metadata", **kwargs )
+
+    def bills(self, **kwargs):
+        return self.get( "bills", **kwargs )
+
+    def legislators(self, **kwargs):
+        return self.get( "legislators", **kwargs )
+
+    def committees(self, **kwargs):
+        return self.get( "committees", **kwargs )
+
+    def events(self, **kwargs):
+        return self.get( "events" **kwargs )
+
     def get_url( self, obj, apikey, **kwargs ):
         ret = "%s/%s?apikey=%s" % (
             service_url,
