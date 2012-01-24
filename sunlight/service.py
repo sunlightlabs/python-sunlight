@@ -29,14 +29,20 @@ import sunlight.registry
 
 import urllib2
 
+API_KEY = None
+
 class Service:
-    def __init__(self, service, apikey):
+    def __init__(self, service):
+        if API_KEY == None:
+            raise sunlight.errors.NoAPIKeyException(
+                "Please set `sunlight.service.API_KEY` :)"
+            )
         if service not in sunlight.registry.registered_objects:
             raise sunlight.errors.NoSuchServiceException(
                 "Error: No such service: `%s'" % service
             )
         self.service = sunlight.registry.registered_objects[service]()
-        self.apikey = apikey
+        self.apikey = API_KEY
 
     def get( self, top_level_object, **kwargs ):
         url = self.service.get_url( top_level_object, self.apikey, **kwargs)

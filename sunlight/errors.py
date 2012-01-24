@@ -32,3 +32,6 @@ class NoSuchServiceException(SunlightException):
 
 class BadRequestException(SunlightException):
     pass
+
+class NoAPIKeyException(SunlightException):
+    pass
