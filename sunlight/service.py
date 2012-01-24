@@ -39,15 +39,15 @@ class Service:
         self.apikey = API_KEY
 
     def get( self, top_level_object, **kwargs ):
-        url = self.get_url( top_level_object, self.apikey, **kwargs)
+        url = self._get_url( top_level_object, self.apikey, **kwargs)
         req = urllib2.Request(url)
         try:
             r = urllib2.urlopen(req)
             return_data = r.read()
-            return self.decode_response( return_data )
+            return self._decode_response( return_data )
         except urllib2.HTTPError as e:
             code = e.getcode()
             ex = sunlight.errors.BadRequestException(
-                self.handle_bad_http_code( code ))
+                self._handle_bad_http_code( code ))
             ex.url = e.geturl()
             raise ex

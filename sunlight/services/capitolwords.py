@@ -52,7 +52,9 @@ class CapitolWords(sunlight.service.Service):
         """
         return self.get( "text", **kwargs )
 
-    def get_url( self, obj, apikey, **kwargs ):
+    # API impl methods below
+
+    def _get_url( self, obj, apikey, **kwargs ):
         ret = "%s/%s.json?apikey=%s" % (
             service_url,
             obj,
@@ -62,10 +64,11 @@ class CapitolWords(sunlight.service.Service):
             ret += "&%s=%s" % ( arg, kwargs[arg] )
         return ret
 
-    def decode_response( self, response ):
+    def _decode_response( self, response ):
         return json.loads( response )
 
-    def handle_bad_http_code( self, code ):
+    def _handle_bad_http_code( self, code ):
+        # Soon to be deprecated
         messages = {}
         try:
             return messages[code]

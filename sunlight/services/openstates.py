@@ -63,7 +63,9 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get( "events" **kwargs )
 
-    def get_url( self, obj, apikey, **kwargs ):
+    # API impl methods
+
+    def _get_url( self, obj, apikey, **kwargs ):
         ret = "%s/%s?apikey=%s" % (
             service_url,
             obj,
@@ -73,10 +75,13 @@ class OpenStates(sunlight.service.Service):
             ret += "&%s=%s" % ( arg, kwargs[arg] )
         return ret
 
-    def decode_response( self, response ):
+    def _decode_response( self, response ):
         return json.loads( response )
 
-    def handle_bad_http_code( self, code ):
+    def _handle_bad_http_code( self, code ):
+        # This will most likely be removed when we can get a read on the
+        # errorful page. For now, this.
+
         messages = {
             400 : "Error with your request. Perhaps too many results?",
             404 : "Object doesn't exist."
