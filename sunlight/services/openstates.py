@@ -39,4 +39,19 @@ class OpenStates:
             ret += "&%s=%s" % ( arg, kwargs[arg] )
         return ret
 
+    def decode_response( self, response ):
+        return json.loads( response )
+
+    def handle_bad_http_code( self, code ):
+        messages = {
+            400 : "Error with your request. Perhaps too many results?",
+            404 : "Object doesn't exist."
+        }
+        try:
+            return messages[code]
+        except KeyError as e:
+            return "Unknown error code!!! Recieved a %s from the server." % (
+                str( code )
+            )
+
 sunlight.registry.registered_objects[module_name] = OpenStates

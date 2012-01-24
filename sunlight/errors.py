@@ -29,3 +29,6 @@ class SunlightException(Exception):
 
 class NoSuchServiceException(SunlightException):
     pass
+
+class BadRequestException(SunlightException):
+    pass

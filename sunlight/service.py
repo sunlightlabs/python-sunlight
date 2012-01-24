@@ -27,6 +27,8 @@ import sunlight.common
 import sunlight.errors
 import sunlight.registry
 
+import urllib2
+
 class Service:
     def __init__(self, service, apikey):
         if service not in sunlight.registry.registered_objects:
@@ -37,5 +39,11 @@ class Service:
         self.apikey = apikey
 
     def get( self, top_level_object, **kwargs ):
-        print self.service.get_url( top_level_object, self.apikey,
-            **kwargs)
+        url = self.service.get_url( top_level_object, self.apikey, **kwargs)
+        req = urllib2.Request(url)
+        try:
+            r = urllib2.urlopen(req)
+        except urllib2.HTTPError as e:
+            code = e.getcode()
+            raise sunlight.errors.BadRequestException(
+                self.service.handle_bad_http_code( code ))
