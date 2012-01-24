@@ -34,8 +34,8 @@ class Service:
     def __init__(self):
         if API_KEY == None:
             raise sunlight.errors.NoAPIKeyException(
-                "Please set `sunlight.service.API_KEY` :)"
-            )
+"Warning: Missing API Key. please visit " + sunlight.common.API_SIGNUP_PAGE +
+" to register for a key.")
         self.apikey = API_KEY
 
     def get( self, top_level_object, **kwargs ):

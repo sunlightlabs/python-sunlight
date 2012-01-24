@@ -23,3 +23,6 @@ OpenStates   = sunlight.services.openstates.OpenStates
 
 import sunlight.services.capitolwords
 CapitolWords = sunlight.services.capitolwords
+
+def attempt_to_load_apikey():
+    pass
