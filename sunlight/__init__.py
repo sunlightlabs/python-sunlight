@@ -22,7 +22,7 @@ import sunlight.services.openstates
 import sunlight.services.capitolwords
 
 OpenStates   = sunlight.services.openstates.OpenStates
-CapitolWords = sunlight.services.capitolwords
+CapitolWords = sunlight.services.capitolwords.CapitolWords
 
 import os.path
 import sunlight.common

@@ -26,6 +26,16 @@ module_name = "capitolwords"
 service_url = "http://capitolwords.org/api"
 
 class CapitolWords(sunlight.service.Service):
+
+    def dates( self, **kwargs ):
+        return self.get( "dates", **kwargs )
+
+    def phrases( self, **kwargs ):
+        return self.get( "phrases", **kwargs )
+
+    def text( self, **kwargs ):
+        return self.get( "text", **kwargs )
+
     def get_url( self, obj, apikey, **kwargs ):
         ret = "%s/%s.json?apikey=%s" % (
             service_url,
