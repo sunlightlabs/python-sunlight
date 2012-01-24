@@ -43,6 +43,8 @@ class Service:
         req = urllib2.Request(url)
         try:
             r = urllib2.urlopen(req)
+            return_data = r.read()
+            return self.service.decode_response( return_data )
         except urllib2.HTTPError as e:
             code = e.getcode()
             raise sunlight.errors.BadRequestException(

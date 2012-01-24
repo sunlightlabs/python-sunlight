@@ -25,6 +25,8 @@ OpenStates URL Library
 import sunlight.service
 import sunlight.registry
 
+import json
+
 module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
