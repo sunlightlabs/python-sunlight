@@ -23,12 +23,12 @@ import sunlight.registry
 
 import json
 
-module_name = "openstates"
-service_url = "http://openstates.org/api/v1"
+module_name = "capitolwords"
+service_url = "http://capitolwords.org/api"
 
-class OpenStates:
+class CapitolWords:
     def get_url( self, obj, apikey, **kwargs ):
-        ret = "%s/%s?apikey=%s" % (
+        ret = "%s/%s.json?apikey=%s" % (
             service_url,
             obj,
             apikey
@@ -41,10 +41,7 @@ class OpenStates:
         return json.loads( response )
 
     def handle_bad_http_code( self, code ):
-        messages = {
-            400 : "Error with your request. Perhaps too many results?",
-            404 : "Object doesn't exist."
-        }
+        messages = {}
         try:
             return messages[code]
         except KeyError as e:
@@ -52,4 +49,4 @@ class OpenStates:
                 str( code )
             )
 
-sunlight.registry.registered_objects[module_name] = OpenStates
+sunlight.registry.registered_objects[module_name] = CapitolWords
