@@ -53,5 +53,7 @@ class Service:
             return self.service.decode_response( return_data )
         except urllib2.HTTPError as e:
             code = e.getcode()
-            raise sunlight.errors.BadRequestException(
+            ex = sunlight.errors.BadRequestException(
                 self.service.handle_bad_http_code( code ))
+            ex.url = e.geturl()
+            raise ex
