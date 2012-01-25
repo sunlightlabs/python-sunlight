@@ -9,7 +9,11 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   sunlight
+   sunlight.rst
+   sunlight/service.rst
+   sunlight/common.rst
+   sunlight/errors.rst
+   sunlight/services/index.rst
 
 Indices and tables
 ==================
