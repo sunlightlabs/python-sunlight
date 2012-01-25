@@ -105,6 +105,15 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get( "events" **kwargs )
 
+    def districts(self, **kwargs):
+        """
+        Query the OpenStates server for information regarding state-level
+        legislative districts.
+
+        Check out the `docs <http://openstates.org/api/districts/>`_.
+        """
+        return self.get( "districts", **kwargs )
+
     # API impl methods
 
     def _get_url( self, obj, apikey, **kwargs ):
