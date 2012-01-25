@@ -1,8 +1,19 @@
 OpenStates -- States rule!
 ==========================
 
-API Documentation
-*****************
+This is a thin wrapper around the `OpenStates <http://openstates.org/api/>`_
+API, which provides state-local data on Legislators, Legislative Instruments,
+Votes, Committees, Events, Districts and more!
+
+Please consider contributing to the
+`project <https://github.com/sunlightlabs/openstates>`_, it's all open-source,
+and community involvement is valued very much by the OpenStates crew.
+
+.. note::
+    If you come accrros data quality issues, broken code, or missing data,
+    please file a report on the
+    `Github issues page <https://github.com/sunlightlabs/openstates/issues>`_.
+    Thanks!
 
 Class Documentation
 *******************
