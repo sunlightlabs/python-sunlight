@@ -7,9 +7,9 @@ os = OpenStates()
 
 vt_agro_bills = os.bills(
     q='agriculture',
-        state='vt',
-            chamber='upper'
-            )
+    state='vt',
+    chamber='upper'
+)
 
 for bill in vt_agro_bills:
-        print bill['title']
+    print bill['title']
