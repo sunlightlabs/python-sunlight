@@ -16,12 +16,12 @@ __version__ = "0.1~pre1"
 import sunlight.services.openstates
 import sunlight.services.capitolwords
 
-OpenStates   = sunlight.services.openstates.OpenStates
+openstates   = sunlight.services.openstates.OpenStates()
 """
 See :class:`sunlight.services.openstates.OpenStates`
 """
 
-CapitolWords = sunlight.services.capitolwords.CapitolWords
+capitolwords = sunlight.services.capitolwords.CapitolWords()
 """
 See :class:`sunlight.services.capitolwords.CapitolWords`
 """
