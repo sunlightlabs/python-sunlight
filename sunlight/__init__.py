@@ -18,6 +18,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Sunlight API Entry point
+
+.. moduleauthor:: Paul Tagliamonte <paultag@sunlightfoundation.com>
+
+"""
+
 __appname__ = "sunlight"
 __version__ = "0.1~pre1"
 
