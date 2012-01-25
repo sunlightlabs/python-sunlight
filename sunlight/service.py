@@ -31,32 +31,14 @@ class Service:
     code on how to actually fetch text over the network.
     """
 
-    def __init__(self):
-        """
-        Just your basic constructor.
-
-        Raises:
-            :class:`sunlight.errors.NoAPIKeyException`
-
-        .. warning::
-            Ensure that the API_KEY is set!
-
-        """
-
-        if API_KEY == None:
-            raise sunlight.errors.NoAPIKeyException(
-"Warning: Missing API Key. please visit " + sunlight.common.API_SIGNUP_PAGE +
-" to register for a key.")
-        self.apikey = API_KEY
-
     def get( self, top_level_object, **kwargs ):
         """
         Get some data from the network - this is where we actually fetch
         something and make a request.
 
-        .. warning:: Be sure that API_KEY was set before creating this
-            obeject. We really need it right now, and hopefully the __init__
-            forced the user into dealing with a lack of key by now.
+        .. warning:: Be sure that API_KEY was set before calling this method.
+            This will throw a :class:`sunlight.errors.NoAPIKeyException` if
+            the API_KEY is not set.
 
         args:
             ``top_level_object`` (str): Thing to query for (such as say,
@@ -67,7 +49,12 @@ class Service:
             to help create a query. Validation will happen down below, and
             on a per-API level.
         """
-        url = self._get_url( top_level_object, self.apikey, **kwargs)
+        if API_KEY == None:
+            raise sunlight.errors.NoAPIKeyException(
+"Warning: Missing API Key. please visit " + sunlight.common.API_SIGNUP_PAGE +
+" to register for a key.")
+
+        url = self._get_url( top_level_object, API_KEY, **kwargs)
         req = urllib2.Request(url)
         try:
             r = urllib2.urlopen(req)
