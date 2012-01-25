@@ -20,7 +20,6 @@
 
 """
 .. module:: sunlight.services.openstates
-    :platform: Linux, Unix, Windows
     :synopsis: OpenStates API Implementation
 
 OpenStates API Implementation inside ``python-sunlight``.

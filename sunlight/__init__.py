@@ -20,7 +20,6 @@
 
 """
 .. module:: sunlight
-    :platform: Linux, Unix, Windows
     :synopsis: Sunlight API Entry Point
 
 Sunlight API __init__ entry. This package includes and defines

@@ -20,7 +20,6 @@
 
 """
 .. module:: sunlight.service
-    :platform: Linux, Unix, Windows
     :synopsis: Sunlight API Superclass
 
 Base service class. All API classes (such as say -

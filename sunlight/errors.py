@@ -20,7 +20,6 @@
 
 """
 .. module:: sunlight.errors
-    :platform: Linux, Unix, Windows
     :synopsis: Exceptions and Errors
 """
 

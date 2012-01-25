@@ -20,7 +20,6 @@
 
 """
 .. module:: sunlight
-    :platform: Linux, Unix, Windows
     :synopsis: Constants and other Globally read things
 
 .. warning::
