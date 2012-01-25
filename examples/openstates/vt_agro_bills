@@ -2,10 +2,9 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the Expat license.
 
-from sunlight import OpenStates
-os = OpenStates()
+from sunlight import openstates
 
-vt_agro_bills = os.bills(
+vt_agro_bills = openstates.bills(
     q='agriculture',
     state='vt',
     chamber='upper'

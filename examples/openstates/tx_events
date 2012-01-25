@@ -2,10 +2,9 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the Expat license.
 
-from sunlight import OpenStates
-os = OpenStates()
+from sunlight import openstates
 
-tx_events = os.events( state='tx', type='committee:meeting' )
+tx_events = openstates.events( state='tx', type='committee:meeting' )
 for event in tx_events:
     print "Event @ %s" % event['when']
     for who in event['participants']:

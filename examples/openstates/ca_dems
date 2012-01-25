@@ -2,10 +2,9 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the Expat license.
 
-from sunlight import OpenStates
-os = OpenStates()
+from sunlight import openstates
 
-ca_dems = os.legislators(
+ca_dems = openstates.legislators(
     state='ca',
     party='Democratic',
     first_name='Bob',

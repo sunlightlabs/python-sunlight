@@ -2,9 +2,8 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the Expat license.
 
-from sunlight import OpenStates
-os = OpenStates()
+from sunlight import openstates
 
-md_cttys = os.committees( state='md', chamber='upper' )
+md_cttys = openstates.committees( state='md', chamber='upper' )
 for ctty in md_cttys:
         print "%s (%s)" % ( ctty['committee'], ctty['chamber'] )
