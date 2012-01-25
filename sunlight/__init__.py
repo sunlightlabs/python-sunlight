@@ -18,6 +18,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+__appname__ = "sunlight"
+__version__ = "0.1~pre1"
+
 import sunlight.services.openstates
 import sunlight.services.capitolwords
 
