@@ -19,8 +19,12 @@
 # SOFTWARE.
 
 """
-Base service class. This is how we can access most of the goodies from the API
-in a single blow.
+.. module:: sunlight.service
+    :platform: Linux, Unix, Windows
+    :synopsis: Sunlight API Superclass
+
+Base service class. All API classes (such as say -
+:class:`sunlight.services.openstates.OpenStates`) inherit from this.
 """
 
 import sunlight.common
@@ -29,6 +33,15 @@ import sunlight.errors
 import urllib2
 
 API_KEY = None
+"""
+This might be populated from :func:`sunlight.attempt_to_load_apikey`, or ``Null``
+(as it is out of the box). All :class:`sunlight.service.Service` objects will
+make use of this API key (once, in it's __init__, not after that) to do their
+job.
+
+.. note::
+    All Sunlight services share API keys. Nice, right?
+"""
 
 class Service:
     def __init__(self):
