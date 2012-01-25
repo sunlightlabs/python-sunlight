@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+# Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
+# under the terms of the Expat license.
+
+from sunlight import OpenStates
+os = OpenStates()
+
+ctty = os.committee_lookup( "MDC000065" )
+print "%s is the %s" % ( ctty['id'], ctty['committee'] )

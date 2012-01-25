@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
+# under the terms of the Expat license.
+
+from sunlight import OpenStates
+os = OpenStates()
+
+reps = os.legislator_geo_lookup(
+    long="-78.76648",
+    lat="35.81336"
+)
+for rep in reps:
+    print "%s - %s %s" % ( rep['chamber'], rep['first_name'], rep['last_name'] )

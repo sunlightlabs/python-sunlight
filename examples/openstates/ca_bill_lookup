@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+# Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
+# under the terms of the Expat license.
+
+from sunlight import OpenStates
+os = OpenStates()
+
+bill = os.bill_lookup( 'ca', '20092010', 'AB 667')
+print "%s - %s" % ( bill['bill_id'], bill['+short_title'] )

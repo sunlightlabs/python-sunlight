@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
+# under the terms of the Expat license.
+
+from sunlight import OpenStates
+os = OpenStates()
+
+ca_dems = os.legislators(
+    state='ca',
+    party='Democratic',
+    first_name='Bob',
+    active='true'
+)
+
+for dem in ca_dems:
+    print "%s %s (%s)" % (
+        dem['first_name'], dem['last_name'], dem['chamber'] )
