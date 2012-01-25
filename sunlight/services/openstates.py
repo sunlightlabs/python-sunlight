@@ -160,6 +160,18 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get( "events", **kwargs )
 
+    def event_lookup( self, event_id, **kwargs ):
+        """
+        Query the OpenStates server for information regarding a single event.
+
+        ``event_id`` is an OpenStates event ID, such as ``TXE00000990``.
+
+        Read more on how this is used in the API docs for OpenStates on
+        `events <http://openstates.org/api/events/#event-lookup>`_.
+        """
+        lss = "events/%s/" % ( event_id )
+        return self.get( lss, **kwargs )
+
     def districts(self, **kwargs):
         """
         Query the OpenStates server for information regarding state-level
