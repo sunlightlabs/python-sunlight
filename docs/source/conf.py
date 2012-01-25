@@ -12,10 +12,9 @@
 # serve to show the default.
 
 import sys, os
-sys.path.append("../")
+sys.path.append("../../")
 
 import sunlight
-
 version = sunlight.__version__
 
 
