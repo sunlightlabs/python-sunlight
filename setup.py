@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Copyright (c) Sunlight Labs, 2012 under the terms and conditions
+# of the LICENSE file.
 
 from sunlight import __appname__, __version__
 from distutils.core import setup
@@ -15,7 +17,7 @@ setup(
 
     long_description = long_description,
     description      = 'Unified Sunlight API bindings',
-    license          = "Expat",
+    license          = "BSD",
     url              = "https://github.com/sunlightlabs/python-sunlight",
 
     platforms        = ['any']
