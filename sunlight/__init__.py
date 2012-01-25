@@ -53,6 +53,10 @@ def attempt_to_load_apikey():
     This function (which will be auto-called on import of :mod:`sunlight`),
     will attempt to pull the Sunlight API Key from a few places (to offload
     complexity of apps using these bindings) before getting too far.
+
+    .. note::
+        This function is implemented to let the enviroment variable override
+        the file read key. Keep this in mind when debugging silly issues.
     """
 
     try:

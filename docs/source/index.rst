@@ -9,6 +9,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   sunlight
+
 Indices and tables
 ==================
 
