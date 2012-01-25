@@ -26,10 +26,9 @@ Examples
 
 Bills::
 
-    from sunlight import OpenStates
-    os = OpenStates()
+    from sunlight import openstates
 
-    vt_agro_bills = os.bills(
+    vt_agro_bills = openstates.bills(
         q='agriculture',
         state='vt',
         chamber='upper'
@@ -41,7 +40,9 @@ Bills::
 
 Legislators::
 
-    ca_dems = os.legislators(
+    from sunlight import openstates
+    
+    ca_dems = openstates.legislators(
         state='ca',
         party='Democratic',
         first_name='Bob',
@@ -54,19 +55,17 @@ Legislators::
 
 Committees::
 
-    from sunlight import OpenStates
-    os = OpenStates()
+    from sunlight import openstates
 
-    md_cttys = os.committees( state='md', chamber='upper' )
+    md_cttys = openstates.committees( state='md', chamber='upper' )
     for ctty in md_cttys:
         print "%s (%s)" % ( ctty['committee'], ctty['chamber'] )
 
 Events::
 
-    from sunlight import OpenStates
-    os = OpenStates()
+    from sunlight import openstates
     
-    tx_events = os.events( state='tx', type='committee:meeting' )
+    tx_events = openstates.events( state='tx', type='committee:meeting' )
     for event in tx_events:
         print "Event @ %s" % event['when']
         for who in event['participants']:

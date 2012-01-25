@@ -36,10 +36,9 @@ that you're using - there'll be more on them there.
 
 OpenStates in 5 seconds::
 
-    from sunlight import OpenStates
-    open_states = OpenStates()
+    from sunlight import openstates
 
-    bills = open_states.bills(
+    bills = openstates.bills(
         q="agriculture",
         state="vt",
         chamber="upper"
