@@ -16,7 +16,7 @@ setup(
     long_description = long_description,
     description      = 'Unified Sunlight API bindings',
     license          = "Expat",
-    url              = "https://github.com/paultag/python-sunlight",
+    url              = "https://github.com/sunlightlabs/python-sunlight",
 
     platforms        = ['any']
 )
