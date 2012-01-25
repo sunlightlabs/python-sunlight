@@ -62,11 +62,28 @@ class OpenStates(sunlight.service.Service):
         The keyword arguments can be found on the
         `OpenStates Website <http://openstates.org/api/bills/>`_.
 
-        Doing `lookups <http://openstates.org/api/bills/#bill-lookup>`_,
-        as well as `searches <http://openstates.org/api/bills/#bill-search>`_
-        should match the documentation.
+        More information on searches can be found in the API
+        `refdoc <http://openstates.org/api/bills/#bill-search>`_
         """
         return self.get( "bills", **kwargs )
+
+    def bill_lookup( self, state_abbr, session,
+            bill_id, chamber=None, **kwargs ):
+        """
+        Query the OpenStates server for data relating to a very exact bill
+        lookup path.
+
+        The ``chamber`` argument is optional, and should be used in cases
+        where it's ambiguous.
+
+        Doing `lookups <http://openstates.org/api/bills/#bill-lookup>`_,
+        should match the documentation.
+        """
+        lss = "bills/%s/%s/" % ( state_abbr, session )
+        if chamber != None:
+            lss += chamber + "/"
+        lss += bill_id + "/"
+        return self.get( lss, **kwargs )
 
     def legislators(self, **kwargs):
         """
@@ -76,14 +93,37 @@ class OpenStates(sunlight.service.Service):
         The `Legislator <http://openstates.org/api/legislators/>`_ API docs are
         complete and detailed for general use.
 
-        That page details
-        `lookups <http://openstates.org/api/legislators/#legislator-lookup>`_,
-        `searches <http://openstates.org/api/legislators/#legislator-search>`_,
-        as well as the
-        `geo-searching <http://openstates.org/api/legislators/#geo-lookup>`_,
-        all of which should be usable from here.
+        Check out the API docs on preforming
+        `searches <http://openstates.org/api/legislators/#legislator-search>`_
+        on the site.
         """
         return self.get( "legislators", **kwargs )
+
+    def legislator_lookup( self, leg_id, **kwargs ):
+        """
+        Query the OpenStates server for data relating to a single legislator.
+
+        the ``leg_id`` argument is a legislator ID code, such as ``MDL000210``
+
+        `lookups <http://openstates.org/api/legislators/#legislator-lookup>`_
+        should match the docs pretty closely.
+        """
+        lss = "legislators/%s/" % leg_id
+        return self.get( lss, **kwargs )
+
+    def legislator_geo_lookup( self, **kwargs ):
+        """
+        Query the OpenStates server for data on all legislators that serve
+        districts containing a given geographical point.
+
+        This method takes two kwargs, one for Latitude (``lat``), and
+        another for Longitude (``long``) (as documented on the API refdoc
+        below)
+
+        `geo-searching <http://openstates.org/api/legislators/#geo-lookup>`_
+        is on the API docs for the OpenStates site.
+        """
+        return self.get( "legislators/geo/", **kwargs )
 
     def committees(self, **kwargs):
         """
@@ -94,6 +134,21 @@ class OpenStates(sunlight.service.Service):
         on the `OpenStates site <http://openstates.org/api/committees/>`_.
         """
         return self.get( "committees", **kwargs )
+
+    def committee_lookup( self, committee_id, **kwargs ):
+        """
+        Query the OpenStates server for information regarding a single
+        state-level legislative committee.
+
+        ``committee_id`` is the committee ID code, such as ``MDC000065``.
+
+        For more information (such as what kwargs make sense), please
+        read up on the API documentation relating to
+        `lookups <http://openstates.org/api/committees/#committee-lookup>`_
+        """
+
+        lss = "committees/%s/" % ( committee_id )
+        return self.get( lss, **kwargs )
 
     def events(self, **kwargs):
         """
