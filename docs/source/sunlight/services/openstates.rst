@@ -1,5 +1,16 @@
-Sunlight API
-************
+OpenStates -- States rule!
+==========================
 
-.. automodule:: sunlight.service.openstates
+API Documentation
+*****************
+
+Class Documentation
+*******************
+
+.. automodule:: sunlight.services.openstates
    :members:
+
+Examples
+********
+
+

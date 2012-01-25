@@ -18,6 +18,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
 # SOFTWARE.
 
+"""
+.. module:: sunlight.services.openstates
+    :platform: Linux, Unix, Windows
+    :synopsis: OpenStates API Implementation
+
+OpenStates API Implementation inside ``python-sunlight``.
+"""
+
 import sunlight.service
 import json
 
@@ -26,40 +34,74 @@ service_url = "http://openstates.org/api/v1"
 
 class OpenStates(sunlight.service.Service):
     """
-    Bindings into the OpenStates project
-
-    API Ref:            http://openstates.org/api/
-    About the project:  http://openstates.org/
+    Bindings into the `OpenStates project <http://openstates.org/>`_. Keep in
+    mind this is a *very* thin wrapper around the
+    `OpenStates API <http://openstates.org/api/>`_, so most of this should be
+    super predictable and easy to pick up. Just as a little extra help, we've
+    included docs on each of the major methods.
     """
 
     def metadata(self, **kwargs):
         """
-        Get basic information on a given state.
+        Query the OpenStates searver for metadata relating to state-level
+        assemblies, legislators and bills.
+
+        The docs for the
+        `Overview <http://openstates.org/api/metadata/#metadata-overview>`_
+        access method, as well as the
+        `State-local <http://openstates.org/api/metadata/#state-metadata>`_
+        access method can be found on the OpenStates site linked.
         """
         return self.get( "metadata", **kwargs )
 
     def bills(self, **kwargs):
         """
-        Get information on a state-level bill
+        Query the OpenStates server for data relating to state-level
+        legislative instruments, such as bills, memoranda, or resolutions.
+
+        The keyword arguments can be found on the
+        `OpenStates Website <http://openstates.org/api/bills/>`_.
+
+        Doing `lookups <http://openstates.org/api/bills/#bill-lookup>`_,
+        as well as `searches <http://openstates.org/api/bills/#bill-search>`_
+        should match the documentation.
         """
         return self.get( "bills", **kwargs )
 
     def legislators(self, **kwargs):
         """
-        Get information on a state-level legislator
+        Query the OpenStates server for data relating to the state-level
+        legislators.
+
+        The `Legislator <http://openstates.org/api/legislators/>`_ API docs are
+        complete and detailed for general use.
+
+        That page details
+        `lookups <http://openstates.org/api/legislators/#legislator-lookup>`_,
+        `searches <http://openstates.org/api/legislators/#legislator-search>`_,
+        as well as the
+        `geo-searching <http://openstates.org/api/legislators/#geo-lookup>`_,
+        all of which should be usable from here.
         """
         return self.get( "legislators", **kwargs )
 
     def committees(self, **kwargs):
         """
-        Get information on a state-level committee
+        Query the OpenStates server for information regarding state-level
+        legislative committees.
+
+        For information regarding it's use, please read the API documentation
+        on the `OpenStates site <http://openstates.org/api/committees/>`_.
         """
         return self.get( "committees", **kwargs )
 
     def events(self, **kwargs):
         """
-        Get information on an event coming up soon (such as a public hearining, 
-        or bill vote)
+        Query the OpenStates server for information regarding upcoming events
+        taken from a state-level legislative calendar.
+
+        Please do take a look at the fantastic documentation on the
+        `OpenStates site <http://openstates.org/api/events/>`_
         """
         return self.get( "events" **kwargs )
 
