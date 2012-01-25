@@ -44,7 +44,23 @@ job.
 """
 
 class Service:
+    """
+    Base class for all the API implementations, as well as a bunch of common
+    code on how to actually fetch text over the network.
+    """
+
     def __init__(self):
+        """
+        Just your basic constructor.
+
+        Raises:
+            :class:`sunlight.errors.NoAPIKeyException`
+
+        .. warning::
+            Ensure that the API_KEY is set!
+
+        """
+
         if API_KEY == None:
             raise sunlight.errors.NoAPIKeyException(
 "Warning: Missing API Key. please visit " + sunlight.common.API_SIGNUP_PAGE +
@@ -52,6 +68,23 @@ class Service:
         self.apikey = API_KEY
 
     def get( self, top_level_object, **kwargs ):
+        """
+        Get some data from the network - this is where we actually fetch
+        something and make a request.
+
+        .. warning:: Be sure that API_KEY was set before creating this
+            obeject. We really need it right now, and hopefully the __init__
+            forced the user into dealing with a lack of key by now.
+
+        args:
+            ``top_level_object`` (str): Thing to query for (such as say,
+                "bills" for OpenStates )
+        
+        kwargs:
+            These arguments will be passed to the underlying API implementation
+            to help create a query. Validation will happen down below, and
+            on a per-API level.
+        """
         url = self._get_url( top_level_object, self.apikey, **kwargs)
         req = urllib2.Request(url)
         try:
