@@ -103,7 +103,7 @@ class OpenStates(sunlight.service.Service):
         Please do take a look at the fantastic documentation on the
         `OpenStates site <http://openstates.org/api/events/>`_
         """
-        return self.get( "events" **kwargs )
+        return self.get( "events", **kwargs )
 
     def districts(self, **kwargs):
         """
