@@ -172,7 +172,7 @@ class OpenStates(sunlight.service.Service):
 
         For more information on this method, please check up on the OpenStates
         API doc on
-        ``boundray lookups <http://openstates.org/api/districts/#district-boundary-lookup>`_
+        `boundray lookups <http://openstates.org/api/districts/#district-boundary-lookup>`_
         """
         lss = "districts/boundary/%s/" % ( boundary_id )
         return self.get( lss, **kwargs )
