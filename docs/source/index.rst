@@ -1,10 +1,8 @@
-.. python-sunlight documentation master file, created by
-   sphinx-quickstart on Tue Jan 24 20:26:10 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to python-sunlight's documentation!
 ===========================================
+
+Welcome! This package is intended to a replacement (and unification) of the
+Sunlight Labs API projects.
 
 Contents:
 

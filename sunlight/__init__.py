@@ -18,10 +18,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Sunlight API Entry point
+"""
+.. module:: sunlight
+    :platform: Linux, Unix, Windows
+    :synopsis: Sunlight API Entry Point
 
-.. moduleauthor:: Paul Tagliamonte <paultag@sunlightfoundation.com>
-
+Sunlight API __init__ entry. This package includes and defines
+a few aliases, so that folks can just use the facade here, rather then
+fight with finding the right module to use.
 """
 
 __appname__ = "sunlight"
@@ -31,13 +35,26 @@ import sunlight.services.openstates
 import sunlight.services.capitolwords
 
 OpenStates   = sunlight.services.openstates.OpenStates
+"""
+See :class:`sunlight.services.openstates.OpenStates`
+"""
+
 CapitolWords = sunlight.services.capitolwords.CapitolWords
+"""
+See :class:`sunlight.services.capitolwords.CapitolWords`
+"""
 
 import os.path
 import sunlight.common
 import sunlight.service
 
 def attempt_to_load_apikey():
+    """
+    This function (which will be auto-called on import of :mod:`sunlight`),
+    will attempt to pull the Sunlight API Key from a few places (to offload
+    complexity of apps using these bindings) before getting too far.
+    """
+
     try:
         fp = os.path.expanduser(sunlight.common.KEY_LOCATION)
         fd = open(fp, 'r')

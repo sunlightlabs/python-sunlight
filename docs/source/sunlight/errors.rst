@@ -1,5 +1,5 @@
 Sunlight API
 ************
 
-.. automodule:: sunlight
+.. automodule:: sunlight.errors
    :members:
