@@ -181,6 +181,20 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get( "districts", **kwargs )
 
+    def district_boundary_lookup( self, boundary_id, **kwargs ):
+        """
+        Query the OpenStates server for information regarding state-level
+        legislative district boundaries.
+
+        ``boundary_id`` is something like ``sldl-tx-state-house-district-35``.
+
+        For more information on this method, please check up on the OpenStates
+        API doc on
+        ``boundray lookups <http://openstates.org/api/districts/#district-boundary-lookup>`_
+        """
+        lss = "districts/boundary/%s/" % ( boundary_id )
+        return self.get( lss, **kwargs )
+
     # API impl methods
 
     def _get_url( self, obj, apikey, **kwargs ):
