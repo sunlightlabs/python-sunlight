@@ -8,7 +8,7 @@
 CapitolWords API Implementation inside ``python-sunlight``.
 """
 
-from sunlight.errors import InvalidRequestException
+from sunlight.errors import InvalidRequestException, BadRequestException
 
 import sunlight.service
 import json
@@ -57,14 +57,33 @@ class CapitolWords(sunlight.service.Service):
 
         return self.get( "phrases", **kwargs )
 
-    def text( self, **kwargs ):
+    def text( self, phrase=None, title=None, **kwargs ):
         """
-        Query the CapitolWords server for information regarding 
+        Query the CapitolWords server for a full-text search of the
+        given arguments.
+
+        Neither ``phrase`` nor ``title`` are required, but one or the other
+        must be used. If both are left "None", a
+        :class:`sunlight.errors.BadRequestException` will be thrown.
+
+        ``phrase`` will do a full-text search on that phrase, whereas
+        ``title`` will doa  full-text search on the title of each CR
+        ( Congressional Record ) document.
 
         For a list of ``kwargs``, check up on the
         `docs <http://capitolwords.org/api/#text.json>`_, under
         "Optional arguments"
         """
+        if not phrase and not title:
+            raise BadRequestException(
+                "You must provide one of phrase or title to this method.")
+
+        if phrase:
+            kwargs['phrase'] = phrase
+
+        if title:
+            kwargs['title']  = title
+
         return self.get( "text", **kwargs )
 
     # API impl methods below
