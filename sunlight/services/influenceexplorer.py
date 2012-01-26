@@ -22,6 +22,9 @@ class InfluenceExplorer(sunlight.service.Service):
     def lobbying(self, **kwargs):
         return self.get("lobbying", **kwargs)
 
+    def grants(self, **kwargs):
+        return self.get("grants", **kwargs)
+
     # API impl methods below
 
     def _get_url( self, obj, apikey, **kwargs ):
