@@ -57,6 +57,18 @@ class CapitolWords(sunlight.service.Service):
 
         return self.get( "phrases", **kwargs )
 
+    def phrases_by_entity( self, entity_type, **kwargs ):
+        """
+        Query the CapitolWords server for information regarding the top
+        phrases for a given entity (such as phrase by legislator) Standard
+        arguments are supported.
+       
+
+        ``entity_type`` should be one of the types given in the API docs.
+        """
+        lss = "%s/%s" % ( "phrases", entity_type )
+        return self.get( lss, **kwargs )
+
     def text( self, phrase=None, title=None, **kwargs ):
         """
         Query the CapitolWords server for a full-text search of the
