@@ -34,7 +34,15 @@ class SunlightException(Exception):
 class BadRequestException(SunlightException):
     """
     This gets thrown when the underlying url request has recieved an abnormal
-    response code. 
+    response code.
+    """
+    pass
+
+
+class InvalidRequestException(BadRequestException):
+    """
+    This gets thrown when the API gets a valid response, but has an error that
+    should be passed back to the program.
     """
     pass
 
