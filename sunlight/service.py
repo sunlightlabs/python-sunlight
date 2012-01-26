@@ -61,8 +61,16 @@ class Service:
             return_data = r.read()
             return self._decode_response( return_data )
         except urllib2.HTTPError as e:
+
+            message = e.read()
             code = e.getcode()
-            ex = sunlight.errors.BadRequestException(
-                self._handle_bad_http_code( code ))
+
+            ex = sunlight.errors.BadRequestException( "Error (%s) -- %s" % (
+                code, message
+            ))
+
             ex.url = e.geturl()
+            ex.message = message
+            ex.code    = code
+
             raise ex

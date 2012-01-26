@@ -195,18 +195,3 @@ class OpenStates(sunlight.service.Service):
 
     def _decode_response( self, response ):
         return json.loads( response )
-
-    def _handle_bad_http_code( self, code ):
-        # This will most likely be removed when we can get a read on the
-        # errorful page. For now, this.
-
-        messages = {
-            400 : "Error with your request. Perhaps too many results?",
-            404 : "No data or no such method."
-        }
-        try:
-            return messages[code]
-        except KeyError as e:
-            return "Unknown error code!!! Recieved a %s from the server." % (
-                str( code )
-            )

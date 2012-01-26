@@ -49,13 +49,3 @@ class CapitolWords(sunlight.service.Service):
 
     def _decode_response( self, response ):
         return json.loads( response )
-
-    def _handle_bad_http_code( self, code ):
-        # Soon to be deprecated
-        messages = {}
-        try:
-            return messages[code]
-        except KeyError as e:
-            return "Unknown error code!!! Recieved a %s from the server." % (
-                str( code )
-            )
