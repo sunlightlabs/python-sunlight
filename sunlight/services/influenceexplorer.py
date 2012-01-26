@@ -10,7 +10,7 @@
 import sunlight.service
 import json
 
-service_url = "http://capitolwords.org/api"
+service_url = "http://transparencydata.com/api/1.0/"
 
 class InfluenceExplorer(sunlight.service.Service):
     """
