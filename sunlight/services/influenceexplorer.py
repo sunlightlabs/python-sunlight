@@ -25,6 +25,9 @@ class InfluenceExplorer(sunlight.service.Service):
     def grants(self, **kwargs):
         return self.get("grants", **kwargs)
 
+    def contracts(self, **kwargs):
+        return self.get("contracts", **kwargs)
+
     # API impl methods below
 
     def _get_url( self, obj, apikey, **kwargs ):
