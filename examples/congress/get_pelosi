@@ -2,4 +2,10 @@
 
 from sunlight import congress
 
-print congress.legislator( lastname="Pelosi" )
+n = congress.legislator( lastname="Pelosi" )
+n = n['response']['legislator']
+
+print "%s %s %s (%s)" % (n['title'], n['firstname'], n['lastname'], n['party'])
+
+if n['twitter_id'] != "":
+    print "You can find %s on twitter as %s" % (n['firstname'], n['twitter_id'])
