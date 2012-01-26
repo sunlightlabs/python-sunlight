@@ -2,5 +2,5 @@
 
 from sunlight import capitolwords
 
-for phrase in capitolwords.text( phrase="obama administration" )['results']:
+for phrase in capitolwords.text( phrase="obama administration" ):
     print "%s mentions Obama on %s" % ( phrase['title'], phrase['date'] )

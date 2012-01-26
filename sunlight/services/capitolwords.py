@@ -116,5 +116,9 @@ class CapitolWords(sunlight.service.Service):
             ex = InvalidRequestException( ret['error'] )
             ex.response = ret
             raise ex
+        if "results" in ret:
+            return ret['results']
+            # XXX: Verify this is actually
+            #      what we want.
         return ret
 
