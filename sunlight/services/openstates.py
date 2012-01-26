@@ -34,7 +34,7 @@ class OpenStates(sunlight.service.Service):
         `State-local <http://openstates.org/api/metadata/#state-metadata>`_
         access method can be found on the OpenStates site linked.
         """
-        return self.get( "metadata", **kwargs )
+        return self.get( [ "metadata" ], **kwargs )
 
     def bills(self, **kwargs):
         """
@@ -47,7 +47,7 @@ class OpenStates(sunlight.service.Service):
         More information on searches can be found in the API
         `refdoc <http://openstates.org/api/bills/#bill-search>`_
         """
-        return self.get( "bills", **kwargs )
+        return self.get( [ "bills" ], **kwargs )
 
     def bill_lookup( self, state_abbr, session,
             bill_id, chamber=None, **kwargs ):
@@ -61,10 +61,10 @@ class OpenStates(sunlight.service.Service):
         Doing `lookups <http://openstates.org/api/bills/#bill-lookup>`_,
         should match the documentation.
         """
-        lss = "bills/%s/%s/" % ( state_abbr, session )
+        lss = [ "bills", state_abbr, session ]
         if chamber != None:
-            lss += chamber + "/"
-        lss += bill_id + "/"
+            lss.append( chamber )
+        lss.append(bill_id)
         return self.get( lss, **kwargs )
 
     def legislators(self, **kwargs):
@@ -79,7 +79,7 @@ class OpenStates(sunlight.service.Service):
         `searches <http://openstates.org/api/legislators/#legislator-search>`_
         on the site.
         """
-        return self.get( "legislators", **kwargs )
+        return self.get( [ "legislators"], **kwargs )
 
     def legislator_lookup( self, leg_id, **kwargs ):
         """
@@ -90,7 +90,7 @@ class OpenStates(sunlight.service.Service):
         `lookups <http://openstates.org/api/legislators/#legislator-lookup>`_
         should match the docs pretty closely.
         """
-        lss = "legislators/%s/" % leg_id
+        lss = [ "legislators", leg_id ]
         return self.get( lss, **kwargs )
 
     def legislator_geo_lookup( self, **kwargs ):
@@ -105,7 +105,7 @@ class OpenStates(sunlight.service.Service):
         `geo-searching <http://openstates.org/api/legislators/#geo-lookup>`_
         is on the API docs for the OpenStates site.
         """
-        return self.get( "legislators/geo/", **kwargs )
+        return self.get( [ "legislators", "geo" ], **kwargs )
 
     def committees(self, **kwargs):
         """
@@ -115,7 +115,7 @@ class OpenStates(sunlight.service.Service):
         For information regarding it's use, please read the API documentation
         on the `OpenStates site <http://openstates.org/api/committees/>`_.
         """
-        return self.get( "committees", **kwargs )
+        return self.get( [ "committees" ], **kwargs )
 
     def committee_lookup( self, committee_id, **kwargs ):
         """
@@ -129,7 +129,7 @@ class OpenStates(sunlight.service.Service):
         `lookups <http://openstates.org/api/committees/#committee-lookup>`_
         """
 
-        lss = "committees/%s/" % ( committee_id )
+        lss = [ "committees", committee_id ]
         return self.get( lss, **kwargs )
 
     def events(self, **kwargs):
@@ -140,7 +140,7 @@ class OpenStates(sunlight.service.Service):
         Please do take a look at the fantastic documentation on the
         `OpenStates site <http://openstates.org/api/events/>`_
         """
-        return self.get( "events", **kwargs )
+        return self.get( [ "events" ], **kwargs )
 
     def event_lookup( self, event_id, **kwargs ):
         """
@@ -151,7 +151,7 @@ class OpenStates(sunlight.service.Service):
         Read more on how this is used in the API docs for OpenStates on
         `events <http://openstates.org/api/events/#event-lookup>`_.
         """
-        lss = "events/%s/" % ( event_id )
+        lss = [ "events", event_id ]
         return self.get( lss, **kwargs )
 
     def districts(self, **kwargs):
@@ -161,7 +161,7 @@ class OpenStates(sunlight.service.Service):
 
         Check out the `docs <http://openstates.org/api/districts/>`_.
         """
-        return self.get( "districts", **kwargs )
+        return self.get( [ "districts" ], **kwargs )
 
     def district_boundary_lookup( self, boundary_id, **kwargs ):
         """
@@ -174,15 +174,19 @@ class OpenStates(sunlight.service.Service):
         API doc on
         `boundray lookups <http://openstates.org/api/districts/#district-boundary-lookup>`_
         """
-        lss = "districts/boundary/%s/" % ( boundary_id )
+        lss = [ 'districts', 'boundary', boundary_id ]
         return self.get( lss, **kwargs )
 
     # API impl methods
 
     def _get_url( self, obj, apikey, **kwargs ):
+        object_path = ""
+        for o in obj:
+            object_path += o + "/"
+
         ret = "%s/%s?apikey=%s" % (
             service_url,
-            obj,
+            object_path,
             apikey
         )
         for arg in kwargs:
@@ -198,7 +202,7 @@ class OpenStates(sunlight.service.Service):
 
         messages = {
             400 : "Error with your request. Perhaps too many results?",
-            404 : "Object doesn't exist."
+            404 : "No data or no such method."
         }
         try:
             return messages[code]
