@@ -15,6 +15,7 @@ __version__ = "0.1~pre1"
 
 import sunlight.services.openstates
 import sunlight.services.capitolwords
+import sunlight.services.congress
 
 openstates   = sunlight.services.openstates.OpenStates()
 """
@@ -24,6 +25,11 @@ See :class:`sunlight.services.openstates.OpenStates`
 capitolwords = sunlight.services.capitolwords.CapitolWords()
 """
 See :class:`sunlight.services.capitolwords.CapitolWords`
+"""
+
+congress = sunlight.services.congress.Congress()
+"""
+See :class:`sunlight.services.congress.Congress`
 """
 
 import os.path
