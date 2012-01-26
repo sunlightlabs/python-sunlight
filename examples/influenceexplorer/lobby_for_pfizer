@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+from sunlight import influenceexplorer
+
+lobs = influenceexplorer.lobbying(
+    client_ft="pfizer",
+    year="2011"
+)
+
+for lob in lobs:
+    print lob['registrant_name']
+    for issue in lob['issues']:
+        print "  %s (%s)" % ( issue['general_issue'], issue['specific_issue'] ) 
