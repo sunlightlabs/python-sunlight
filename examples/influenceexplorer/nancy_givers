@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+from sunlight import influenceexplorer
+
+givers = influenceexplorer.entities( search="Nancy Pelosi" )
+
+for entity in givers:
+    print "A(n) %s named %s gave %s" % (
+        entity['type'],
+        entity['name'],
+        entity['total_received']
+    )
