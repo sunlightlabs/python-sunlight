@@ -16,6 +16,7 @@ __version__ = "0.1~pre1"
 import sunlight.services.openstates
 import sunlight.services.capitolwords
 import sunlight.services.congress
+import sunlight.services.influenceexplorer
 
 openstates   = sunlight.services.openstates.OpenStates()
 """
@@ -30,6 +31,11 @@ See :class:`sunlight.services.capitolwords.CapitolWords`
 congress = sunlight.services.congress.Congress()
 """
 See :class:`sunlight.services.congress.Congress`
+"""
+
+influenceexplorer = sunlight.services.influenceexplorer.InfluenceExplorer()
+"""
+See :class:`sunlight.services.influenceexplorer.InfluenceExplorer`
 """
 
 import os.path

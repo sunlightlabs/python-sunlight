@@ -10,11 +10,14 @@
 import sunlight.service
 import json
 
-service_url = "http://transparencydata.com/api/1.0/"
+service_url = "http://transparencydata.com/api/1.0"
 
 class InfluenceExplorer(sunlight.service.Service):
     """
     """
+
+    def contributions(self, **kwargs):
+        return self.get("contributions", **kwargs)
 
     # API impl methods below
 
