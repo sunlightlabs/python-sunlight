@@ -6,3 +6,4 @@ Sunlight API Binding Modules
 
    openstates.rst
    capitolwords.rst
+   congress.rst
