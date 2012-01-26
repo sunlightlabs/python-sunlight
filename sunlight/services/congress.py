@@ -30,7 +30,7 @@ class Congress(sunlight.service.Service):
         <http://services.sunlightlabs.com/docs/congressapi/legislators.get(List)/>`_
         """
         return _unpack(self.get('legislators.getList', **kwargs),
-                       'legislators')
+                       'legislator')
 
 
     def legislator_search(self, name, threshold=0.9, all_legislators=False):
