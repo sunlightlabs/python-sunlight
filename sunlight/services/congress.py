@@ -41,9 +41,10 @@ class Congress(sunlight.service.Service):
     def legislators( self, **kwargs ):
         return self.get( "legislators.getList", **kwargs )
 
-    #"""
-    #"""
-    #def legislators_search( self, name, 
+    """
+    """
+    def legislators_search( self, name ):
+        return self.get( "legislators.search", **kwargs )
 
     # API impl methods below
 
