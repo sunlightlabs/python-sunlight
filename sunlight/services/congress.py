@@ -14,12 +14,8 @@ import json
 
 service_url = "http://services.sunlightlabs.com/api/"
 
-def _unpack_legislators(resp):
-    return [e['legislator'] for e in resp['legislators']]
-def _unpack_districts(resp):
-    return [e['district'] for e in resp['districts']]
-def _unpack_committees(resp):
-    return [e['committee'] for e in resp['committees']]
+def _unpack(resp, key):
+    return [e[key] for e in resp[key+'s']]
 
 class Congress(sunlight.service.Service):
     """
@@ -28,18 +24,32 @@ class Congress(sunlight.service.Service):
 
     def legislators(self, **kwargs):
         """
-        Query the Congress API for all legislators matching certain criteria.
+        Query for all legislators matching certain criteria.
 
         See documentation at `legislators.get(List)
         <http://services.sunlightlabs.com/docs/congressapi/legislators.get(List)/>`_
         """
-        return _unpack_legislators(self.get('legislators.getList', **kwargs))
+        return _unpack(self.get('legislators.getList', **kwargs),
+                       'legislators')
+
+
+    def legislator_search(self, name, threshold=0.9, all_legislators=False):
+        """
+        Fuzzy-matching name search against federal legislators.
+
+        See documentation at `legislators.search
+        <http://services.sunlightlabs.com/docs/congressapi/legislators.search/>`_
+        """
+        params = {'name': name, 'threshold': threshold}
+        if all_legislators:
+            params['all_legislators'] = 1
+        return _unpack(self.get('legislators.search', **params),
+                       'result')
 
 
     def legislators_for_zip(self, zipcode):
         """
-        Query the Congress API for all legislators representing a given ZIP
-        code.
+        Query for all legislators representing a given ZIP code.
 
         This method is not recommended, prefer legislators_for_lat_lon instead.
         See the blog post `"Don't Use Zip Codes Unless You Have To"
@@ -48,59 +58,56 @@ class Congress(sunlight.service.Service):
         See documentation at `legislators.allForZip
         <http://services.sunlightlabs.com/docs/congressapi/legislators.allForZip/>`_
         """
-        return _unpack_legislators(self.get('legislators.allForZip',
-                                            zip=zipcode))
+        return _unpack(self.get('legislators.allForZip', zip=zipcode),
+                       'legislator'
+                      )
 
     def legislators_for_lat_lon(self, latitude, longitude):
         """
-        Query the Congress API for all legislators representing an given
-        location.
+        Query for all legislators representing an given location.
 
         See documentation at `legislators.allForLatLong
         <http://services.sunlightlabs.com/docs/congressapi/legislators.allForLatLong/>`_
         """
-        return _unpack_legislators(self.get('legislators.allForLatLong',
-                                            latitude=latitude,
-                                            longitude=longitude))
+        return _unpack(self.get('legislators.allForLatLong', latitude=latitude,
+                                longitude=longitude), 'legislator')
 
     def districts_for_zip(self, zipcode):
         """
-        Query the Congress API for all congressional districts overlapping a
-        zip code.
+        Query for all congressional districts overlapping a zip code.
 
         See documentation at `districts.getDistrictFromLatLong
         <http://services.sunlightlabs.com/docs/congressapi/districts.getDistrictFromLatLong/>`_
         """
-        return _unpack_districts(self.get('districts.getDistrictsFromZip',
-                                            zip=zipcode))
+        return _unpack(self.get('districts.getDistrictsFromZip', zip=zipcode),
+                       'district'
+                      )
 
     def districts_for_lat_long(self, latitude, longitude):
         """
-        Query the Congress API for all congressional districts containing a
-        given location.
+        Query for all congressional districts containing a given location.
 
         See documentation at `districts.getDistrictFromLatLong
         <http://services.sunlightlabs.com/docs/congressapi/districts.getDistrictFromLatLong/>`_
         """
-        return _unpack_districts(self.get('districts.getDistrictFromLatLong',
-                                            latitude=latitude,
-                                            longitude=longitude))
+        return _unpack(self.get('districts.getDistrictFromLatLong',
+                                latitude=latitude, longitude=longitude),
+                       'district'
+                      )
 
     def committees(self, chamber):
         """
-        Query the Congress API for all committees for a chamber.
-        (House|Senate|Joint)
+        Query for all committees for a chamber.  (House|Senate|Joint)
 
         See documentation at `committees.getList
         <http://services.sunlightlabs.com/docs/congressapi/committees.getList/>`_
         """
-        return _unpack_committees(self.get('committees.getList',
-                                           chamber=chamber))
+        return _unpack(self.get('committees.getList', chamber=chamber),
+                       'committee')
 
     def committee_detail(self, id):
         """
-        Query the Congress API for all details for a committee, including
-        members.
+        Query for all details for a committee, including members.
 
         See documentation at `committees.get
         <http://services.sunlightlabs.com/docs/congressapi/committees.get/>`_
@@ -109,14 +116,13 @@ class Congress(sunlight.service.Service):
 
     def committees_for_legislator(self, bioguide_id):
         """
-        Query the Congress API for all details for a committee, including
-        members.
+        Query for all details for all of a legislator's committee assignments.
 
         See documentation at `committees.allForLegislator
         <http://services.sunlightlabs.com/docs/congressapi/committees.allForLegislator/>`_
         """
-        return _unpack_committees(self.get('committees.allForLegislator',
-                                           bioguide_id=bioguide_id))
+        return _unpack(self.get('committees.allForLegislator',
+                                bioguide_id=bioguide_id), 'committee')
 
     # implementation methods
     def _get_url(self, obj, apikey, **kwargs):
