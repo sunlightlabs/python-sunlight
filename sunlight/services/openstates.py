@@ -10,188 +10,180 @@ OpenStates API Implementation inside ``python-sunlight``.
 
 import sunlight.service
 import json
+import urllib
 
 module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
 class OpenStates(sunlight.service.Service):
     """
-    Bindings into the `OpenStates project <http://openstates.org/>`_. Keep in
-    mind this is a *very* thin wrapper around the
-    `OpenStates API <http://openstates.org/api/>`_, so most of this should be
-    super predictable and easy to pick up. Just as a little extra help, we've
-    included docs on each of the major methods.
+    Bindings into the `Open States API <http://openstates.org/api/>`_. Keep in
+    mind this is a thin wrapper around the API so the API documentation is the
+    place to look for help on field names and examples.
     """
 
-    def metadata(self, **kwargs):
+    def all_metadata(self):
         """
-        Query the OpenStates searver for metadata relating to state-level
-        assemblies, legislators and bills.
+        Get an overview of all available states including each state's name
+        and abbreviation.
 
-        The docs for the
-        `Overview <http://openstates.org/api/metadata/#metadata-overview>`_
-        access method, as well as the
-        `State-local <http://openstates.org/api/metadata/#state-metadata>`_
-        access method can be found on the OpenStates site linked.
+        For details see
+        `Metadata Overview <http://openstates.org/api/metadata/#metadata-overview>`_.
         """
-        return self.get( [ "metadata" ], **kwargs )
+        return self.get(["metadata"])
+
+    def state_metadata(self, state):
+        """
+        Complete metadata for a given state, containing information on
+        the particulars of this state's chambers, sessions, and terms.
+
+        For details see
+        `State Metadata <http://openstates.org/api/metadata/#state-metadata>`_.
+        """
+        return self.get(["metadata", state])
 
     def bills(self, **kwargs):
         """
-        Query the OpenStates server for data relating to state-level
-        legislative instruments, such as bills, memoranda, or resolutions.
+        Search the entirety of bills available via the Open States API.
 
-        The keyword arguments can be found on the
-        `OpenStates Website <http://openstates.org/api/bills/>`_.
-
-        More information on searches can be found in the API
-        `refdoc <http://openstates.org/api/bills/#bill-search>`_
+        The fields and keyword arguments can be found on the
+        `Bill API docs <http://openstates.org/api/bills/>`_.
         """
-        return self.get( [ "bills" ], **kwargs )
+        return self.get(["bills"], **kwargs)
 
-    def bill_lookup( self, state_abbr, session,
-            bill_id, chamber=None, **kwargs ):
+    def bill_detail(self, state, session, bill_id, chamber=None):
         """
-        Query the OpenStates server for data relating to a very exact bill
-        lookup path.
+        Get full information on a single bill from the Open States API given
+        a ``state``, ``session``, and ``bill_id`` (and optionally ``chamber``
+        if the request would be ambiguous without one).
 
-        The ``chamber`` argument is optional, and should be used in cases
-        where it's ambiguous.
-
-        Doing `lookups <http://openstates.org/api/bills/#bill-lookup>`_,
-        should match the documentation.
+        The fields and keyword arguments can be found on the
+        `Open States Bill API docs <http://openstates.org/api/bills/>`_.
         """
-        lss = [ "bills", state_abbr, session ]
-        if chamber != None:
-            lss.append( chamber )
+        lss = ["bills", state_abbr, session]
+        if chamber:
+            lss.append(chamber)
         lss.append(bill_id)
-        return self.get( lss, **kwargs )
+        return self.get(lss)
 
     def legislators(self, **kwargs):
         """
-        Query the OpenStates server for data relating to the state-level
-        legislators.
+        Search the entirety of legislators available via the Open States API.
 
-        The `Legislator <http://openstates.org/api/legislators/>`_ API docs are
-        complete and detailed for general use.
-
-        Check out the API docs on preforming
-        `searches <http://openstates.org/api/legislators/#legislator-search>`_
-        on the site.
+        The fields and keyword arguments can be found on the
+        `Legislator API docs <http://openstates.org/api/legislators/>`_.
         """
         return self.get( [ "legislators"], **kwargs )
 
-    def legislator_lookup( self, leg_id, **kwargs ):
+    def legislator_detail(self, leg_id):
         """
-        Query the OpenStates server for data relating to a single legislator.
+        Get detailed information on a single legislator given their Open States
+        Legislator ID.
 
-        the ``leg_id`` argument is a legislator ID code, such as ``MDL000210``
+        The ``leg_id`` argument is a legislator ID code used throughout the
+        Open States API, such as ``MDL000210``.
 
-        `lookups <http://openstates.org/api/legislators/#legislator-lookup>`_
-        should match the docs pretty closely.
+        For details on fields see the `Legislator API Fields
+        <http://openstates.org/api/legislators/#legislator-fields>`_.
         """
-        lss = [ "legislators", leg_id ]
-        return self.get( lss, **kwargs )
+        return self.get(["legislators", leg_id])
 
-    def legislator_geo_lookup( self, **kwargs ):
+    def legislator_geo_search(self, latitude, longitude):
         """
-        Query the OpenStates server for data on all legislators that serve
-        districts containing a given geographical point.
+        Given a latitude and longitude return all legislators that represent
+        districts containing that point.
 
-        This method takes two kwargs, one for Latitude (``lat``), and
-        another for Longitude (``long``) (as documented on the API refdoc
-        below)
-
-        `geo-searching <http://openstates.org/api/legislators/#geo-lookup>`_
-        is on the API docs for the OpenStates site.
+        See the Open States documentation for examples of `Legislator Geo
+        Lookup <http://openstates.org/api/legislators/#geo-lookup>`_.
         """
-        return self.get( [ "legislators", "geo" ], **kwargs )
+        return self.get(["legislators", "geo"], **kwargs)
 
     def committees(self, **kwargs):
         """
-        Query the OpenStates server for information regarding state-level
-        legislative committees.
+        Search against all committees available via the Open States API.
 
-        For information regarding it's use, please read the API documentation
-        on the `OpenStates site <http://openstates.org/api/committees/>`_.
+        Committee fields and keyword arguments can be found on the
+        `Committee API docs <http://openstates.org/api/committees/>`_.
         """
-        return self.get( [ "committees" ], **kwargs )
+        return self.get(["committees"], **kwargs)
 
-    def committee_lookup( self, committee_id, **kwargs ):
+    def committee_detail(self, committee_id):
         """
-        Query the OpenStates server for information regarding a single
-        state-level legislative committee.
+        Get detailed information on a single committee given its Open States
+        Committee ID.
 
-        ``committee_id`` is the committee ID code, such as ``MDC000065``.
+        The ``committee_id`` argument is a committee ID code used throughout
+        the Open States API, such as ``MDC000065``.
 
-        For more information (such as what kwargs make sense), please
-        read up on the API documentation relating to
-        `lookups <http://openstates.org/api/committees/#committee-lookup>`_
+        For details on fields see the `Committee API Fields
+        <http://openstates.org/api/committees/#committee-fields>`_.
         """
-
-        lss = [ "committees", committee_id ]
-        return self.get( lss, **kwargs )
+        return self.get(["committees", committee_id])
 
     def events(self, **kwargs):
         """
-        Query the OpenStates server for information regarding upcoming events
+        Query the Open States API for information regarding upcoming events
         taken from a state-level legislative calendar.
 
-        Please do take a look at the fantastic documentation on the
-        `OpenStates site <http://openstates.org/api/events/>`_
+        See the Open States' site for details on the
+        `Event API <http://openstates.org/api/events/>`_.
         """
-        return self.get( [ "events" ], **kwargs )
+        return self.get([ "events" ], **kwargs)
 
-    def event_lookup( self, event_id, **kwargs ):
+    def event_detail(self, event_id):
         """
-        Query the OpenStates server for information regarding a single event.
+        Get detailed informaton regarding a single event.
 
         ``event_id`` is an OpenStates event ID, such as ``TXE00000990``.
 
-        Read more on how this is used in the API docs for OpenStates on
-        `events <http://openstates.org/api/events/#event-lookup>`_.
+        See the Open States' site for details on the
+        `Event API Fields <http://openstates.org/api/events/#event-fields>`_.
         """
         lss = [ "events", event_id ]
         return self.get( lss, **kwargs )
 
-    def districts(self, **kwargs):
+    def districts(self, state, chamber=None):
         """
-        Query the OpenStates server for information regarding state-level
-        legislative districts.
+        Get a listing of districts for a state (optionally narrowed by
+        chamber).
 
-        Check out the `docs <http://openstates.org/api/districts/>`_.
+        For a listing of fields see `District Fields
+        <http://openstates.org/api/districts/#district-fields>`_.
         """
-        return self.get( [ "districts" ], **kwargs )
+        pieces = ['districts', state]
+        if chamber:
+            pieces.append(chamber)
+        return self.get(pieces)
 
-    def district_boundary_lookup( self, boundary_id, **kwargs ):
+    def district_boundary(self, boundary_id):
         """
-        Query the OpenStates server for information regarding state-level
-        legislative district boundaries.
+        Get a detailed GeoJSON-style boundary for a given district given a
+        boundary_id (available via the :meth:``districts``.
 
-        ``boundary_id`` is something like ``sldl-tx-state-house-district-35``.
+        ``boundary_id`` resembles ``sldl-tx-state-house-district-35``.
 
-        For more information on this method, please check up on the OpenStates
-        API doc on
-        `boundray lookups <http://openstates.org/api/districts/#district-boundary-lookup>`_
+        For a listing of fields see `District Fields
+        <http://openstates.org/api/districts/#district-fields>`_.
+
+        For more information on this method and example output see
+        `District Boundary Lookup
+        <http://openstates.org/api/districts/#district-boundary-lookup>`_
         """
-        lss = [ 'districts', 'boundary', boundary_id ]
-        return self.get( lss, **kwargs )
+        return self.get(['districts', 'boundary', boundary_id])
 
     # API impl methods
 
-    def _get_url( self, obj, apikey, **kwargs ):
-        object_path = ""
-        for o in obj:
-            object_path += o + "/"
+    def _get_url(self, objs, apikey, **kwargs):
+        # join pieces by slashes and add a trailing slash
+        object_path = "/".join(objs)
+        object_path +=  "/"
 
-        ret = "%s/%s?apikey=%s" % (
+        return "%s/%s?apikey=%s&%s" % (
             service_url,
             object_path,
-            apikey
+            apikey,
+            urllib.urlencode(kwargs)
         )
-        for arg in kwargs:
-            ret += "&%s=%s" % ( arg, kwargs[arg] )
-        return ret
 
-    def _decode_response( self, response ):
-        return json.loads( response )
+    def _decode_response(self, response):
+        return json.loads(response)
