@@ -5,5 +5,7 @@
  - CapitolWords      [  paultag  ]
  - Congress          [ jamesturk ]
  - InfluenceExplorer [  paultag  ]
+
 * Bumped the release 0.1~pre1 -> 0.5
 * Brushed up the last bits to the docs. S'all good.
+* Changed to from setuptools from distutils.
