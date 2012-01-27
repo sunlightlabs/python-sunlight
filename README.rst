@@ -19,3 +19,14 @@ both being read, the enviroment variable *will* override the file.
 
 To register for an API key, if you don't have one, please fill out the form
 `here <http://services.sunlightlabs.com/accounts/register/>`_.
+
+
+Help me!
+********
+
+A bit tacky, but the documentation can be found on
+`readthedocs <python-sunlight.rtfd.org>`_. If this doens't help, feel free to
+email for help, ask over IRC in ``#sunlightlabs`` on ``irc.freenode.net``, or
+open a issue if it's a particularly nasty bug.
+
+We're all friendly, just take your time and show off your code!
