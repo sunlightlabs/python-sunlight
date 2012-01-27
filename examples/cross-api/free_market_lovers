@@ -7,7 +7,7 @@ for person in capitolwords.phrases_by_entity(
     "legislator",
     phrase="free market",
     sort="count",
-)['results']:
+):
     n = congress.legislators( bioguide_id=person['legislator'],
         all_legislators="true" )
     if len(n) >= 1:
