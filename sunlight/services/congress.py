@@ -19,7 +19,9 @@ def _unpack(resp, key):
 
 class Congress(sunlight.service.Service):
     """
-    Bindings into the `Sunlight Congress <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_.
+    Bindings into the `Sunlight Congress <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_
+    API. Keep in mind this is a very thin layer over the API it's self, so
+    please do check with the API documentation for method usage.
     """
 
     def legislators(self, **kwargs):

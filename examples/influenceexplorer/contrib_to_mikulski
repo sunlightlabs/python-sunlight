@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+from sunlight import influenceexplorer
+
+contrib = influenceexplorer.contributions(
+    contributor_state="md|va",
+    recipient_ft="mikulski",
+    cycle="2008" )
+
+for contributor in contrib:
+    print "%s from %s contributed %s" % (
+        contributor['contributor_name'],
+        contributor['contributor_city'],
+        contributor['amount']
+    )

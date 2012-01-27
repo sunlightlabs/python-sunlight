@@ -3,7 +3,7 @@
 # of the LICENSE file.
 
 from sunlight import __appname__, __version__
-from distutils.core import setup
+from setuptools import setup
 
 long_description = open('README.rst').read()
 

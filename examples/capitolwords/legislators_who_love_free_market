@@ -6,5 +6,5 @@ for person in capitolwords.phrases_by_entity(
     "legislator",
     phrase="free market",
     sort="count",
-)['results']:
+):
     print "Congress BioGuide ID: %s" % person['legislator']

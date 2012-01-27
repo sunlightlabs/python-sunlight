@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+from sunlight import influenceexplorer
+
+grants = influenceexplorer.grants(
+    agency_ft="Homeland Security"
+)
+
+for grant in grants:
+    print "%s to %s for %s" % (
+        grant['total_funding_amount'],
+        grant['recipient_name'],
+        grant['project_description']
+    )
