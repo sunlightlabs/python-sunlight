@@ -25,8 +25,8 @@ Help me!
 ********
 
 A bit tacky, but the documentation can be found on
-`readthedocs <python-sunlight.rtfd.org>`_. If this doens't help, feel free to
-email for help, ask over IRC in ``#sunlightlabs`` on ``irc.freenode.net``, or
-open a issue if it's a particularly nasty bug.
+`readthedocs <http://python-sunlight.rtfd.org>`_. If this doens't help, feel
+free to email for help, ask over IRC in ``#sunlightlabs`` on
+``irc.freenode.net``, or open a issue if it's a particularly nasty bug.
 
 We're all friendly, just take your time and show off your code!
