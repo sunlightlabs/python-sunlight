@@ -1,0 +1,24 @@
+#!/bin/bash
+
+res=$(whiptail --menu "So, whatcha wana do?" 12 50 2 \
+     --backtitle "Sunlight Labs API Key Quickstart" \
+    "1." "Generate a new key" "2." "Enter an existing key" \
+    3>&2 2>&1 1>&3-)
+
+if [ "x$res" == "x1." ]; then
+    echo "Hit enter to spawn a browser to sign up for a key"
+    echo "After signup, press enter again."
+    read foo
+    x-www-browser "http://services.sunlightlabs.com/accounts/register/"
+    $0 $@ # Poor man's recusion
+elif [ "x$res" == "x2." ]; then
+    echo "Enter your key now"
+    echo -n "> "
+    read apikey
+    echo "OK."
+    echo " API Key: $apikey"
+    echo ""
+    echo "If this is correct, press enter."
+    read foo
+    echo $apikey > ~/.sunlight.key
+fi
