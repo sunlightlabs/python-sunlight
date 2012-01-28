@@ -15,7 +15,7 @@ Using this library is very easy - by default, python-sunlight will search for
 API keys in two places. First, ``~/.sunlight.key`` will be read, and the
 contents of that file will be used as the API Key. Secondly, if an enviroment
 variable called ``SUNLIGHT_API_KEY`` is set, that will be used (in the case of
-both being read, the enviroment variable *will* override the file.
+both being read, the enviroment variable *will* override the file.)
 
 To register for an API key, if you don't have one, please fill out the form
 `here <http://services.sunlightlabs.com/accounts/register/>`_.
