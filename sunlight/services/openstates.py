@@ -22,7 +22,7 @@ class OpenStates(sunlight.service.Service):
     place to look for help on field names and examples.
     """
 
-    def all_metadata(self):
+    def all_metadata(self, **kwargs):
         """
         Get an overview of all available states including each state's name
         and abbreviation.
@@ -30,9 +30,9 @@ class OpenStates(sunlight.service.Service):
         For details see
         `Metadata Overview <http://openstates.org/api/metadata/#metadata-overview>`_.
         """
-        return self.get(["metadata"])
+        return self.get(["metadata"], **kwargs)
 
-    def state_metadata(self, state):
+    def state_metadata(self, state, **kwargs):
         """
         Complete metadata for a given state, containing information on
         the particulars of this state's chambers, sessions, and terms.
@@ -40,7 +40,7 @@ class OpenStates(sunlight.service.Service):
         For details see
         `State Metadata <http://openstates.org/api/metadata/#state-metadata>`_.
         """
-        return self.get(["metadata", state])
+        return self.get(["metadata", state], **kwargs)
 
     def bills(self, **kwargs):
         """
@@ -75,7 +75,7 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get( [ "legislators"], **kwargs )
 
-    def legislator_detail(self, leg_id):
+    def legislator_detail(self, leg_id, **kwargs):
         """
         Get detailed information on a single legislator given their Open States
         Legislator ID.
@@ -86,7 +86,7 @@ class OpenStates(sunlight.service.Service):
         For details on fields see the `Legislator API Fields
         <http://openstates.org/api/legislators/#legislator-fields>`_.
         """
-        return self.get(["legislators", leg_id])
+        return self.get(["legislators", leg_id], **kwargs)
 
     def legislator_geo_search(self, latitude, longitude, **kwargs):
         """
@@ -109,7 +109,7 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get(["committees"], **kwargs)
 
-    def committee_detail(self, committee_id):
+    def committee_detail(self, committee_id, **kwargs):
         """
         Get detailed information on a single committee given its Open States
         Committee ID.
@@ -120,7 +120,7 @@ class OpenStates(sunlight.service.Service):
         For details on fields see the `Committee API Fields
         <http://openstates.org/api/committees/#committee-fields>`_.
         """
-        return self.get(["committees", committee_id])
+        return self.get(["committees", committee_id], **kwargs)
 
     def events(self, **kwargs):
         """
@@ -132,7 +132,7 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get([ "events" ], **kwargs)
 
-    def event_detail(self, event_id):
+    def event_detail(self, event_id, **kwargs):
         """
         Get detailed informaton regarding a single event.
 
@@ -144,7 +144,7 @@ class OpenStates(sunlight.service.Service):
         lss = [ "events", event_id ]
         return self.get( lss, **kwargs )
 
-    def districts(self, state, chamber=None):
+    def districts(self, state, chamber=None, **kwargs):
         """
         Get a listing of districts for a state (optionally narrowed by
         chamber).
@@ -155,9 +155,9 @@ class OpenStates(sunlight.service.Service):
         pieces = ['districts', state]
         if chamber:
             pieces.append(chamber)
-        return self.get(pieces)
+        return self.get(pieces, **kwargs)
 
-    def district_boundary(self, boundary_id):
+    def district_boundary(self, boundary_id, **kwargs):
         """
         Get a detailed GeoJSON-style boundary for a given district given a
         boundary_id (available via the :meth:``districts``.
@@ -171,7 +171,7 @@ class OpenStates(sunlight.service.Service):
         `District Boundary Lookup
         <http://openstates.org/api/districts/#district-boundary-lookup>`_
         """
-        return self.get(['districts', 'boundary', boundary_id])
+        return self.get(['districts', 'boundary', boundary_id], **kwargs)
 
     # API impl methods
 
