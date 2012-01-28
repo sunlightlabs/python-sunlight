@@ -4,5 +4,5 @@
 
 from sunlight import openstates
 
-bill = openstates.bill_lookup( 'ca', '20092010', 'AB 667')
+bill = openstates.bill_detail( 'ca', '20092010', 'AB 667')
 print "%s - %s" % ( bill['bill_id'], bill['+short_title'] )

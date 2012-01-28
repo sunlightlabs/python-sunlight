@@ -4,9 +4,9 @@
 
 from sunlight import openstates
 
-reps = openstates.legislator_geo_lookup(
-    long="-78.76648",
-    lat="35.81336"
+reps = openstates.legislator_geo_search(
+    longitude="-78.76648",
+    latitude="35.81336"
 )
 for rep in reps:
     print "%s - %s %s" % ( rep['chamber'], rep['first_name'], rep['last_name'] )

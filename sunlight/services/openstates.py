@@ -60,7 +60,7 @@ class OpenStates(sunlight.service.Service):
         The fields and keyword arguments can be found on the
         `Open States Bill API docs <http://openstates.org/api/bills/>`_.
         """
-        lss = ["bills", state_abbr, session]
+        lss = ["bills", state, session]
         if chamber:
             lss.append(chamber)
         lss.append(bill_id)
@@ -88,7 +88,7 @@ class OpenStates(sunlight.service.Service):
         """
         return self.get(["legislators", leg_id])
 
-    def legislator_geo_search(self, latitude, longitude):
+    def legislator_geo_search(self, latitude, longitude, **kwargs):
         """
         Given a latitude and longitude return all legislators that represent
         districts containing that point.
@@ -96,6 +96,8 @@ class OpenStates(sunlight.service.Service):
         See the Open States documentation for examples of `Legislator Geo
         Lookup <http://openstates.org/api/legislators/#geo-lookup>`_.
         """
+        kwargs['lat']  = latitude
+        kwargs['long'] = longitude
         return self.get(["legislators", "geo"], **kwargs)
 
     def committees(self, **kwargs):
