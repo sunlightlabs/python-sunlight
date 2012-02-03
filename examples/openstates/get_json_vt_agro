@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+# Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
+# under the terms of the LICENSE file
+
+import json
+from sunlight import openstates
+
+vt_agro_bills = openstates.bills(
+    q='agriculture',
+    state='vt',
+    chamber='upper'
+)
+
+print json.dumps( vt_agro_bills )
