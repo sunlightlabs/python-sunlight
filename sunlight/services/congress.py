@@ -19,9 +19,9 @@ def _unpack(resp, key):
 
 class Congress(sunlight.service.Service):
     """
-    Bindings into the `Sunlight Congress <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_
-    API. Keep in mind this is a very thin layer over the API it's self, so
-    please do check with the API documentation for method usage.
+    Bindings into the `Sunlight Congress API
+    <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_, an API
+    primarily for details on current federal legislators.
     """
 
     def legislators(self, **kwargs):
@@ -85,7 +85,7 @@ class Congress(sunlight.service.Service):
                        'district'
                       )
 
-    def districts_for_lat_long(self, latitude, longitude):
+    def districts_for_lat_lon(self, latitude, longitude):
         """
         Query for all congressional districts containing a given location.
 
