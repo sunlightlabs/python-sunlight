@@ -18,10 +18,10 @@ This set of Congress API methods deal with federal legislators.
 For detailed documentaion on the return value of these methods see
 `legislator fields <http://services.sunlightlabs.com/docs/congressapi/legislators.get(List)/>`_.
 
-.. automethod:: sunlight.services.congress.Congress.legislators
-.. automethod:: sunlight.services.congress.Congress.legislator_search
-.. automethod:: sunlight.services.congress.Congress.legislators_for_zip
-.. automethod:: sunlight.services.congress.Congress.legislators_for_lat_lon
+.. automethod:: sunlight.services.congress.congress.legislators
+.. automethod:: sunlight.services.congress.congress.legislator_search
+.. automethod:: sunlight.services.congress.congress.legislators_for_zip
+.. automethod:: sunlight.services.congress.congress.legislators_for_lat_lon
 
 Districts
 =========
@@ -30,14 +30,14 @@ Pair of methods for retrieving districts.  District dictionaries have a `'state'
 (ex. `{'state': 'NC', 'number': '3'}`)
 
 
-.. automethod:: sunlight.services.congress.Congress.districts_for_zip
-.. automethod:: sunlight.services.congress.Congress.districts_for_lat_lon
+.. automethod:: sunlight.services.congress.congress.districts_for_zip
+.. automethod:: sunlight.services.congress.congress.districts_for_lat_lon
 
 Committees
 ==========
 
 Methods for dealing with committees.
 
-.. automethod:: sunlight.services.congress.Congress.committees
-.. automethod:: sunlight.services.congress.Congress.committee_detail
-.. automethod:: sunlight.services.congress.Congress.committees_for_legislator
+.. automethod:: sunlight.services.congress.congress.committees
+.. automethod:: sunlight.services.congress.congress.committee_detail
+.. automethod:: sunlight.services.congress.congress.committees_for_legislator

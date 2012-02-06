@@ -17,7 +17,7 @@ service_url = "http://services.sunlightlabs.com/api/"
 def _unpack(resp, key):
     return [e[key] for e in resp[key+'s']]
 
-class Congress(sunlight.service.Service):
+class congress(sunlight.service.Service):
     """
     Bindings into the `Sunlight Congress API
     <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_, an API

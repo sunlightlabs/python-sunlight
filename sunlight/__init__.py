@@ -28,7 +28,7 @@ capitolwords = sunlight.services.capitolwords.CapitolWords()
 See :class:`sunlight.services.capitolwords.CapitolWords`
 """
 
-congress = sunlight.services.congress.Congress()
+congress = sunlight.services.congress.congress()
 """
 See :class:`sunlight.services.congress.Congress`
 """
