@@ -1,3 +1,8 @@
+2012-02-06  James Turk <jturk@sunlightfoundation.com>
+
+* refactor documentation to prepare for release
+* internal classes are now lowercase, ugly but it fixes sphinx
+
 2012-01-26  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * Initial ChangeLog commit entry. Current working projects:
