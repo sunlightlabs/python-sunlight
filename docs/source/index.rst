@@ -9,7 +9,7 @@ python-sunlight serves as a unified API wrapper for the various `open government
 APIs <http://services.sunlightlabs.com>`_ made available by `Sunlight Foundation <http://sunlightfoundation.com>`_
 projects.
 
-Currently python-sunlight supports the following APIs:
+Currently this library supports the following APIs:
 
 * `Sunlight Congress API <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_ (via :ref:`sunlight.congress`)
 * `Open States API <http://openstates.org/api/>`_ (via :ref:`sunlight.openstates`)
@@ -39,7 +39,18 @@ Now all you need is a `Sunlight API Key <http://services.sunlightlabs.com/accoun
 import sunlight
 ===============
 
-Using the various API submodules:
+After setting your API key simply ``import sunlight`` and start using the APIs::
+
+    import sunlight
+    nc_legs = sunlight.openstates.legislators(state='nc')
+
+You can also import a specific API client::
+
+    from sunlight import congress
+    pelosi = congress.legislators(lastname='Pelosi')[0]
+
+APIs
+----
 
 .. toctree::
    :maxdepth: 2
