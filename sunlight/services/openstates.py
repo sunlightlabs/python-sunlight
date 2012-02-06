@@ -1,13 +1,6 @@
 # Copyright (c) Sunlight Labs, 2012 under the terms and conditions
 # of the LICENSE file.
 
-"""
-.. module:: sunlight.services.openstates
-    :synopsis: OpenStates API Implementation
-
-OpenStates API Implementation inside ``python-sunlight``.
-"""
-
 import sunlight.service
 import json
 import urllib
@@ -15,7 +8,7 @@ import urllib
 module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
-class OpenStates(sunlight.service.Service):
+class openstates(sunlight.service.Service):
     """
     Bindings into the `Open States API <http://openstates.org/api/>`_. Keep in
     mind this is a thin wrapper around the API so the API documentation is the

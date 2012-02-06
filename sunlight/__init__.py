@@ -18,25 +18,10 @@ import sunlight.services.capitolwords
 import sunlight.services.congress
 import sunlight.services.influenceexplorer
 
-openstates   = sunlight.services.openstates.OpenStates()
-"""
-See :class:`sunlight.services.openstates.OpenStates`
-"""
-
-capitolwords = sunlight.services.capitolwords.CapitolWords()
-"""
-See :class:`sunlight.services.capitolwords.CapitolWords`
-"""
-
+openstates = sunlight.services.openstates.openstates()
+capitolwords = sunlight.services.capitolwords.capitolwords()
 congress = sunlight.services.congress.congress()
-"""
-See :class:`sunlight.services.congress.Congress`
-"""
-
 influenceexplorer = sunlight.services.influenceexplorer.InfluenceExplorer()
-"""
-See :class:`sunlight.services.influenceexplorer.InfluenceExplorer`
-"""
 
 import os.path
 import sunlight.common

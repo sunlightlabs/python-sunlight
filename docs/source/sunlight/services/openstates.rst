@@ -1,28 +1,75 @@
-OpenStates -- States rule!
-==========================
+.. _sunlight.openstates:
 
-This is a thin wrapper around the `OpenStates <http://openstates.org/api/>`_
-API, which provides state-local data on Legislators, Legislative Instruments,
-Votes, Committees, Events, Districts and more!
+===================
+sunlight.openstates
+===================
+
+This is a thin wrapper around the `Open States <http://openstates.org/api/>`_
+API, which provides data on state legislators, bills, votes, committees, districts,
+events, and more!
 
 Please consider contributing to the
-`project <https://github.com/sunlightlabs/openstates>`_, it's all open-source,
-and community involvement is valued very much by the OpenStates crew.
+`Open States project <https://github.com/sunlightlabs/openstates>`_, it's all open-source,
+and community involvement is valued very much by the Open States crew.
 
 .. note::
-    If you come accrros data quality issues, broken code, or missing data,
+    If you come across data quality issues, broken code, or missing data,
     please file a report on the
-    `Github issues page <https://github.com/sunlightlabs/openstates/issues>`_.
+    `GitHub issues page <https://github.com/sunlightlabs/openstates/issues>`_.
     Thanks!
 
-Class Documentation
-*******************
+Metadata
+========
 
-.. automodule:: sunlight.services.openstates
-   :members:
+Methods for dealing with `Open States Metadata <http://openstates.org/api/metadata/#metadata-fields>`_.
+
+.. automethod:: sunlight.services.openstates.openstates.all_metadata
+.. automethod:: sunlight.services.openstates.openstates.state_metadata
+
+Bills
+=====
+
+Methods for dealing with `Open States Bills <http://openstates.org/api/bills/#bill-fields>`_.
+
+.. automethod:: sunlight.services.openstates.openstates.bills
+.. automethod:: sunlight.services.openstates.openstates.bill_detail
+
+Legislators
+===========
+
+Methods for dealing with `Open States Legislators <http://openstates.org/api/legislators/#legislator-fields>`_.
+
+.. automethod:: sunlight.services.openstates.openstates.legislators
+.. automethod:: sunlight.services.openstates.openstates.legislator_detail
+.. automethod:: sunlight.services.openstates.openstates.legislator_geo_search
+
+Committees
+==========
+
+Methods for dealing with `Open States Committees <http://openstates.org/api/committees/#committee-fields>`_.
+
+.. automethod:: sunlight.services.openstates.openstates.committees
+.. automethod:: sunlight.services.openstates.openstates.committee_detail
+
+Districts
+=========
+
+Methods for dealing with `Open States Districts <http://openstates.org/api/districts/#district-fields>`_.
+
+.. automethod:: sunlight.services.openstates.openstates.districts
+.. automethod:: sunlight.services.openstates.openstates.district_boundary
+
+Events
+======
+
+Methods for dealing with `Open States Events <http://openstates.org/api/events/#event-fields>`_.
+
+.. automethod:: sunlight.services.openstates.openstates.events
+.. automethod:: sunlight.services.openstates.openstates.event_detail
+
 
 Examples
-********
+========
 
 Bills::
 

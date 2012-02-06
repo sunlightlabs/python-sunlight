@@ -1,3 +1,5 @@
+.. _sunlight.congress:
+
 =================
 sunlight.congress
 =================

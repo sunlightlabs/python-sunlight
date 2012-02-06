@@ -1,14 +1,17 @@
-CapitolWords -- explore words and phrases!
-==========================================
+.. _sunlight.capitolwords:
 
-For every day Congress is in session, Capitol Words visualizes the most
-frequently used words in the Congressional Record, giving you an at-a-glance
-view of which issues lawmakers address on a daily, weekly, monthly and yearly
-basis. Capitol Words lets you see what are the most popular words spoken by
-lawmakers on the House and Senate floor.
+=====================
+sunlight.capitolwords
+=====================
 
-Class Documentation
-*******************
+For every day Congress is in session, `Capitol Words <http://capitolwords.org>`_
+visualizes the most frequently used words in the Congressional Record,
+giving you an at-a-glance view of which issues lawmakers address on a
+daily, weekly, monthly and yearly basis. Capitol Words lets you see
+what are the most popular words spoken by lawmakers on the House and Senate floor.
 
-.. automodule:: sunlight.services.capitolwords
-   :members:
+
+.. automethod:: sunlight.services.capitolwords.capitolwords.dates
+.. automethod:: sunlight.services.capitolwords.capitolwords.phrases
+.. automethod:: sunlight.services.capitolwords.capitolwords.phrases_by_entity
+.. automethod:: sunlight.services.capitolwords.capitolwords.text
