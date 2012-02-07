@@ -2,6 +2,8 @@
 
 * refactor documentation to prepare for release
 * internal classes are now lowercase, ugly but it fixes sphinx
+* rename sunlight.common to sunlight.config
+* move sunlight.service.API_KEY to sunlight.config.API_KEY
 
 2012-01-26  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 

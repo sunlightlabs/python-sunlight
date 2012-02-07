@@ -55,9 +55,9 @@ individual clients:
 .. toctree::
    :maxdepth: 2
 
-   sunlight/services/congress.rst
-   sunlight/services/openstates.rst
-   sunlight/services/capitolwords.rst
+   services/congress.rst
+   services/openstates.rst
+   services/capitolwords.rst
 
 Internals
 =========
