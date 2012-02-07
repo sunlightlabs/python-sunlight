@@ -36,7 +36,7 @@ Usage
 
 `Register for a Sunlight API Key <http://services.sunlightlabs.com/accounts/register/>`_ if you haven't already, then you'll be ready to start using the library.
 
-The recommended method of providing the library with your API key is by placing your key in a file at :file:`~/.sunlight.key`.  Alternatively you can use an environment variable named :envvar:`SUNLIGHT_API_KEY` or set :data:`sunlight.service.API_KEY` within your program.
+The recommended method of providing the library with your API key is by placing your key in a file at :file:`~/.sunlight.key`.  Alternatively you can use an environment variable named :envvar:`SUNLIGHT_API_KEY` or set :data:`sunlight.config.API_KEY` within your program.
 
 After setting your API key simply ``import sunlight`` and start using the APIs::
 
