@@ -10,6 +10,18 @@
     wrong.
 """
 
+
+API_KEY = None
+"""
+This might be populated from :func:`sunlight.attempt_to_load_apikey`, or
+``None`` (as it is out of the box). All :class:`sunlight.service.Service`
+objects will make use of this API key (once, in it's __init__, not after that)
+to do their job.
+
+.. note::
+    All Sunlight services share API keys. Nice, right?
+"""
+
 API_SIGNUP_PAGE = "http://services.sunlightlabs.com/accounts/register/"
 """
 This is a link to the API Key signup page - so that we can sanely direct people

@@ -48,7 +48,7 @@ class InvalidRequestException(BadRequestException):
 
 class NoAPIKeyException(SunlightException):
     """
-    This gets thrown if the bindings are asked to issue a requst, but the
-    ``sunlight.service.API_KEY`` variable is ``None``.
+    This gets thrown if the bindings are asked to issue a request, but the
+    ``sunlight.config.API_KEY`` variable is ``None``.
     """
     pass
