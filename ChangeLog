@@ -1,3 +1,7 @@
+2012-02-07  Paul Tagliamonte <paultag@sunlightfoundation.com>
+
+* Bumping release to 1.0~rc1
+
 2012-02-06  James Turk <jturk@sunlightfoundation.com>
 
 * refactor documentation to prepare for release
@@ -8,10 +12,9 @@
 2012-01-26  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * Initial ChangeLog commit entry. Current working projects:
- - OpenStates        [  paultag  ]
- - CapitolWords      [  paultag  ]
- - Congress          [ jamesturk ]
- - InfluenceExplorer [  paultag  ]
+ - OpenStates
+ - CapitolWords
+ - Congress
 
 * Bumped the release 0.1~pre1 -> 0.5
 * Brushed up the last bits to the docs. S'all good.
