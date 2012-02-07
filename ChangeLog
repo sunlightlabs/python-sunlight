@@ -1,6 +1,7 @@
 2012-02-07  Paul Tagliamonte <paultag@sunlightfoundation.com>
 
 * Bumping release to 1.0~rc1
+* Removed the set-key binary, it was not really ready for use.
 
 2012-02-06  James Turk <jturk@sunlightfoundation.com>
 
