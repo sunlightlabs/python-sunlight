@@ -1,3 +1,5 @@
 *.swp
 *.pyc
 docs/build
+dist/
+sunlight.egg-info/

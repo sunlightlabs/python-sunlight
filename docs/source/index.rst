@@ -24,7 +24,7 @@ Installation
 
 The simplest way to install python-sunlight is via `pip <http://www.pip-installer.org/>`_::
 
-    $ pip install python-sunlight
+    $ pip install sunlight
 
 You may also wish to check the project out from `GitHub <http://github.com/sunlightlabs/python-sunlight>`_::
 
