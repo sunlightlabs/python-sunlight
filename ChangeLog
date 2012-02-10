@@ -1,19 +1,19 @@
-2012-02-08  James Turk <jturk@sunlightfoundation.com>
+2012-02-08  James Turk  <jturk@sunlightfoundation.com>
 
 * fix MANIFEST.in for PyPI and pip install directions
 
-2012-02-08  Paul Tagliamonte <paultag@sunlightfoundation.com>
+2012-02-08  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * Updating README.rst to reflect a "1.0" status.
  - Added "Contributing" block, and "License" block.
 * Bumping release to 1.0from 1.1~rc1.
 
-2012-02-07  Paul Tagliamonte <paultag@sunlightfoundation.com>
+2012-02-07  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * Bumping release to 1.0~rc1
 * Removed the set-key binary, it was not really ready for use.
 
-2012-02-06  James Turk <jturk@sunlightfoundation.com>
+2012-02-06  James Turk  <jturk@sunlightfoundation.com>
 
 * refactor documentation to prepare for release
 * internal classes are now lowercase, ugly but it fixes sphinx
