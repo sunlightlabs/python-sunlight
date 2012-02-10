@@ -1,6 +1,7 @@
 2012-02-08  James Turk  <jturk@sunlightfoundation.com>
 
 * fix MANIFEST.in for PyPI and pip install directions
+* Bump release from 1.0 -> 1.0.1
 
 2012-02-08  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
