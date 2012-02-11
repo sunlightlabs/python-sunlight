@@ -1,3 +1,7 @@
+2012-02-11  James Turk  <jturk@sunlightfoundation.com>
+
+* fix urllib imports for Python 3 compatibility
+
 2012-02-08  James Turk  <jturk@sunlightfoundation.com>
 
 * fix MANIFEST.in for PyPI and pip install directions
