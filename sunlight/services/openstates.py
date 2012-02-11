@@ -3,7 +3,6 @@
 
 import sunlight.service
 import json
-import urllib
 
 module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
@@ -177,7 +176,7 @@ class openstates(sunlight.service.Service):
             service_url,
             object_path,
             apikey,
-            urllib.urlencode(kwargs)
+            sunlight.service.urlencode(kwargs)
         )
 
     def _decode_response(self, response):
