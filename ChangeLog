@@ -1,6 +1,7 @@
 2012-02-11  James Turk  <jturk@sunlightfoundation.com>
 
 * fix urllib imports for Python 3 compatibility
+* Bump release to 1.0.2
 
 2012-02-08  James Turk  <jturk@sunlightfoundation.com>
 
