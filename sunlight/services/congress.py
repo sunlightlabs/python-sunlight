@@ -9,7 +9,6 @@ Sunlight Congress API Implementation inside ``python-sunlight``.
 """
 
 import sunlight.service
-import urllib
 import json
 
 service_url = "http://services.sunlightlabs.com/api/"
@@ -132,7 +131,7 @@ class congress(sunlight.service.Service):
             service_url,
             obj,
             apikey,
-            urllib.urlencode(kwargs.items())
+            sunlight.service.urlencode(kwargs.items())
         )
 
     def _decode_response(self, response):

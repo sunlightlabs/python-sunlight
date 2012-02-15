@@ -8,11 +8,19 @@
 Base service class. All API classes (such as say -
 :class:`sunlight.services.openstates.OpenStates`) inherit from this.
 """
+import sys
 
 import sunlight.config
 import sunlight.errors
 
-import urllib2
+if sys.version_info[0] >= 3:
+    from urllib.parse import urlencode
+    from urllib.request import urlopen
+    from urllib.error import HTTPError
+else:
+    from urllib import urlencode
+    from urllib2 import urlopen
+    from urllib2 import HTTPError
 
 
 class Service:
@@ -21,7 +29,7 @@ class Service:
     code on how to actually fetch text over the network.
     """
 
-    def get( self, top_level_object, **kwargs ):
+    def get(self, top_level_object, **kwargs):
         """
         Get some data from the network - this is where we actually fetch
         something and make a request.
@@ -39,19 +47,18 @@ class Service:
             to help create a query. Validation will happen down below, and
             on a per-API level.
         """
-        if sunlight.config.API_KEY == None:
+        if not sunlight.config.API_KEY:
             raise sunlight.errors.NoAPIKeyException(
 "Warning: Missing API Key. please visit " + sunlight.config.API_SIGNUP_PAGE +
 " to register for a key.")
 
         url = self._get_url(top_level_object, sunlight.config.API_KEY,
                             **kwargs)
-        req = urllib2.Request(url)
         try:
-            r = urllib2.urlopen(req)
-            return_data = r.read()
-            return self._decode_response( return_data )
-        except urllib2.HTTPError as e:
+            r = urlopen(url)
+            return_data = r.read().decode()
+            return self._decode_response(return_data)
+        except HTTPError as e:
             message = e.read()
             code = e.getcode()
 
