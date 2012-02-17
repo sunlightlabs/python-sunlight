@@ -1,3 +1,8 @@
+2012-02-17  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* Import InvalidRequestException to the IE module, thanks pyflakes!
+* Bump release to 1.0.3
+
 2012-02-11  James Turk  <jturk@sunlightfoundation.com>
 
 * fix urllib imports for Python 3 compatibility

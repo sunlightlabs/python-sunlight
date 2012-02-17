@@ -8,6 +8,8 @@
 InfluenceExplorer API Implementation inside ``python-sunlight``.
 """
 
+from sunlight.errors import InvalidRequestException
+
 import sunlight.service
 import json
 
