@@ -1,3 +1,11 @@
+2012-02-17  Paul Tagliamonte  <paultag@sunlightfoundation.com
+
+* sunlight/service.py: Added a UTF hint to the .decode() call, it was
+resulting in a unicode error when translating UTF -> ASCII. This resulted in
+issue #170 in OpenStates.
+* Hotfix release, thanks ehazlett!
+* Bump release to 1.0.4
+
 2012-02-17  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * Import InvalidRequestException to the IE module, thanks pyflakes!
