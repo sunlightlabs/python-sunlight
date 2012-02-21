@@ -56,7 +56,7 @@ class Service:
                             **kwargs)
         try:
             r = urlopen(url)
-            return_data = r.read().decode(encoding='UTF-8')
+            return_data = r.read().decode('utf8')
             return self._decode_response(return_data)
         except HTTPError as e:
             message = e.read()
