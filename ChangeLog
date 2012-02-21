@@ -1,4 +1,11 @@
-2012-02-17  Paul Tagliamonte  <paultag@sunlightfoundation.com
+2012-02-21  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/service.py: Fixed the decode param to work with python2.6. This
+issue was discovered and reported by @eyeseast on GitHub. Sorry for the bumpy
+ride, everyone.
+* Bump release to 1.0.5
+
+2012-02-17  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * sunlight/service.py: Added a UTF hint to the .decode() call, it was
 resulting in a unicode error when translating UTF -> ASCII. This resulted in

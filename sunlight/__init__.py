@@ -11,7 +11,7 @@ fight with finding the right module to use.
 """
 
 __appname__ = "sunlight"
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 
 import sunlight.services.openstates
 import sunlight.services.capitolwords
