@@ -1,2 +1,4 @@
 include AUTHORS ChangeLog *.rst LICENSE
 recursive-include docs *
+recursive-include examples *
+

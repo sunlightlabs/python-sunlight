@@ -1,6 +1,7 @@
 2012-02-26  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * MANIFEST.in: Including the docs in the sdist tarball.
+* Bump release to 1.0.6, then to 1.1.0
 
 2012-02-21  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
