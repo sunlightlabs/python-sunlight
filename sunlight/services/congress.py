@@ -131,7 +131,7 @@ class congress(sunlight.service.Service):
             service_url,
             obj,
             apikey,
-            sunlight.service.urlencode(kwargs.items())
+            sunlight.service.urlencode(kwargs)
         )
 
     def _decode_response(self, response):
