@@ -2,6 +2,7 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the LICENSE file
 
+from __future__ import print_function
 from sunlight import openstates
 
 ca_dems = openstates.legislators(
@@ -12,5 +13,5 @@ ca_dems = openstates.legislators(
 )
 
 for dem in ca_dems:
-    print "%s %s (%s)" % (
-        dem['first_name'], dem['last_name'], dem['chamber'] )
+    print( "%s %s (%s)" % (
+        dem['first_name'], dem['last_name'], dem['chamber'] ))

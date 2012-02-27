@@ -2,6 +2,8 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the LICENSE file
 
+from __future__ import print_function
+
 import json
 from sunlight import openstates
 
@@ -11,4 +13,4 @@ vt_agro_bills = openstates.bills(
     chamber='upper'
 )
 
-print json.dumps( vt_agro_bills )
+print( json.dumps( vt_agro_bills ))

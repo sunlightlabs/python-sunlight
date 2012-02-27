@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 from sunlight import influenceexplorer
 
 grants = influenceexplorer.grants(
@@ -7,8 +8,8 @@ grants = influenceexplorer.grants(
 )
 
 for grant in grants:
-    print "%s to %s for %s" % (
+    print( "%s to %s for %s" % (
         grant['total_funding_amount'],
         grant['recipient_name'],
         grant['project_description']
-    )
+    ))

@@ -2,7 +2,8 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the LICENSE file
 
+from __future__ import print_function
 from sunlight import openstates
 
 bill = openstates.bill_detail( 'ca', '20092010', 'AB 667')
-print "%s - %s" % ( bill['bill_id'], bill['+short_title'] )
+print( "%s - %s" % ( bill['bill_id'], bill['+short_title'] ))

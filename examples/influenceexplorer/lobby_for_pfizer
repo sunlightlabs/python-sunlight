@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 from sunlight import influenceexplorer
 
 lobs = influenceexplorer.lobbying(
@@ -8,6 +9,6 @@ lobs = influenceexplorer.lobbying(
 )
 
 for lob in lobs:
-    print lob['registrant_name']
+    print( lob['registrant_name'] )
     for issue in lob['issues']:
-        print "  %s (%s)" % ( issue['general_issue'], issue['specific_issue'] ) 
+        print( "  %s (%s)" % ( issue['general_issue'], issue['specific_issue'] ))

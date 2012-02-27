@@ -2,7 +2,8 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the LICENSE file
 
+from __future__ import print_function
 from sunlight import openstates
 
 ctty = openstates.committee_detail( "MDC000065" )
-print "%s is the %s" % ( ctty['id'], ctty['committee'] )
+print( "%s is the %s" % ( ctty['id'], ctty['committee'] ))

@@ -2,10 +2,11 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the LICENSE file.
 
+from __future__ import print_function
 from sunlight import openstates
 
 tx_events = openstates.events( state='tx', type='committee:meeting' )
 for event in tx_events:
-    print "Event @ %s" % event['when']
+    print( "Event @ %s" % event['when'] )
     for who in event['participants']:
-        print "  %s (%s)" % ( who['participant'], who['chamber'] )
+        print( "  %s (%s)" % ( who['participant'], who['chamber'] ))

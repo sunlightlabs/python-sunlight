@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 from sunlight import capitolwords
 
-print "Internet was mentioned N times on the following days:"
-print ""
+print( "Internet was mentioned N times on the following days:" )
+print( "" )
 
 for date in capitolwords.dates("internet"):
-    print "%s - %s" % ( date['count'], date['day'] )
+    print( "%s - %s" % ( date['count'], date['day'] ))

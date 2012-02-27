@@ -2,6 +2,7 @@
 # Copyright (c) 2012 Paul Tagliamonte <paultag@sunlightfoundation.com>
 # under the terms of the LICENSE file
 
+from __future__ import print_function
 from sunlight import openstates
 
 vt_agro_bills = openstates.bills(
@@ -11,4 +12,4 @@ vt_agro_bills = openstates.bills(
 )
 
 for bill in vt_agro_bills:
-    print bill['title']
+    print( bill['title'] )
