@@ -1,3 +1,8 @@
+2012-02-27  James Turk  <jturk@sunlightfoundation.com>
+
+* Yet another fix for Python 3, remove an extra items() call in congress client
+* Bumping to 1.1.1
+
 2012-02-26  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * MANIFEST.in: Including the docs in the sdist tarball.
