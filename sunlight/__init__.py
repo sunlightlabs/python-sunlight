@@ -29,6 +29,15 @@ import sunlight.config
 import sunlight.service
 
 
+def available_services():
+    return {
+        'openstates': openstates,
+        'capitolwords': capitolwords,
+        'congress': congress,
+        'influenceexplorer': influenceexplorer,
+    }
+
+
 def _attempt_to_load_apikey():
     """
     This function (which will be auto-called on import of :mod:`sunlight`),
