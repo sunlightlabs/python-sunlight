@@ -79,14 +79,12 @@ class InfluenceExplorer(sunlight.service.Service):
     # API impl methods below
 
     def _get_url( self, obj, apikey, **kwargs ):
-        ret = "%s/%s.json?apikey=%s" % (
+        return "%s/%s?apikey=%s&%s" % (
             service_url,
             obj,
-            apikey
+            apikey,
+            sunlight.service.urlencode(kwargs)
         )
-        for arg in kwargs:
-            ret += "&%s=%s" % ( arg, kwargs[arg] )
-        return ret
 
     def _decode_response( self, response ):
         ret = json.loads( response )

@@ -1,3 +1,8 @@
+2012-04-12  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/services/capitolwords.py: Fixed a URL Encoding issue that was
+sitting there, undiscovered. Thanks, dandrinkard!
+
 2012-02-27  James Turk  <jturk@sunlightfoundation.com>
 
 [James]
