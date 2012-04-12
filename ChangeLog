@@ -2,6 +2,7 @@
 
 * sunlight/services/capitolwords.py: Fixed a URL Encoding issue that was
 sitting there, undiscovered. Thanks, dandrinkard!
+* Bump release to 1.1.2
 
 2012-02-27  James Turk  <jturk@sunlightfoundation.com>
 

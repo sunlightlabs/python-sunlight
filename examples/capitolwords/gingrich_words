@@ -5,7 +5,7 @@ from sunlight import capitolwords
 
 newt = "G000225"
 
-favorate_phrases = capitolwords.phrases( "legislator", "G000225", sort="count+desc")
+favorate_phrases = capitolwords.phrases( "legislator", "G000225", sort="count desc")
 for phrase in favorate_phrases:
     print( "%s: %s" % ( phrase['ngram'], phrase['count'] ))
 
