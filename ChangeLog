@@ -5,6 +5,7 @@
  - Fixed the exception that gets raised
    when running "openstates.bill(None)" from something cryptic to something
    a bit more explicit.
+* Bump release to 1.1.3
 
 2012-04-12  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
