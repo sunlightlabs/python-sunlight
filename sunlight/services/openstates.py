@@ -2,6 +2,7 @@
 # of the LICENSE file.
 
 import sunlight.service
+from sunlight.errors import BadRequestException
 import json
 
 module_name = "openstates"
@@ -173,6 +174,11 @@ class openstates(sunlight.service.Service):
     # API impl methods
 
     def _get_url(self, objs, apikey, **kwargs):
+        # Gate for any None's in the query. This is usually a problem.
+        if None in objs:
+            raise BadRequestException("`None' passed to the URL encoder (%s)" %
+                                      (str(objs)))
+
         # join pieces by slashes and add a trailing slash
         object_path = "/".join(objs)
         object_path +=  "/"

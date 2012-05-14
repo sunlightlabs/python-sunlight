@@ -34,7 +34,7 @@ class SunlightException(Exception):
 class BadRequestException(SunlightException):
     """
     This gets thrown when the underlying url request has recieved an abnormal
-    response code.
+    response code, or the program has issued a request that can not be filled.
     """
     pass
 
