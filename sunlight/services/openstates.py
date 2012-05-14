@@ -43,6 +43,11 @@ class openstates(sunlight.service.Service):
         """
         return self.get(["bills"], **kwargs)
 
+    def bill(self, bill_id, **kwargs):
+        """
+        """
+        return self.get(["bills", bill_id], **kwargs)
+
     def bill_detail(self, state, session, bill_id, chamber=None):
         """
         Get full information on a single bill from the Open States API given
