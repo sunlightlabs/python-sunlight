@@ -1,3 +1,11 @@
+2012-05-14  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/services/openstates.py:
+ - Added a new method - "openstates.bill", to get single bills by bill ID
+ - Fixed the exception that gets raised
+   when running "openstates.bill(None)" from something cryptic to something
+   a bit more explicit.
+
 2012-04-12  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * sunlight/services/capitolwords.py: Fixed a URL Encoding issue that was
