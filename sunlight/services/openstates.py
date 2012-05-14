@@ -46,6 +46,10 @@ class openstates(sunlight.service.Service):
 
     def bill(self, bill_id, **kwargs):
         """
+        Get full information on a single bill from the Open States API given
+        the OpenStates Bill ID (such as TNB00004685)
+
+        `Bill API docs <http://openstates.org/api/bills/>`_.
         """
         return self.get(["bills", bill_id], **kwargs)
 
