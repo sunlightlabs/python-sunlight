@@ -1,3 +1,10 @@
+2012-06-29  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/services/openstates.py:
+ - Encode all URL pararms before they get to urlencode, in the event a
+   non-ascii name is passed as a kwarg.
+* Bump release to 1.1.4
+
 2012-05-14  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * sunlight/services/openstates.py:
