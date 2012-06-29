@@ -1,3 +1,11 @@
+2012-06-29  James Turk  <jturk@sunlightfoundation.com>
+
+* sunlight/service.py:
+ - Add new safe_encode function to use rather then urlencode
+* sunlight/services/*.py:
+ - Migrate the sunlight.service.urlencode call to a .safe_encode call.
+* Bump release to 1.1.5
+
 2012-06-29  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * sunlight/services/openstates.py:
