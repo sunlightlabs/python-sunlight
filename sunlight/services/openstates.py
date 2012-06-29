@@ -178,11 +178,6 @@ class openstates(sunlight.service.Service):
     # API impl methods
 
     def _get_url(self, objs, apikey, **kwargs):
-        nargs = {}
-        for arg in kwargs:
-            nargs[arg] = kwargs[arg].encode('utf-8')
-        kwargs = nargs
-
         # Gate for any None's in the query. This is usually a problem.
         if None in objs:
             raise BadRequestException("`None' passed to the URL encoder (%s)" %
@@ -196,7 +191,7 @@ class openstates(sunlight.service.Service):
             service_url,
             object_path,
             apikey,
-            sunlight.service.urlencode(kwargs)
+            sunlight.service.safe_encode(kwargs)
         )
 
     def _decode_response(self, response):

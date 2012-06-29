@@ -96,7 +96,7 @@ class capitolwords(sunlight.service.Service):
             service_url,
             obj,
             apikey,
-            sunlight.service.urlencode(kwargs)
+            sunlight.service.safe_encode(kwargs)
         )
         return ret
 
