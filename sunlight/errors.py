@@ -6,6 +6,7 @@
     :synopsis: Exceptions and Errors
 """
 
+
 class SunlightException(Exception):
     """
     :class:`sunlight.errors.SunlightException` is the base exception,
@@ -31,6 +32,7 @@ class SunlightException(Exception):
         """
         return repr(self.value)
 
+
 class BadRequestException(SunlightException):
     """
     This gets thrown when the underlying url request has recieved an abnormal
@@ -45,6 +47,7 @@ class InvalidRequestException(BadRequestException):
     should be passed back to the program.
     """
     pass
+
 
 class NoAPIKeyException(SunlightException):
     """

@@ -28,6 +28,7 @@ import warnings
 import sunlight.config
 import sunlight.service
 
+
 def _attempt_to_load_apikey():
     """
     This function (which will be auto-called on import of :mod:`sunlight`),
@@ -49,7 +50,7 @@ def _attempt_to_load_apikey():
                 sunlight.config.KEY_LOCATION, str(e)))
     try:
         sunlight.config.API_KEY = \
-                os.environ[sunlight.config.KEY_ENVVAR].strip()
+            os.environ[sunlight.config.KEY_ENVVAR].strip()
     except KeyError as e:
         pass
 

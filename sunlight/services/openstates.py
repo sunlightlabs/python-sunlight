@@ -8,6 +8,7 @@ import json
 module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
+
 class openstates(sunlight.service.Service):
     """
     Bindings into the `Open States API <http://openstates.org/api/>`_. Keep in
@@ -75,7 +76,7 @@ class openstates(sunlight.service.Service):
         The fields and keyword arguments can be found on the
         `Legislator API docs <http://openstates.org/api/legislators/>`_.
         """
-        return self.get( [ "legislators"], **kwargs )
+        return self.get(["legislators"], **kwargs)
 
     def legislator_detail(self, leg_id, **kwargs):
         """
@@ -98,7 +99,7 @@ class openstates(sunlight.service.Service):
         See the Open States documentation for examples of `Legislator Geo
         Lookup <http://openstates.org/api/legislators/#geo-lookup>`_.
         """
-        kwargs['lat']  = latitude
+        kwargs['lat'] = latitude
         kwargs['long'] = longitude
         return self.get(["legislators", "geo"], **kwargs)
 
@@ -132,7 +133,7 @@ class openstates(sunlight.service.Service):
         See the Open States' site for details on the
         `Event API <http://openstates.org/api/events/>`_.
         """
-        return self.get([ "events" ], **kwargs)
+        return self.get(["events"], **kwargs)
 
     def event_detail(self, event_id, **kwargs):
         """
@@ -143,8 +144,8 @@ class openstates(sunlight.service.Service):
         See the Open States' site for details on the
         `Event API Fields <http://openstates.org/api/events/#event-fields>`_.
         """
-        lss = [ "events", event_id ]
-        return self.get( lss, **kwargs )
+        lss = ["events", event_id]
+        return self.get(lss, **kwargs)
 
     def districts(self, state, chamber=None, **kwargs):
         """
@@ -185,7 +186,7 @@ class openstates(sunlight.service.Service):
 
         # join pieces by slashes and add a trailing slash
         object_path = "/".join(objs)
-        object_path +=  "/"
+        object_path += "/"
 
         return "%s/%s?apikey=%s&%s" % (
             service_url,

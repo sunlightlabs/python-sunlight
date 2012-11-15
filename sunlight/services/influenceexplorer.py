@@ -15,6 +15,7 @@ import json
 
 service_url = "http://transparencydata.com/api/1.0"
 
+
 class InfluenceExplorer(sunlight.service.Service):
     """
     Bindings into the `InfluenceExplorer <http://influenceexplorer.com/>`_
@@ -77,8 +78,7 @@ class InfluenceExplorer(sunlight.service.Service):
         return self.get("entities", **kwargs)
 
     # API impl methods below
-
-    def _get_url( self, obj, apikey, **kwargs ):
+    def _get_url(self, obj, apikey, **kwargs):
         return "%s/%s?apikey=%s&%s" % (
             service_url,
             obj,
@@ -86,11 +86,10 @@ class InfluenceExplorer(sunlight.service.Service):
             sunlight.service.safe_encode(kwargs)
         )
 
-    def _decode_response( self, response ):
-        ret = json.loads( response )
+    def _decode_response(self, response):
+        ret = json.loads(response)
         if "error" in ret:
-            ex = InvalidRequestException( ret['error'] )
+            ex = InvalidRequestException(ret['error'])
             ex.response = ret
             raise ex
         return ret
-

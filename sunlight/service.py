@@ -78,6 +78,6 @@ class Service:
 
             ex.url = e.geturl()
             ex.message = message
-            ex.code    = code
+            ex.code = code
 
             raise ex

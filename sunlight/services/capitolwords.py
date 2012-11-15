@@ -9,6 +9,7 @@ import json
 
 service_url = "http://capitolwords.org/api"
 
+
 class capitolwords(sunlight.service.Service):
     """
     Bindings into the `CapitolWords project <http://capitolwords.org>`_.
@@ -34,7 +35,7 @@ class capitolwords(sunlight.service.Service):
         endpoint <http://capitolwords.org/api/#dates.json>`_.
         """
         kwargs['phrase'] = phrase
-        return self.get( "dates", **kwargs )
+        return self.get("dates", **kwargs)
 
     def phrases(self, entity_type, entity_value, **kwargs):
         """
@@ -45,10 +46,10 @@ class capitolwords(sunlight.service.Service):
         For a list of arguments see `Capitol Words' phrases.json
         endpoint <http://capitolwords.org/api/#phrases.json>`_.
         """
-        kwargs['entity_type']  = entity_type
+        kwargs['entity_type'] = entity_type
         kwargs['entity_value'] = entity_value
 
-        return self.get( "phrases", **kwargs )
+        return self.get("phrases", **kwargs)
 
     def phrases_by_entity(self, entity_type, **kwargs):
         """
@@ -60,9 +61,9 @@ class capitolwords(sunlight.service.Service):
         endpoint <http://capitolwords.org/api/#phrases/entity.json>`_.
         """
         lss = "%s/%s" % ("phrases", entity_type)
-        return self.get( lss, **kwargs )
+        return self.get(lss, **kwargs)
 
-    def text( self, phrase=None, title=None, **kwargs ):
+    def text(self, phrase=None, title=None, **kwargs):
         """
         Full text-search against Capitol Words data.
 
@@ -85,13 +86,13 @@ class capitolwords(sunlight.service.Service):
             kwargs['phrase'] = phrase
 
         if title:
-            kwargs['title']  = title
+            kwargs['title'] = title
 
-        return self.get( "text", **kwargs )
+        return self.get("text", **kwargs)
 
     # API impl methods below
 
-    def _get_url( self, obj, apikey, **kwargs ):
+    def _get_url(self, obj, apikey, **kwargs):
         ret = "%s/%s.json?apikey=%s&%s" % (
             service_url,
             obj,
@@ -100,10 +101,10 @@ class capitolwords(sunlight.service.Service):
         )
         return ret
 
-    def _decode_response( self, response ):
-        ret = json.loads( response )
+    def _decode_response(self, response):
+        ret = json.loads(response)
         if "error" in ret:
-            ex = InvalidRequestException( ret['error'] )
+            ex = InvalidRequestException(ret['error'])
             ex.response = ret
             raise ex
         if "results" in ret:
@@ -111,4 +112,3 @@ class capitolwords(sunlight.service.Service):
             # XXX: Verify this is actually
             #      what we want.
         return ret
-

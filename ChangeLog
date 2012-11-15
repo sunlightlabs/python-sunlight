@@ -3,6 +3,8 @@
 * sunlight/services/congress.py:
  - Add **kwargs for each method, and pass them along to all requests. This
    helps prevent cases where we add an argument and older versions break.
+* sunlight/services/*.py:
+ - Fixed some outstanding pep8 issues.
 
 2012-06-29  James Turk  <jturk@sunlightfoundation.com>
 

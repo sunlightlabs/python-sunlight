@@ -13,8 +13,10 @@ import json
 
 service_url = "http://services.sunlightlabs.com/api/"
 
+
 def _unpack(resp, key):
-    return [e[key] for e in resp[key+'s']]
+    return [e[key] for e in resp[key + 's']]
+
 
 class congress(sunlight.service.Service):
     """
@@ -33,7 +35,6 @@ class congress(sunlight.service.Service):
         return _unpack(self.get('legislators.getList', **kwargs),
                        'legislator')
 
-
     def legislator_search(self, name, threshold=0.9, all_legislators=False,
                           **kwargs):
         """
@@ -49,7 +50,6 @@ class congress(sunlight.service.Service):
             params['all_legislators'] = 1
 
         return _unpack(self.get('legislators.search', **params), 'result')
-
 
     def legislators_for_zip(self, zipcode, **kwargs):
         """
@@ -112,7 +112,6 @@ class congress(sunlight.service.Service):
         })
         return _unpack(self.get('districts.getDistrictFromLatLong', **params),
                        'district')
-
 
     def committees(self, chamber, **kwargs):
         """
