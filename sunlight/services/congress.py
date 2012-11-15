@@ -34,21 +34,24 @@ class congress(sunlight.service.Service):
                        'legislator')
 
 
-    def legislator_search(self, name, threshold=0.9, all_legislators=False):
+    def legislator_search(self, name, threshold=0.9, all_legislators=False,
+                          **kwargs):
         """
         Fuzzy-matching name search against federal legislators.
 
         See documentation at `legislators.search
         <http://services.sunlightlabs.com/docs/congressapi/legislators.search/>`_
         """
-        params = {'name': name, 'threshold': threshold}
+        params = kwargs.copy()
+        params.update({'name': name, 'threshold': threshold})
+
         if all_legislators:
             params['all_legislators'] = 1
-        return _unpack(self.get('legislators.search', **params),
-                       'result')
+
+        return _unpack(self.get('legislators.search', **params), 'result')
 
 
-    def legislators_for_zip(self, zipcode):
+    def legislators_for_zip(self, zipcode, **kwargs):
         """
         Query for all legislators representing a given ZIP code.
 
@@ -59,71 +62,95 @@ class congress(sunlight.service.Service):
         See documentation at `legislators.allForZip
         <http://services.sunlightlabs.com/docs/congressapi/legislators.allForZip/>`_
         """
-        return _unpack(self.get('legislators.allForZip', zip=zipcode),
-                       'legislator'
-                      )
+        params = kwargs.copy()
+        params.update({
+            "zip": zipcode
+        })
+        return _unpack(self.get('legislators.allForZip', **params),
+                       'legislator')
 
-    def legislators_for_lat_lon(self, latitude, longitude):
+    def legislators_for_lat_lon(self, latitude, longitude, **kwargs):
         """
         Query for all legislators representing an given location.
 
         See documentation at `legislators.allForLatLong
         <http://services.sunlightlabs.com/docs/congressapi/legislators.allForLatLong/>`_
         """
-        return _unpack(self.get('legislators.allForLatLong', latitude=latitude,
-                                longitude=longitude), 'legislator')
+        params = kwargs.copy()
+        params.update({
+            "latitude": latitude,
+            "longitude": longitude
+        })
+        return _unpack(self.get('legislators.allForLatLong', **params),
+                       'legislator')
 
-    def districts_for_zip(self, zipcode):
+    def districts_for_zip(self, zipcode, **kwargs):
         """
         Query for all congressional districts overlapping a zip code.
 
         See documentation at `districts.getDistrictFromLatLong
         <http://services.sunlightlabs.com/docs/congressapi/districts.getDistrictFromLatLong/>`_
         """
-        return _unpack(self.get('districts.getDistrictsFromZip', zip=zipcode),
-                       'district'
-                      )
+        params = kwargs.copy()
+        params.update({
+            "zip": zipcode
+        })
+        return _unpack(self.get('districts.getDistrictsFromZip', **params),
+                       'district')
 
-    def districts_for_lat_lon(self, latitude, longitude):
+    def districts_for_lat_lon(self, latitude, longitude, **kwargs):
         """
         Query for all congressional districts containing a given location.
 
         See documentation at `districts.getDistrictFromLatLong
         <http://services.sunlightlabs.com/docs/congressapi/districts.getDistrictFromLatLong/>`_
         """
-        return _unpack(self.get('districts.getDistrictFromLatLong',
-                                latitude=latitude, longitude=longitude),
-                       'district'
-                      )
+        params = kwargs.copy()
+        params.update({
+            "latitude": latitude,
+            "longitude": longitude
+        })
+        return _unpack(self.get('districts.getDistrictFromLatLong', **params),
+                       'district')
 
-    def committees(self, chamber):
+
+    def committees(self, chamber, **kwargs):
         """
         Query for all committees for a chamber.  (House|Senate|Joint)
 
         See documentation at `committees.getList
         <http://services.sunlightlabs.com/docs/congressapi/committees.getList/>`_
         """
-        return _unpack(self.get('committees.getList', chamber=chamber),
+        params = kwargs.copy()
+        params.update({"chamber": chamber})
+        return _unpack(self.get('committees.getList', **params),
                        'committee')
 
-    def committee_detail(self, id):
+    def committee_detail(self, committee_id, **kwargs):
         """
         Query for all details for a committee, including members.
 
         See documentation at `committees.get
         <http://services.sunlightlabs.com/docs/congressapi/committees.get/>`_
         """
-        return self.get('committees.get', id=id)['committee']
+        params = kwargs.copy()
+        params.update({"id": committee_id})
+        # We can't use _unpack since top level is `committee' not committees
+        return self.get('committees.get', **params)['committee']
 
-    def committees_for_legislator(self, bioguide_id):
+    def committees_for_legislator(self, bioguide_id, **kwargs):
         """
         Query for all details for all of a legislator's committee assignments.
 
         See documentation at `committees.allForLegislator
         <http://services.sunlightlabs.com/docs/congressapi/committees.allForLegislator/>`_
         """
-        return _unpack(self.get('committees.allForLegislator',
-                                bioguide_id=bioguide_id), 'committee')
+        params = kwargs.copy()
+        params.update({
+            "bioguide_id": bioguide_id
+        })
+        return _unpack(self.get('committees.allForLegislator', **params),
+                       'committee')
 
     # implementation methods
     def _get_url(self, obj, apikey, **kwargs):
