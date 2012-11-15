@@ -1,3 +1,9 @@
+2012-11-15  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/services/congress.py:
+ - Add **kwargs for each method, and pass them along to all requests. This
+   helps prevent cases where we add an argument and older versions break.
+
 2012-06-29  James Turk  <jturk@sunlightfoundation.com>
 
 * sunlight/service.py:
