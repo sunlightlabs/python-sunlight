@@ -18,7 +18,7 @@ def _unpack(resp, key):
     return [e[key] for e in resp[key + 's']]
 
 
-class congress(sunlight.service.Service):
+class Congress(sunlight.service.Service):
     """
     Bindings into the `Sunlight Congress API
     <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_, an API

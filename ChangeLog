@@ -1,3 +1,16 @@
+2012-12-12  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/services/*py:
+ - Rename classes to not be gross.
+* Bump release to 1.1.7
+
+2012-12-12  Jeremy Carbaugh  <jcarbaugh@sunlightfoundation.com>
+
+* sunlight/cli.py:
+ - Add a clint CLI wrapper for python-sunlight
+* sunlight/__init__.py:
+ - Add a method to get services provided.
+
 2012-11-15  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * sunlight/services/congress.py:

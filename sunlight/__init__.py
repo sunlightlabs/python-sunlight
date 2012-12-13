@@ -11,16 +11,16 @@ fight with finding the right module to use.
 """
 
 __appname__ = "sunlight"
-__version__ = "1.1.6"
+__version__ = "1.1.7"
 
 import sunlight.services.openstates
 import sunlight.services.capitolwords
 import sunlight.services.congress
 import sunlight.services.influenceexplorer
 
-openstates = sunlight.services.openstates.openstates()
-capitolwords = sunlight.services.capitolwords.capitolwords()
-congress = sunlight.services.congress.congress()
+openstates = sunlight.services.openstates.Openstates()
+capitolwords = sunlight.services.capitolwords.CapitolWords()
+congress = sunlight.services.congress.Congress()
 influenceexplorer = sunlight.services.influenceexplorer.InfluenceExplorer()
 
 import os.path

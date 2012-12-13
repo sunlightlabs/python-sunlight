@@ -9,7 +9,7 @@ module_name = "openstates"
 service_url = "http://openstates.org/api/v1"
 
 
-class openstates(sunlight.service.Service):
+class Openstates(sunlight.service.Service):
     """
     Bindings into the `Open States API <http://openstates.org/api/>`_. Keep in
     mind this is a thin wrapper around the API so the API documentation is the

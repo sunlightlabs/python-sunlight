@@ -10,7 +10,7 @@ import json
 service_url = "http://capitolwords.org/api"
 
 
-class capitolwords(sunlight.service.Service):
+class CapitolWords(sunlight.service.Service):
     """
     Bindings into the `CapitolWords project <http://capitolwords.org>`_.
     Keep in mind, as you use this wrapper, that this is a very thin translation
