@@ -4,8 +4,8 @@ import sys
 from clint import args
 import sunlight
 
-def main():
 
+def main():
     services = sunlight.available_services()
     service = services.get(args.get(0), None)
 
@@ -23,10 +23,11 @@ def main():
             sys.stdout.write(json.dumps(resp, indent=2) + '\n')
 
         else:
-            help(methods=available_methods) # missing or invalid method param
+            help(methods=available_methods)  # missing or invalid method param
 
     else:
-        help(services=services) # missing or invalid service parameter
+        help(services=services)  # missing or invalid service parameter
+
 
 def help(services=None, methods=None):
     sys.stderr.write("Usage: sunlight <service> <method> [<args>, ...]\n")
@@ -40,6 +41,7 @@ def help(services=None, methods=None):
         sys.stderr.write("Available methods:\n")
         for m in methods:
             sys.stderr.write("    %s\n" % m)
+
 
 if __name__ == "__main__":
     main()

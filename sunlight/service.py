@@ -59,8 +59,10 @@ class Service:
         """
         if not sunlight.config.API_KEY:
             raise sunlight.errors.NoAPIKeyException(
-"Warning: Missing API Key. please visit " + sunlight.config.API_SIGNUP_PAGE +
-" to register for a key.")
+                "Warning: Missing API Key. please visit " +
+                sunlight.config.API_SIGNUP_PAGE +
+                " to register for a key."
+            )
 
         url = self._get_url(top_level_object, sunlight.config.API_KEY,
                             **kwargs)
