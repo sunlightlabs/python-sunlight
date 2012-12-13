@@ -10,7 +10,10 @@ long_description = open('README.rst').read()
 setup(
     name       = __appname__,
     version    = __version__,
-    packages   = [ 'sunlight', 'sunlight.services' ],
+    packages   = ['sunlight', 'sunlight.services'],
+
+    install_requires = ['clint'],
+    entry_points     = {'console_scripts': ['sunlight = sunlight.cli:main']},
 
     author       = "Paul Tagliamonte",
     author_email = "paultag@sunlightfoundation.com",
