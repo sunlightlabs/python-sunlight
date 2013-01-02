@@ -12,7 +12,7 @@ for cw_record in capitolwords.phrases_by_entity(
     "legislator",  # We're getting all legislators
     sort="count",  # sorted by how much they say
     phrase=phrase, # this word
-)[:6]: # We'll just try the top 5 legislators
+)[:6]: # We'll just try the top 6 legislators
     legislator = congress.legislators(
         bioguide_id=cw_record['legislator'], # Look up this bioguide (unique ID)
         #                                      for every fed. legislator
