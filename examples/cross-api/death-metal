@@ -14,7 +14,7 @@ for cw_record in capitolwords.phrases_by_entity(
     phrase=phrase, # this word
 )[:6]: # We'll just try the top 5 legislators
     legislator = congress.legislators(
-        bioguide_id=cw_record['legislator'], # Look up this biogude (unique ID)
+        bioguide_id=cw_record['legislator'], # Look up this bioguide (unique ID)
         #                                      for every fed. legislator
         all_legislators="true" # search retired legislators
     )
