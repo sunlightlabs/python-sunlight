@@ -7,4 +7,4 @@ from sunlight import openstates
 
 md_cttys = openstates.committees( state='md', chamber='upper' )
 for ctty in md_cttys:
-        print( "%s (%s)" % ( ctty['committee'], ctty['chamber'] ))
+    print( "%s (%s)" % ( ctty['committee'], ctty['chamber'] ))
