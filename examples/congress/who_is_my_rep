@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+from sunlight import congress
+import json
+import os
+
+obj = json.load(open(os.path.expanduser("~/.location.json"), "r"))
+lat, lon = obj['latitude'], obj['longitude']
+
+
+print(congress.locate_legislators_by_zip("02481"))
