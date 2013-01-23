@@ -12,18 +12,22 @@ import sunlight.service
 import json
 
 
+API_ROOT = "http://congress.api.sunlightfoundation.com"
+
+
 class Congress(sunlight.service.Service):
     """
-    Bindings into the `Sunlight Congress API
-    <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_, an API
-    primarily for details on current federal legislators.
     """
 
+    def legislators(self, **kwargs):
+        return self.get('legislators', **kwargs)
+
     # implementation methods
-    def _get_url(self, obj, apikey, **kwargs):
+    def _get_url(self, endpoint, apikey, **kwargs):
         return "%s/%s?apikey=%s&%s" % (
-            service_url,
-            obj,
-            apikey,
+            API_ROOT, endpoint, apikey,
             sunlight.service.safe_encode(kwargs)
         )
+
+    def _decode_response(self, response):
+        return json.loads(response)['results']

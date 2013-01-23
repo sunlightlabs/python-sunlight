@@ -5,7 +5,12 @@
 .. module:: sunlight.services.congress
     :synopsis: Sunlight Congress API Implementation
 
-Sunlight Congress API Implementation inside ``python-sunlight``.
+.. warning::
+    Please avoid using this for new applications, this API has been
+    phased out, and will be taken down at the end of the current
+    congress.
+
+Deprecated Sunlight Congress API Implementation inside ``python-sunlight``.
 """
 
 import sunlight.service
