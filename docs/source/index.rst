@@ -11,13 +11,12 @@ projects.
 
 Currently this library supports the following APIs:
 
-* `Sunlight Congress API <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_ (via :ref:`sunlight.congress`)
 * `Open States API <http://openstates.org/api/>`_ (via :ref:`sunlight.openstates`)
+* `Congress API <http://sunlightlabs.github.com/congress/>`_ (via :ref:`sunlight.congress`)
 * `Capitol Words API <http://capitolwords.org/api/>`_ (via :ref:`sunlight.capitolwords`)
 
-Support is pending for the `Influence Explorer API <http://data.influenceexplorer.com/api/>`_ and the
-`Real Time Congress API <http://services.sunlightlabs.com/docs/Real_Time_Congress_API/>`_,
-though these currently have their own Python wrappers.
+* `The old Sunlight Congress API (deprecated) <http://services.sunlightlabs.com/docs/Sunlight_Congress_API/>`_ (via :ref:`sunlight.congress_deprecated`)
+
 
 Installation
 ============

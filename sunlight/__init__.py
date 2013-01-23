@@ -16,12 +16,13 @@ __version__ = "1.1.7"
 import sunlight.services.openstates
 import sunlight.services.capitolwords
 import sunlight.services.congress
-import sunlight.services.influenceexplorer
+import sunlight.services.congress_deprecated
 
 openstates = sunlight.services.openstates.Openstates()
 capitolwords = sunlight.services.capitolwords.CapitolWords()
+
 congress = sunlight.services.congress.Congress()
-influenceexplorer = sunlight.services.influenceexplorer.InfluenceExplorer()
+congress_deprecated = sunlight.services.congress_deprecated.Congress()
 
 import os.path
 import warnings
@@ -34,7 +35,6 @@ def available_services():
         'openstates': openstates,
         'capitolwords': capitolwords,
         'congress': congress,
-        'influenceexplorer': influenceexplorer,
     }
 
 
