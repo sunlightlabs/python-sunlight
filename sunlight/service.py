@@ -27,7 +27,7 @@ else:
 
 def safe_encode(kwargs):
     kwargs = kwargs.copy()
-    for k, v in kwargs.iteritems():
+    for k, v in kwargs.items():
         if isinstance(v, _str_type):
             kwargs[k] = v.encode('utf8')
     return urlencode(kwargs)
