@@ -15,10 +15,10 @@ def main():
         ]
         if args.get(1) in available_methods:
 
-            params = {
-                g[0][2:]: g[1].get(0) for g in args.grouped.items()[1:] if
+            params = dict([
+                (g[0][2:], g[1].get(0)) for g in args.grouped.items()[1:] if
                 g[0].startswith('--')
-            }
+            ])
             resp = getattr(service, args.get(1))(**params)
             sys.stdout.write(json.dumps(resp, indent=2) + '\n')
 
