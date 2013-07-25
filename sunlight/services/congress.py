@@ -187,17 +187,17 @@ class Congress(sunlight.service.Service):
         """
         Search and filter through committees in the House and Senate.
 
-        For details see `Bill API docs
+        For details see `Committees API docs
         <http://sunlightlabs.github.io/congress/committees.html>`
         """
         return self.get('committees', **kwargs)
 
     def amendments(self, **kwargs):
         """
-        Search and filter through committees in Congress.
+        Search and filter through amendments in Congress.
 
         For details see `Amendments API docs
-        <http://sunlightlabs.github.io/congress/committees.html>`
+        <http://sunlightlabs.github.io/congress/amendments.html>`
         """
         return self.get('amendments', **kwargs)
 
