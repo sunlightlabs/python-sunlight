@@ -1,5 +1,6 @@
 import json
 import sys
+import itertools
 
 from clint import args
 import sunlight
@@ -19,7 +20,9 @@ def main():
                 (g[0][2:], g[1].get(0)) for g in args.grouped.items()[1:] if
                 g[0].startswith('--')
             ])
-            resp = getattr(service, args.get(1))(**params)
+            fn_args = [g.split(',') for g in args.grouped.get('_')[2:]]
+            fn_args = list(itertools.chain.from_iterable(fn_args))
+            resp = getattr(service, args.get(1))(*fn_args, **params)
             sys.stdout.write(json.dumps(resp, indent=2) + '\n')
 
         else:
