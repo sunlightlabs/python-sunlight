@@ -24,6 +24,23 @@ LEGISLATOR_ID_TYPES = (
     'fec',
 )
 
+# Stolen from http://codereview.stackexchange.com/a/21035/28391
+def flatten_dict(d):
+    def flat_items():
+        for k, v in d.items():
+            if isinstance(v, dict):
+                for kk, vv in flatten_dict(v).items():
+                    yield '{0}.{1}'.format(k,kk), vv
+            else:
+                yield k, v
+
+    return dict(flat_items())
+
+def preencode_values(d):
+    for k, v in d.items():
+        if isinstance(v, bool):
+            d[k] = str(v).lower()
+    return d
 
 class Congress(sunlight.service.Service):
     """
@@ -230,10 +247,12 @@ class Congress(sunlight.service.Service):
 
     # implementation methods
     def _get_url(self, endpoint, apikey, **kwargs):
-        return "%s/%s?apikey=%s&%s" % (
+        url_args = preencode_values( flatten_dict(kwargs) )
+        url =  "%s/%s?apikey=%s&%s" % (
             API_ROOT, endpoint, apikey,
-            sunlight.service.safe_encode(kwargs)
+            sunlight.service.safe_encode(url_args)
         )
+        return url
 
     def _decode_response(self, response):
         return json.loads(response)['results']
