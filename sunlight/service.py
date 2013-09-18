@@ -18,11 +18,15 @@ if sys.version_info[0] >= 3:
     from urllib.request import urlopen
     from urllib.error import HTTPError
     _str_type = str
+    from collections import UserDict
+    from collections import UserList
 else:
     from urllib import urlencode
     from urllib2 import urlopen
     from urllib2 import HTTPError
     _str_type = basestring
+    from UserList import UserList
+    from UserDict import IterableUserDict as UserDict
 
 
 def safe_encode(kwargs):
@@ -83,3 +87,25 @@ class Service:
             ex.code = code
 
             raise ex
+
+
+class EntityList(UserList):
+    """
+    EntityList provides an iterable of API entities along with a _meta
+    dictionary that contains information about the query results. This could
+    include result count and pagination details.
+    """
+    def __init__(self, data=[], meta=None):
+        UserList.__init__(self, data)
+        self._meta = meta
+
+
+class EntityDict(UserDict):
+    """
+    EntityDict provides a dictionary representation of an API entity along
+    with a _meta dictionary that contains information about the query results.
+    This could include result count and pagination details.
+    """
+    def __init__(self, data={}, meta=None):
+        UserDict.__init__(self, data)
+        self._meta = meta

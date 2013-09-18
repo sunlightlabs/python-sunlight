@@ -9,6 +9,8 @@ Sunlight Congress API Implementation inside ``python-sunlight``.
 """
 
 import sunlight.service
+from sunlight.service import EntityList
+from sunlight.service import EntityDict
 import json
 
 
@@ -86,7 +88,7 @@ class Congress(sunlight.service.Service):
         kwargs.update(id_arg)
         results = self.get('legislators', **kwargs)
         if len(results):
-            return results[0]
+            return EntityDict(results[0], results._meta)
         return None
 
 
@@ -148,7 +150,7 @@ class Congress(sunlight.service.Service):
         })
         results = self.get('bills', **kwargs)
         if len(results):
-            return results[0]
+            return EntityDict(results[0], results._meta)
         return None
 
     def search_bills(self, query, **kwargs):
@@ -264,4 +266,6 @@ class Congress(sunlight.service.Service):
         return url
 
     def _decode_response(self, response):
-        return json.loads(response)['results']
+        data = json.loads(response)
+        results = data.pop('results')
+        return EntityList(results, data)
