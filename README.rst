@@ -22,7 +22,7 @@ The easiest way to write this file out is by running a command similar to this
     echo "API_KEY" > ~/.sunlight.key
 
 where `API_KEY` is actually the string of letters and numbers that was emailed
-to you. Actually putting `API_KEY` into this file will most likely result in 
+to you. Actually putting `API_KEY` into this file will most likely result in
 an error from the server. You can confirm they key with the following command:
 
     cat ~/.sunlight.key
@@ -34,10 +34,10 @@ Help me!
 
 Basic usage and some brief examples can be found on
 `readthedocs <http://python-sunlight.rtfd.org>`_.
-If this doens't help, feel free to email for help, ask over IRC in
+If this doesn't help, feel free to email for help, ask over IRC in
 ``#sunlightlabs`` on ``irc.freenode.net``, or open a issue if it's a
 particularly nasty bug (particularly regarding ambiguous documentation, or
-poorly exposed API methods). 
+poorly exposed API methods).
 
 License
 *******
