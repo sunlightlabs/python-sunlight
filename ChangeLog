@@ -1,3 +1,10 @@
+2013-09-18  Daniel Cloud  <dcloud@sunlightfoundation.com>
+
+* sunlight/service.py:
+ - Add EntityList and EntityDict subclasses that provide metadata
+* sunlight/services/congress.py:
+ - Add new nominations endpoint
+
 2013-07-24  Daniel Cloud  <dcloud@sunlightfoundation.com>
 
 * sunlight/services/congress.py:
