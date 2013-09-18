@@ -245,6 +245,15 @@ class Congress(sunlight.service.Service):
         """
         return self.get('hearings', **kwargs)
 
+    def nominations(self, **kwargs):
+        """
+        Search and filter through presidential nominations in Congress.
+
+        For details see `Nominations API docs
+        <http://sunlightlabs.github.io/congress/nominations.html>`
+        """
+        return self.get('nominations', **kwargs)
+
     # implementation methods
     def _get_url(self, endpoint, apikey, **kwargs):
         url_args = preencode_values( flatten_dict(kwargs) )
