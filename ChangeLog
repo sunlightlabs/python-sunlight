@@ -1,3 +1,8 @@
+2013-11-08  Daniel Cloud  <dcloud@sunlightfoundation.com>
+
+* sunlight/cli.py:
+ - Fix json serialization of EntityList and EntityDict
+
 2013-09-18  Daniel Cloud  <dcloud@sunlightfoundation.com>
 
 * sunlight/service.py:
