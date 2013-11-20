@@ -1,3 +1,14 @@
+2013-11-20  Thom Neale  <tneale@sunlightfoundation.com>
+
+* sunlight/debugcache.py:
+ - Added a method decorator for caching API responses, base classes for adding more backends if need arises
+* sunlight/__init__.py:
+ - Imports the cache instance and aliases it
+* sunlight/services.py:
+ - Imports the cache instance and decorates Service.get with it
+ - If the cache is never enabled, everything words the way it always has
+ - If the cache is enabled with cache.enable(), API responses get cached
+
 2013-11-08  Daniel Cloud  <dcloud@sunlightfoundation.com>
 
 * sunlight/cli.py:
