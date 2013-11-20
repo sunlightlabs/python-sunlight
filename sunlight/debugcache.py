@@ -73,8 +73,10 @@ class MongoBackend(BaseBackend):
 
     def purge(self, *keys):
         if not keys:
-            return self.mongo.drop_database()
-        self.mongo.reponses.remove({'_id': {'$in': keys}})
+            spec = {}
+        else:
+            spec = {'_id': {'$in': keys}}
+        self.mongo.reponses.remove(keys)
 
 
 class BaseCache(object):
@@ -84,6 +86,15 @@ class BaseCache(object):
         logging.basicConfig(
             format='%(asctime)s %(levelname)s %(message)s')
         self.logger = logging.getLogger('cache')
+
+    def set_backend(self, backend_name):
+        try:
+            self.backend = backends[backend_name]()
+            self.logger.info('Changed cache backend to %r.' % self.backend)
+        except KeyError:
+            raise ValueError('No backend named %r is defined.' % backend_name)
+
+    enable = set_backend
 
     def disable(self):
         '''Disable the cache. Will wipe out an in-memory cache.
@@ -97,15 +108,6 @@ class BaseCache(object):
         self.logger.info('Purging cache...')
         self.backend.purge()
         self.logger.info('...done.')
-
-    def set_backend(self, backend_name):
-        try:
-            self.backend = backends[backend_name]()
-            self.logger.info('Changed cache backend to %r.' % self.backend)
-        except KeyError:
-            raise ValueError('No backend named %r is defined.' % backend_name)
-
-    enable = set_backend
 
     def get_key(self, *args, **kwargs):
         '''Create a cache key based on the input to the wrapped callable.
