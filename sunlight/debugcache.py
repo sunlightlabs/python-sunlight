@@ -6,6 +6,9 @@ from sunlight import cache
 
 cache.enable('mongo')
 cache.logger.setLevel(logging.DEBUG)
+
+Note: the implementation below doesn't bother with cache expiration.
+Typical use case is caching API calls during an expensive build process.
 '''
 import pickle
 import logging
