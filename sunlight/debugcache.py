@@ -1,3 +1,12 @@
+'''
+The cache is disabled by default. Use it like so:
+
+import logging
+from sunlight import cache, openstates
+
+cache.enable('mongo')
+cache.logger.setLevel(logging.DEBUG)
+'''
 import pickle
 import logging
 import functools
