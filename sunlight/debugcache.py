@@ -2,7 +2,7 @@
 The cache is disabled by default. Use it like so:
 
 import logging
-from sunlight import cache, openstates
+from sunlight import cache
 
 cache.enable('mongo')
 cache.logger.setLevel(logging.DEBUG)
@@ -46,7 +46,7 @@ class BaseBackend(object):
 
 
 class MemoryBackend(BaseBackend):
-    '''In memory cache for API responses.
+    '''In-memory cache for API responses.
     '''
     nicknames = ['mem', 'locmem', 'localmem']
 
