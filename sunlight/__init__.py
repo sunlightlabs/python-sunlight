@@ -16,10 +16,12 @@ __version__ = "1.2.1"
 import sunlight.services.openstates
 import sunlight.services.capitolwords
 import sunlight.services.congress
+import sunlight.services.opencivic
 import sunlight.services.congress_deprecated
 
 openstates = sunlight.services.openstates.Openstates()
 capitolwords = sunlight.services.capitolwords.CapitolWords()
+opencivic = sunlight.services.opencivic.OpenCivic()
 
 congress = sunlight.services.congress.Congress()
 congress_deprecated = sunlight.services.congress_deprecated.Congress()

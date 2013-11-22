@@ -1,7 +1,14 @@
+2013-11-22  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* sunlight/services/opencivic.py
+ - New service for OpenCivic endpoints. Currently hardcoded to talk with
+   opencivicdata.org.
+
 2013-11-20  Thom Neale  <tneale@sunlightfoundation.com>
 
 * sunlight/debugcache.py:
- - Added a method decorator for caching API responses, base classes for adding more backends if need arises
+ - Added a method decorator for caching API responses, base classes for
+   adding more backends if need arises
 * sunlight/__init__.py:
  - Imports the cache instance and aliases it
 * sunlight/services.py:
