@@ -9,8 +9,8 @@ Sunlight Congress API Implementation inside ``python-sunlight``.
 """
 
 import sunlight.service
-from sunlight.service import EntityList
-from sunlight.service import EntityDict
+from sunlight.service import EntityDict, EntityList
+from sunlight.pagination import pageable
 import json
 
 
@@ -51,6 +51,9 @@ class Congress(sunlight.service.Service):
     is the place to look for help on field names and examples.
     """
 
+    is_pageable = True
+
+    @pageable
     def legislators(self, **kwargs):
         """
         Search and filter for members of Congress.
@@ -60,6 +63,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('legislators', **kwargs)
 
+    @pageable
     def legislator(self, identifier, id_type=LEGISLATOR_ID_TYPES[0], **kwargs):
         """
         Retrieve a member of Congress by a unique identifier. Defaults to
@@ -91,7 +95,6 @@ class Congress(sunlight.service.Service):
             return EntityDict(results[0], results._meta)
         return None
 
-
     def all_legislators_in_office(self, **kwargs):
         """
         Returns all legislators currently in office (non-paginated response).
@@ -104,6 +107,7 @@ class Congress(sunlight.service.Service):
         })
         return self.get('legislators', **kwargs)
 
+    @pageable
     def locate_legislators_by_lat_lon(self, lat, lon, **kwargs):
         """
         Find members of Congress by a latitude and longitude.
@@ -117,6 +121,7 @@ class Congress(sunlight.service.Service):
         })
         return self.get('legislators/locate', **kwargs)
 
+    @pageable
     def locate_legislators_by_zip(self, zipcode, **kwargs):
         """
         Find members of Congress by zip code.
@@ -129,6 +134,7 @@ class Congress(sunlight.service.Service):
         })
         return self.get('legislators/locate', **kwargs)
 
+    @pageable
     def bills(self, **kwargs):
         """
         Search and filter through bills in Congress.
@@ -138,6 +144,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('bills', **kwargs)
 
+    @pageable
     def bill(self, bill_id, **kwargs):
         """
         Retrieve a bill by bill_id.
@@ -153,6 +160,7 @@ class Congress(sunlight.service.Service):
             return EntityDict(results[0], results._meta)
         return None
 
+    @pageable
     def search_bills(self, query, **kwargs):
         """
         Search the full text of legislation, and other fields.
@@ -165,6 +173,7 @@ class Congress(sunlight.service.Service):
         })
         return self.get('bills/search', **kwargs)
 
+    @pageable
     def upcoming_bills(self, **kwargs):
         """
         Search and filter through upcoming bills in the House and Senate.
@@ -177,6 +186,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('upcoming_bills', **kwargs)
 
+    @pageable
     def locate_districts_by_lat_lon(self, lat, lon, **kwargs):
         """
         Find congressional districts by a latitude and longitude.
@@ -190,6 +200,7 @@ class Congress(sunlight.service.Service):
         })
         return self.get('/districts/locate', **kwargs)
 
+    @pageable
     def locate_districts_by_zip(self, zipcode, **kwargs):
         """
         Find congressional districts by a latitude and longitude.
@@ -202,6 +213,7 @@ class Congress(sunlight.service.Service):
         })
         return self.get('/districts/locate', **kwargs)
 
+    @pageable
     def committees(self, **kwargs):
         """
         Search and filter through committees in the House and Senate.
@@ -211,6 +223,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('committees', **kwargs)
 
+    @pageable
     def amendments(self, **kwargs):
         """
         Search and filter through amendments in Congress.
@@ -220,6 +233,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('amendments', **kwargs)
 
+    @pageable
     def votes(self, **kwargs):
         """
         Search and filter through votes in Congress.
@@ -229,6 +243,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('votes', **kwargs)
 
+    @pageable
     def floor_updates(self, **kwargs):
         """
         Search and filter through floor updates in the House and Senate.
@@ -238,6 +253,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('floor_updates', **kwargs)
 
+    @pageable
     def hearings(self, **kwargs):
         """
         Search and filter through committee hearings in the House and Senate.
@@ -247,6 +263,7 @@ class Congress(sunlight.service.Service):
         """
         return self.get('hearings', **kwargs)
 
+    @pageable
     def nominations(self, **kwargs):
         """
         Search and filter through presidential nominations in Congress.

@@ -44,6 +44,9 @@ class Service:
     Base class for all the API implementations, as well as a bunch of common
     code on how to actually fetch text over the network.
     """
+
+    is_pageable = False
+
     @debug_cache
     def get(self, top_level_object, **kwargs):
         """
