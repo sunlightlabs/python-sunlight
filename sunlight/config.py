@@ -22,7 +22,7 @@ to do their job.
     All Sunlight services share API keys. Nice, right?
 """
 
-API_SIGNUP_PAGE = "http://services.sunlightlabs.com/accounts/register/"
+API_SIGNUP_PAGE = "http://sunlightfoundation.com/api/accounts/register/"
 """
 This is a link to the API Key signup page - so that we can sanely direct people
 to register for a key (if they don't already have one) -- after all, signing up
