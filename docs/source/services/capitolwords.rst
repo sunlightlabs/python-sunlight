@@ -10,8 +10,8 @@ giving you an at-a-glance view of which issues lawmakers address on a
 daily, weekly, monthly and yearly basis. Capitol Words lets you see
 what are the most popular words spoken by lawmakers on the House and Senate floor.
 
+CapitolWords
+============
 
-.. automethod:: sunlight.services.capitolwords.capitolwords.dates
-.. automethod:: sunlight.services.capitolwords.capitolwords.phrases
-.. automethod:: sunlight.services.capitolwords.capitolwords.phrases_by_entity
-.. automethod:: sunlight.services.capitolwords.capitolwords.text
+.. autoclass:: sunlight.services.capitolwords.CapitolWords
+    :members:
