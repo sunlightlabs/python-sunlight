@@ -97,7 +97,7 @@ class Congress(sunlight.service.Service):
         Returns all legislators currently in office (non-paginated response).
 
         For details see `Legislators API docs
-        <http://sunlightlabs.github.io/congress/legislators.html>`
+        <http://sunlightlabs.github.io/congress/legislators.html>`_
         """
         kwargs.update({
             "per_page": "all"
@@ -109,7 +109,7 @@ class Congress(sunlight.service.Service):
         Find members of Congress by a latitude and longitude.
 
         For details see `Legislators API docs
-        <http://sunlightlabs.github.io/congress/legislators.html#methods/legislators-locate>`
+        <http://sunlightlabs.github.io/congress/legislators.html#methods/legislators-locate>`_
         """
         kwargs.update({
             "latitude": lat,
@@ -122,7 +122,7 @@ class Congress(sunlight.service.Service):
         Find members of Congress by zip code.
 
         For details see `Legislators API docs
-        <http://sunlightlabs.github.io/congress/legislators.html#methods/legislators-locate>`
+        <http://sunlightlabs.github.io/congress/legislators.html#methods/legislators-locate>`_
         """
         kwargs.update({
             "zip": zipcode
@@ -134,7 +134,7 @@ class Congress(sunlight.service.Service):
         Search and filter through bills in Congress.
 
         For details see `Bills API docs
-        <http://sunlightlabs.github.io/congress/bills.html>`
+        <http://sunlightlabs.github.io/congress/bills.html>`_
         """
         return self.get('bills', **kwargs)
 
@@ -143,7 +143,7 @@ class Congress(sunlight.service.Service):
         Retrieve a bill by bill_id.
 
         For details see `Bills API docs
-        <http://sunlightlabs.github.io/congress/bills.html>`
+        <http://sunlightlabs.github.io/congress/bills.html>`_
         """
         kwargs.update({
             "bill_id": bill_id
@@ -157,8 +157,8 @@ class Congress(sunlight.service.Service):
         """
         Search the full text of legislation, and other fields.
 
-        For details see `Bills API docs
-        <http://sunlightlabs.github.io/congress/bills.html#methods/bills-search>`
+        For details see `Bill search API docs
+        <http://sunlightlabs.github.io/congress/bills.html#methods/bills-search>`_
         """
         kwargs.update({
             "query": query
@@ -173,7 +173,7 @@ class Congress(sunlight.service.Service):
         party leadership for upcoming House and Senate floor action.
 
         For details see `Upcoming Bills API docs
-        <http://sunlightlabs.github.io/congress/upcoming_bills.html>`
+        <http://sunlightlabs.github.io/congress/upcoming_bills.html>`_
         """
         return self.get('upcoming_bills', **kwargs)
 
@@ -182,7 +182,7 @@ class Congress(sunlight.service.Service):
         Find congressional districts by a latitude and longitude.
 
         For details see `Districts API docs
-        <http://sunlightlabs.github.io/congress/districts.html>`
+        <http://sunlightlabs.github.io/congress/districts.html>`_
         """
         kwargs.update({
             "latitude": lat,
@@ -195,7 +195,7 @@ class Congress(sunlight.service.Service):
         Find congressional districts by a latitude and longitude.
 
         For details see `Districts API docs
-        <http://sunlightlabs.github.io/congress/districts.html>`
+        <http://sunlightlabs.github.io/congress/districts.html>`_
         """
         kwargs.update({
             "zip": zipcode,
@@ -207,7 +207,7 @@ class Congress(sunlight.service.Service):
         Search and filter through committees in the House and Senate.
 
         For details see `Committees API docs
-        <http://sunlightlabs.github.io/congress/committees.html>`
+        <http://sunlightlabs.github.io/congress/committees.html>`_
         """
         return self.get('committees', **kwargs)
 
@@ -216,7 +216,7 @@ class Congress(sunlight.service.Service):
         Search and filter through amendments in Congress.
 
         For details see `Amendments API docs
-        <http://sunlightlabs.github.io/congress/amendments.html>`
+        <http://sunlightlabs.github.io/congress/amendments.html>`_
         """
         return self.get('amendments', **kwargs)
 
@@ -225,7 +225,7 @@ class Congress(sunlight.service.Service):
         Search and filter through votes in Congress.
 
         For details see `Votes API docs
-        <http://sunlightlabs.github.io/congress/votes.html>`
+        <http://sunlightlabs.github.io/congress/votes.html>`_
         """
         return self.get('votes', **kwargs)
 
@@ -234,7 +234,7 @@ class Congress(sunlight.service.Service):
         Search and filter through floor updates in the House and Senate.
 
         For details see `Floor Updates API docs
-        <http://sunlightlabs.github.io/congress/floor_updates.html>`
+        <http://sunlightlabs.github.io/congress/floor_updates.html>`_
         """
         return self.get('floor_updates', **kwargs)
 
@@ -243,7 +243,7 @@ class Congress(sunlight.service.Service):
         Search and filter through committee hearings in the House and Senate.
 
         For details see `Hearings API docs
-        <http://sunlightlabs.github.io/congress/hearings.html>`
+        <http://sunlightlabs.github.io/congress/hearings.html>`_
         """
         return self.get('hearings', **kwargs)
 
@@ -252,7 +252,7 @@ class Congress(sunlight.service.Service):
         Search and filter through presidential nominations in Congress.
 
         For details see `Nominations API docs
-        <http://sunlightlabs.github.io/congress/nominations.html>`
+        <http://sunlightlabs.github.io/congress/nominations.html>`_
         """
         return self.get('nominations', **kwargs)
 
