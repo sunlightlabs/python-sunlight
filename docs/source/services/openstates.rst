@@ -23,49 +23,49 @@ Metadata
 
 Methods for dealing with `Open States Metadata <http://openstates.org/api/metadata/#metadata-fields>`_.
 
-.. automethod:: sunlight.services.openstates.openstates.all_metadata
-.. automethod:: sunlight.services.openstates.openstates.state_metadata
+.. automethod:: sunlight.services.openstates.Openstates.all_metadata
+.. automethod:: sunlight.services.openstates.Openstates.state_metadata
 
 Bills
 =====
 
 Methods for dealing with `Open States Bills <http://openstates.org/api/bills/#bill-fields>`_.
 
-.. automethod:: sunlight.services.openstates.openstates.bills
-.. automethod:: sunlight.services.openstates.openstates.bill_detail
+.. automethod:: sunlight.services.openstates.Openstates.bills
+.. automethod:: sunlight.services.openstates.Openstates.bill_detail
 
 Legislators
 ===========
 
 Methods for dealing with `Open States Legislators <http://openstates.org/api/legislators/#legislator-fields>`_.
 
-.. automethod:: sunlight.services.openstates.openstates.legislators
-.. automethod:: sunlight.services.openstates.openstates.legislator_detail
-.. automethod:: sunlight.services.openstates.openstates.legislator_geo_search
+.. automethod:: sunlight.services.openstates.Openstates.legislators
+.. automethod:: sunlight.services.openstates.Openstates.legislator_detail
+.. automethod:: sunlight.services.openstates.Openstates.legislator_geo_search
 
 Committees
 ==========
 
 Methods for dealing with `Open States Committees <http://openstates.org/api/committees/#committee-fields>`_.
 
-.. automethod:: sunlight.services.openstates.openstates.committees
-.. automethod:: sunlight.services.openstates.openstates.committee_detail
+.. automethod:: sunlight.services.openstates.Openstates.committees
+.. automethod:: sunlight.services.openstates.Openstates.committee_detail
 
 Districts
 =========
 
 Methods for dealing with `Open States Districts <http://openstates.org/api/districts/#district-fields>`_.
 
-.. automethod:: sunlight.services.openstates.openstates.districts
-.. automethod:: sunlight.services.openstates.openstates.district_boundary
+.. automethod:: sunlight.services.openstates.Openstates.districts
+.. automethod:: sunlight.services.openstates.Openstates.district_boundary
 
 Events
 ======
 
 Methods for dealing with `Open States Events <http://openstates.org/api/events/#event-fields>`_.
 
-.. automethod:: sunlight.services.openstates.openstates.events
-.. automethod:: sunlight.services.openstates.openstates.event_detail
+.. automethod:: sunlight.services.openstates.Openstates.events
+.. automethod:: sunlight.services.openstates.Openstates.event_detail
 
 
 Examples
@@ -88,7 +88,7 @@ Bills::
 Legislators::
 
     from sunlight import openstates
-    
+
     ca_dems = openstates.legislators(
         state='ca',
         party='Democratic',
@@ -111,10 +111,10 @@ Committees::
 Events::
 
     from sunlight import openstates
-    
+
     tx_events = openstates.events( state='tx', type='committee:meeting' )
     for event in tx_events:
         print "Event @ %s" % event['when']
         for who in event['participants']:
             print "  %s (%s)" % ( who['participant'], who['chamber'] )
-                        
+
