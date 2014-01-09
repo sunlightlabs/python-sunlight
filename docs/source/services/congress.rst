@@ -11,15 +11,12 @@ Congress. Information on legislators, districts, committees, bills,
 votes, as well as real-time notice of hearings, floor activity and
 upcoming bills.
 
-Congress
-========
-
 .. autoclass:: sunlight.services.congress.Congress
 
     Class methods that do not specify positional arguments accept `filtering <http://sunlightlabs.github.io/congress/index.html#filtering>`_, `pagination <http://sunlightlabs.github.io/congress/index.html#pagination>`_, and `sorting <http://sunlightlabs.github.io/congress/index.html#sorting>`_ parameters as keyword arguments. See each method's API page for specfic filtering arguments.
 
 Legislators
------------
+===========
 
 This set of Congress API methods deal with federal legislators.
 For detailed documentaion on the return value of these methods see
