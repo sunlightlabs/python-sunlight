@@ -45,7 +45,7 @@ After setting your API key simply ``import sunlight`` and start using the APIs::
 You can also import a specific API client::
 
     >>> from sunlight import congress
-    >>> pelosi = congress.legislators(lastname='Pelosi')[0]
+    >>> pelosi = congress.legislators(last_name='Pelosi')[0]
 
 
 For details on how to use the various APIs check out the documentation for the
