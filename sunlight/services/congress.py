@@ -14,7 +14,7 @@ from sunlight.service import EntityDict
 import json
 
 
-API_ROOT = "http://congress.api.sunlightfoundation.com"
+API_ROOT = "https://congress.api.sunlightfoundation.com"
 
 LEGISLATOR_ID_TYPES = (
     'bioguide',
