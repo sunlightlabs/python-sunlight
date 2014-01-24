@@ -1,11 +1,12 @@
 '''
-The cache is disabled by default. Use it like so:
+.. module:: cache
 
-import logging
-from sunlight import cache
+The cache is disabled by default. Use it like so: ::
 
-cache.enable('mongo')
-cache.logger.setLevel(logging.DEBUG)
+    import logging
+    from sunlight import response_cache
+    response_cache.enable('mongo')
+    response_cache.logger.setLevel(logging.DEBUG)
 
 Note: the implementation below doesn't bother with cache expiration.
 Typical use case is caching API calls during an expensive build process.

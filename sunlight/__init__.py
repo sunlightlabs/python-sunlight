@@ -69,4 +69,4 @@ def _attempt_to_load_apikey():
 _attempt_to_load_apikey()
 
 
-cache = sunlight.cache.response_cache
+response_cache = sunlight.cache.response_cache
