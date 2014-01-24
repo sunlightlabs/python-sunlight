@@ -70,7 +70,7 @@ class PagingService(object):
                             break
 
                     if count % per_page != 0:
-                        logger.debug('!   %s retuned less than number of requested results, stopping' % name)
+                        logger.debug('!   %s returned less than number of requested results, stopping' % name)
                         stopthepresses = True
 
                     if stopthepresses:
