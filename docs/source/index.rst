@@ -58,6 +58,17 @@ individual clients:
    services/openstates.rst
    services/capitolwords.rst
 
+Extras
+======
+
+Useful utilities for working with the services.
+
+.. toctree::
+   :maxdepth 2
+
+   sunlight/cache.rst
+   sunlight/pagination.rst
+
 Internals
 =========
 
