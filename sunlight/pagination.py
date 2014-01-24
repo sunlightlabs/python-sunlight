@@ -10,6 +10,17 @@ def pageable(func):
 
 
 class PagingService(object):
+    """
+    PagingService wraps normal services and iterates over the results of consecutive API calls. ::
+
+        from sunlight import congress
+        from sunlight.pagination import PagingService
+
+        congress = PagingService(congress)
+
+        print(len(list(congress.legislators(limit=55))))   # page more than a single page
+
+    """
 
     limit_attr = 'limit'
     page_attr = 'page'
