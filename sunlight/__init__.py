@@ -30,7 +30,7 @@ import os.path
 import warnings
 import sunlight.config
 import sunlight.service
-import sunlight.debugcache
+import sunlight.cache
 
 
 def available_services():
@@ -69,4 +69,4 @@ def _attempt_to_load_apikey():
 _attempt_to_load_apikey()
 
 
-cache = sunlight.debugcache.debug_cache
+cache = sunlight.cache.response_cache

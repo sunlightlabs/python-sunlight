@@ -12,7 +12,7 @@ import sys
 
 import sunlight.config
 import sunlight.errors
-from sunlight.debugcache import debug_cache
+from sunlight.cache import response_cache
 
 
 if sys.version_info[0] >= 3:
@@ -47,7 +47,7 @@ class Service:
 
     is_pageable = False
 
-    @debug_cache
+    @response_cache
     def get(self, top_level_object, **kwargs):
         """
         Get some data from the network - this is where we actually fetch

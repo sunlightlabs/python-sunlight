@@ -156,7 +156,7 @@ class ResponseCache(BaseCache):
         return key
 
 
-debug_cache = ResponseCache()
+response_cache = ResponseCache()
 
 
 def get_mongo():
