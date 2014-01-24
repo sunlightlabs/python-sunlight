@@ -58,6 +58,10 @@ class PagingService(object):
                     kwargs[self.page_attr] = page
                     resp = attr(*args, **kwargs)
 
+                    if not resp:
+                        logger.debug('!   %s returned 0 results this iteration, stopping' % name)
+                        stopthepresses = True
+
                     for rec in resp:
 
                         yield rec
