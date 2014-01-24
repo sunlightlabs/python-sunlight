@@ -148,8 +148,12 @@ class BaseCache(object):
 
 
 class ResponseCache(BaseCache):
+    '''Simple cache implementation with pickled strings as cache keys.
+    '''
 
     def get_key(self, method_self, *args, **kwargs):
+        '''Create a cache key by: pickle.dumps((module, name, args, kwargs))
+        '''
         name = self.__class__.__name__
         module = self.__class__.__module__
         key = pickle.dumps((module, name, args, kwargs))
