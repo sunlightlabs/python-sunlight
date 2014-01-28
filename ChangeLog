@@ -1,3 +1,7 @@
+2014-01-13  Eric Mill  <eric@sunlightfoundation.com>
+
+* Change to HTTPS endpoint for congress API
+
 2014-01-24  Daniel Cloud <dcloud@sunlightfoundation.com>
 
 * sunlight/debugcache.py -> sunlight/cache.py
