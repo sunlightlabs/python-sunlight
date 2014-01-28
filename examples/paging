@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+from __future__ import print_function
+
+import logging
+
+from sunlight import congress, capitolwords
+from sunlight.pagination import PagingService, logger
+
+
+logger.setLevel(logging.DEBUG)
+
+# try to create a paging service with an unpageable one
+try:
+    capitolwords = PagingService(capitolwords)
+except ValueError, ve:
+    print('ValueError: %s' % ve.message)
+
+# create a pageable service
+congress = PagingService(congress)
+
+print(len(list(congress.legislators(limit=1000)))) # page more than known results
+print(len(list(congress.legislators(limit=5))))    # page less than a single page
+print(len(list(congress.legislators(limit=55))))   # page more than a single page
+
+# bypass unpageable methods
+print(len(congress.all_legislators_in_office()))
+
+# page from an arbitrary page
+print(len(list(congress.legislators(limit=100, page=3))))

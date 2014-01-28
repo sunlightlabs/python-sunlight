@@ -12,7 +12,7 @@ import sys
 
 import sunlight.config
 import sunlight.errors
-from sunlight.debugcache import debug_cache
+from sunlight.cache import response_cache
 
 
 if sys.version_info[0] >= 3:
@@ -44,7 +44,10 @@ class Service:
     Base class for all the API implementations, as well as a bunch of common
     code on how to actually fetch text over the network.
     """
-    @debug_cache
+
+    is_pageable = False
+
+    @response_cache
     def get(self, top_level_object, **kwargs):
         """
         Get some data from the network - this is where we actually fetch

@@ -1,3 +1,19 @@
+2014-01-24  Daniel Cloud <dcloud@sunlightfoundation.com>
+
+* sunlight/debugcache.py -> sunlight/cache.py
+ - Renamed debugcache module to cache. Renamed cache instance variable to
+   response_cache
+* sunlight/__init__.py:
+ - Rename cache alias to response_cache.
+* Added documentation for cache and pagination
+
+2014-01-24  Jeremy Carbaugh <jcarbaugh@sunlightfoundation.com>
+
+* sunlight/pagination.py
+- Made a PagingService that API services can opt in to.
+* sunlight/services/congress.py
+- Made congress support PagingService.
+
 2013-11-22  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * sunlight/services/opencivic.py

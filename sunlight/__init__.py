@@ -11,7 +11,7 @@ fight with finding the right module to use.
 """
 
 __appname__ = "sunlight"
-__version__ = "1.2.1"
+__version__ = "1.2.3"
 
 import sunlight.services.openstates
 import sunlight.services.capitolwords
@@ -30,7 +30,7 @@ import os.path
 import warnings
 import sunlight.config
 import sunlight.service
-import sunlight.debugcache
+import sunlight.cache
 
 
 def available_services():
@@ -69,4 +69,4 @@ def _attempt_to_load_apikey():
 _attempt_to_load_apikey()
 
 
-cache = sunlight.debugcache.debug_cache
+response_cache = sunlight.cache.response_cache

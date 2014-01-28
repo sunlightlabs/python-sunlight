@@ -1,11 +1,12 @@
 '''
-The cache is disabled by default. Use it like so:
+.. module:: cache
 
-import logging
-from sunlight import cache
+The cache is disabled by default. Use it like so: ::
 
-cache.enable('mongo')
-cache.logger.setLevel(logging.DEBUG)
+    import logging
+    from sunlight import response_cache
+    response_cache.enable('mongo')
+    response_cache.logger.setLevel(logging.DEBUG)
 
 Note: the implementation below doesn't bother with cache expiration.
 Typical use case is caching API calls during an expensive build process.
@@ -148,15 +149,19 @@ class BaseCache(object):
 
 
 class ResponseCache(BaseCache):
+    '''Simple cache implementation with pickled strings as cache keys.
+    '''
 
     def get_key(self, method_self, *args, **kwargs):
+        '''Create a cache key by: pickle.dumps((module, name, args, kwargs))
+        '''
         name = self.__class__.__name__
         module = self.__class__.__module__
         key = pickle.dumps((module, name, args, kwargs))
         return key
 
 
-debug_cache = ResponseCache()
+response_cache = ResponseCache()
 
 
 def get_mongo():
