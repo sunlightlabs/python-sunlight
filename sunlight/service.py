@@ -73,7 +73,7 @@ class Service:
                 " to register for a key."
             )
 
-        top_level_object = map(quote, top_level_object)
+        top_level_object = list(map(quote, top_level_object))
         url = self._get_url(top_level_object, sunlight.config.API_KEY,
                             **kwargs)
         try:
