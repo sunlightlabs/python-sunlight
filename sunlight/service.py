@@ -16,14 +16,14 @@ from sunlight.cache import response_cache
 
 
 if sys.version_info[0] >= 3:
-    from urllib.parse import urlencode
+    from urllib.parse import urlencode, quote
     from urllib.request import urlopen
     from urllib.error import HTTPError
     _str_type = str
     from collections import UserDict
     from collections import UserList
 else:
-    from urllib import urlencode
+    from urllib import urlencode, quote
     from urllib2 import urlopen
     from urllib2 import HTTPError
     _str_type = basestring
@@ -73,6 +73,7 @@ class Service:
                 " to register for a key."
             )
 
+        top_level_object = map(quote, top_level_object)
         url = self._get_url(top_level_object, sunlight.config.API_KEY,
                             **kwargs)
         try:
