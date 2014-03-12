@@ -1,3 +1,8 @@
+2014-03-12  Thom Neale  <tneale@sunlightfoundation.com>
+
+* sunlight/service.py
+ - Added url encoding for url path segments.
+
 2014-01-13  Eric Mill  <eric@sunlightfoundation.com>
 
 * Change to HTTPS endpoint for congress API
