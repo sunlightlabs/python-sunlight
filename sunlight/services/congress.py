@@ -26,23 +26,26 @@ LEGISLATOR_ID_TYPES = (
     'fec',
 )
 
+
 # Stolen from http://codereview.stackexchange.com/a/21035/28391
 def flatten_dict(d):
     def flat_items():
         for k, v in d.items():
             if isinstance(v, dict):
                 for kk, vv in flatten_dict(v).items():
-                    yield '{0}.{1}'.format(k,kk), vv
+                    yield '{0}.{1}'.format(k, kk), vv
             else:
                 yield k, v
 
     return dict(flat_items())
+
 
 def preencode_values(d):
     for k, v in d.items():
         if isinstance(v, bool):
             d[k] = str(v).lower()
     return d
+
 
 class Congress(sunlight.service.Service):
     """
@@ -61,7 +64,7 @@ class Congress(sunlight.service.Service):
         For details see `Legislators API docs
         <http://sunlightlabs.github.io/congress/legislators.html>`
         """
-        return self.get('legislators', **kwargs)
+        return self.get(['legislators'], **kwargs)
 
     @pageable
     def legislator(self, identifier, id_type=LEGISLATOR_ID_TYPES[0], **kwargs):
@@ -90,7 +93,7 @@ class Congress(sunlight.service.Service):
             id_arg[id_key] = identifier
 
         kwargs.update(id_arg)
-        results = self.get('legislators', **kwargs)
+        results = self.get(['legislators'], **kwargs)
         if len(results):
             return EntityDict(results[0], results._meta)
         return None
@@ -105,7 +108,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "per_page": "all"
         })
-        return self.get('legislators', **kwargs)
+        return self.get(['legislators'], **kwargs)
 
     @pageable
     def locate_legislators_by_lat_lon(self, lat, lon, **kwargs):
@@ -119,7 +122,7 @@ class Congress(sunlight.service.Service):
             "latitude": lat,
             "longitude": lon
         })
-        return self.get('legislators/locate', **kwargs)
+        return self.get(['legislators/locate'], **kwargs)
 
     @pageable
     def locate_legislators_by_zip(self, zipcode, **kwargs):
@@ -132,7 +135,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "zip": zipcode
         })
-        return self.get('legislators/locate', **kwargs)
+        return self.get(['legislators/locate'], **kwargs)
 
     @pageable
     def bills(self, **kwargs):
@@ -142,7 +145,7 @@ class Congress(sunlight.service.Service):
         For details see `Bills API docs
         <http://sunlightlabs.github.io/congress/bills.html>`_
         """
-        return self.get('bills', **kwargs)
+        return self.get(['bills'], **kwargs)
 
     @pageable
     def bill(self, bill_id, **kwargs):
@@ -155,7 +158,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "bill_id": bill_id
         })
-        results = self.get('bills', **kwargs)
+        results = self.get(['bills'], **kwargs)
         if len(results):
             return EntityDict(results[0], results._meta)
         return None
@@ -171,7 +174,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "query": query
         })
-        return self.get('bills/search', **kwargs)
+        return self.get(['bills/search'], **kwargs)
 
     @pageable
     def upcoming_bills(self, **kwargs):
@@ -184,7 +187,7 @@ class Congress(sunlight.service.Service):
         For details see `Upcoming Bills API docs
         <http://sunlightlabs.github.io/congress/upcoming_bills.html>`_
         """
-        return self.get('upcoming_bills', **kwargs)
+        return self.get(['upcoming_bills'], **kwargs)
 
     @pageable
     def locate_districts_by_lat_lon(self, lat, lon, **kwargs):
@@ -198,7 +201,7 @@ class Congress(sunlight.service.Service):
             "latitude": lat,
             "longitude": lon
         })
-        return self.get('/districts/locate', **kwargs)
+        return self.get(['/districts/locate'], **kwargs)
 
     @pageable
     def locate_districts_by_zip(self, zipcode, **kwargs):
@@ -211,7 +214,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "zip": zipcode,
         })
-        return self.get('/districts/locate', **kwargs)
+        return self.get(['/districts/locate'], **kwargs)
 
     @pageable
     def committees(self, **kwargs):
@@ -221,7 +224,7 @@ class Congress(sunlight.service.Service):
         For details see `Committees API docs
         <http://sunlightlabs.github.io/congress/committees.html>`_
         """
-        return self.get('committees', **kwargs)
+        return self.get(['committees'], **kwargs)
 
     @pageable
     def amendments(self, **kwargs):
@@ -231,7 +234,7 @@ class Congress(sunlight.service.Service):
         For details see `Amendments API docs
         <http://sunlightlabs.github.io/congress/amendments.html>`_
         """
-        return self.get('amendments', **kwargs)
+        return self.get(['amendments'], **kwargs)
 
     @pageable
     def votes(self, **kwargs):
@@ -241,7 +244,7 @@ class Congress(sunlight.service.Service):
         For details see `Votes API docs
         <http://sunlightlabs.github.io/congress/votes.html>`_
         """
-        return self.get('votes', **kwargs)
+        return self.get(['votes'], **kwargs)
 
     @pageable
     def floor_updates(self, **kwargs):
@@ -251,7 +254,7 @@ class Congress(sunlight.service.Service):
         For details see `Floor Updates API docs
         <http://sunlightlabs.github.io/congress/floor_updates.html>`_
         """
-        return self.get('floor_updates', **kwargs)
+        return self.get(['floor_updates'], **kwargs)
 
     @pageable
     def hearings(self, **kwargs):
@@ -261,7 +264,7 @@ class Congress(sunlight.service.Service):
         For details see `Hearings API docs
         <http://sunlightlabs.github.io/congress/hearings.html>`_
         """
-        return self.get('hearings', **kwargs)
+        return self.get(['hearings'], **kwargs)
 
     @pageable
     def nominations(self, **kwargs):
@@ -271,18 +274,27 @@ class Congress(sunlight.service.Service):
         For details see `Nominations API docs
         <http://sunlightlabs.github.io/congress/nominations.html>`_
         """
-        return self.get('nominations', **kwargs)
+        return self.get(['nominations'], **kwargs)
 
     # implementation methods
-    def _get_url(self, endpoint, apikey, **kwargs):
-        url_args = preencode_values( flatten_dict(kwargs) )
-        url =  "%s/%s?apikey=%s&%s" % (
-            API_ROOT, endpoint, apikey,
-            sunlight.service.safe_encode(url_args)
-        )
+    def _get_url(self, pathparts, apikey, **kwargs):
+        url_args = preencode_values(flatten_dict(kwargs))
+
+        # join pieces by slashes and add a trailing slash
+        endpoint_path = "/".join(pathparts)
+
+        url = "{api_root}/{path}?apikey={apikey}&{url_args}".format(
+            api_root=API_ROOT,
+            path=endpoint_path,
+            apikey=apikey,
+            url_args=sunlight.service.safe_encode(url_args)
+        ).strip('&')
         return url
 
     def _decode_response(self, response):
         data = json.loads(response)
-        results = data.pop('results')
-        return EntityList(results, data)
+        results = data.pop('results', None)
+        if results:
+            return EntityList(results, data)
+        else:
+            return data
