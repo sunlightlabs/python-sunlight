@@ -7,7 +7,7 @@ from sunlight.errors import InvalidRequestException, BadRequestException
 import sunlight.service
 import json
 
-service_url = "http://capitolwords.org/api"
+service_url = "http://capitolwords.org/api/1"
 
 
 class CapitolWords(sunlight.service.Service):
@@ -35,7 +35,7 @@ class CapitolWords(sunlight.service.Service):
         endpoint <http://capitolwords.org/api/#dates.json>`_.
         """
         kwargs['phrase'] = phrase
-        return self.get("dates", **kwargs)
+        return self.get(["dates"], **kwargs)
 
     def phrases(self, entity_type, entity_value, **kwargs):
         """
@@ -49,7 +49,7 @@ class CapitolWords(sunlight.service.Service):
         kwargs['entity_type'] = entity_type
         kwargs['entity_value'] = entity_value
 
-        return self.get("phrases", **kwargs)
+        return self.get(["phrases"], **kwargs)
 
     def phrases_by_entity(self, entity_type, **kwargs):
         """
@@ -60,8 +60,7 @@ class CapitolWords(sunlight.service.Service):
         For a list of arguments see `Capitol Words' phrases/entity.json
         endpoint <http://capitolwords.org/api/#phrases/entity.json>`_.
         """
-        lss = "%s/%s" % ("phrases", entity_type)
-        return self.get(lss, **kwargs)
+        return self.get(["phrases", entity_type], **kwargs)
 
     def text(self, phrase=None, title=None, **kwargs):
         """
@@ -88,14 +87,17 @@ class CapitolWords(sunlight.service.Service):
         if title:
             kwargs['title'] = title
 
-        return self.get("text", **kwargs)
+        return self.get(["text"], **kwargs)
 
     # API impl methods below
 
-    def _get_url(self, obj, apikey, **kwargs):
+    def _get_url(self, pathparts, apikey, **kwargs):
+        # join pieces by slashes and add a trailing slash
+        endpoint_path = "/".join(pathparts)
+
         ret = "%s/%s.json?apikey=%s&%s" % (
             service_url,
-            obj,
+            endpoint_path,
             apikey,
             sunlight.service.safe_encode(kwargs)
         )
