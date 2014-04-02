@@ -22,6 +22,16 @@ class TestCongress(unittest.TestCase):
 
         self.assertEqual(url, expected_url)
 
+    def test_pathlist__get_url(self):
+        url = sunlight.congress._get_url(['legislators', 'locate'],
+                                         sunlight.config.API_KEY)
+
+        expected_url = "{base_url}/legislators/locate?apikey={apikey}".format(
+            base_url='https://congress.api.sunlightfoundation.com',
+            apikey=sunlight.config.API_KEY)
+
+        self.assertEqual(url, expected_url)
+
     def test_legislators(self):
         results = sunlight.congress.legislators()
         page = results._meta.get('page', None)

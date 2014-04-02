@@ -122,7 +122,7 @@ class Congress(sunlight.service.Service):
             "latitude": lat,
             "longitude": lon
         })
-        return self.get(['legislators/locate'], **kwargs)
+        return self.get(['legislators', 'locate'], **kwargs)
 
     @pageable
     def locate_legislators_by_zip(self, zipcode, **kwargs):
@@ -135,7 +135,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "zip": zipcode
         })
-        return self.get(['legislators/locate'], **kwargs)
+        return self.get(['legislators', 'locate'], **kwargs)
 
     @pageable
     def bills(self, **kwargs):
@@ -174,7 +174,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "query": query
         })
-        return self.get(['bills/search'], **kwargs)
+        return self.get(['bills', 'search'], **kwargs)
 
     @pageable
     def upcoming_bills(self, **kwargs):
@@ -201,7 +201,7 @@ class Congress(sunlight.service.Service):
             "latitude": lat,
             "longitude": lon
         })
-        return self.get(['/districts/locate'], **kwargs)
+        return self.get(['districts', 'locate'], **kwargs)
 
     @pageable
     def locate_districts_by_zip(self, zipcode, **kwargs):
@@ -214,7 +214,7 @@ class Congress(sunlight.service.Service):
         kwargs.update({
             "zip": zipcode,
         })
-        return self.get(['/districts/locate'], **kwargs)
+        return self.get(['districts', 'locate'], **kwargs)
 
     @pageable
     def committees(self, **kwargs):
