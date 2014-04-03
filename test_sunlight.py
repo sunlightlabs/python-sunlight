@@ -4,13 +4,20 @@ except ImportError:
     import unittest
 
 import sunlight
+from sunlight.service import EntityDict, EntityList
+from sunlight.errors import BadRequestException
 
 
 class TestCongress(unittest.TestCase):
 
-    def test_get(self):
-        resp = sunlight.congress.get([''])
-        self.assertIsNotNone(resp)
+    def setUp(self):
+        self.bioguide_id = 'L000551'
+        self.thomas_id = '01501'
+        self.ocd_id = 'ocd-division/country:us/state:ca/cd:13'
+
+    def test_get_badpath(self):
+        with self.assertRaises(BadRequestException):
+            resp = sunlight.congress.get(['foo', 'bar'])
 
     def test__get_url(self):
         url = sunlight.congress._get_url(['bills'],
@@ -31,6 +38,40 @@ class TestCongress(unittest.TestCase):
             apikey=sunlight.config.API_KEY)
 
         self.assertEqual(url, expected_url)
+
+    def test_legislator(self):
+        results = sunlight.congress.legislator(self.bioguide_id)
+        self.assertIsNotNone(results)
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 1)
+        self.assertIsInstance(results, EntityDict)
+
+    def test_legislator_thomas_id(self):
+        results = sunlight.congress.legislator(self.thomas_id, id_type='thomas')
+        self.assertIsNotNone(results)
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 1)
+        self.assertIsInstance(results, EntityDict)
+
+    def test_legislator_ocd_id(self):
+        results = sunlight.congress.legislator(self.ocd_id, id_type='ocd')
+        self.assertIsNotNone(results)
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 1)
+        self.assertIsInstance(results, EntityDict)
+
+    def test_legislator_bad_bioguideid(self):
+        results = sunlight.congress.legislator('foo')
+        self.assertIsNone(results)
 
     def test_legislators(self):
         results = sunlight.congress.legislators()
@@ -82,7 +123,8 @@ class TestCapitolWords(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_phrases_by_entity(self):
-        results = sunlight.capitolwords.phrases_by_entity('state', phrase='Obamacare')
+        results = sunlight.capitolwords.phrases_by_entity('state',
+                                                          phrase='Obamacare')
         self.assertNotEqual(len(results), 0)
 
     def test_legislator_phrases(self):
