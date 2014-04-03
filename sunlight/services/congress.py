@@ -18,6 +18,7 @@ API_ROOT = "https://congress.api.sunlightfoundation.com"
 
 LEGISLATOR_ID_TYPES = (
     'bioguide',
+    'ocd',
     'thomas',
     'lis',
     'govtrack',
@@ -73,6 +74,7 @@ class Congress(sunlight.service.Service):
         bioguide. Choices are:
 
             * bioguide
+            * ocd
             * thomas
             * lis
             * govtrack
@@ -90,11 +92,11 @@ class Congress(sunlight.service.Service):
             id_arg['fec_ids'] = identifier
         else:
             id_key = '{0}_id'.format(id_type)
-            id_arg[id_key] = identifier
+            id_arg[id_key] = '"{0}"'.format(identifier)
 
         kwargs.update(id_arg)
         results = self.get(['legislators'], **kwargs)
-        if len(results):
+        if results and len(results):
             return EntityDict(results[0], results._meta)
         return None
 
@@ -159,7 +161,7 @@ class Congress(sunlight.service.Service):
             "bill_id": bill_id
         })
         results = self.get(['bills'], **kwargs)
-        if len(results):
+        if results and len(results):
             return EntityDict(results[0], results._meta)
         return None
 
@@ -297,4 +299,4 @@ class Congress(sunlight.service.Service):
         if results:
             return EntityList(results, data)
         else:
-            return data
+            return None
