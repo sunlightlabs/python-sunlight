@@ -1,3 +1,15 @@
+2014-04-04  Daniel Cloud  <dcloud@sunlightfoundation.com>
+
+* Fix for congress.legislator methods, including adding support for OCD id.
+  Make sure to return None when there are no results.
+* Add tests for congress.legislator method, including lookup by thomas and ocd
+  identifiers.
+* Further embrache path as list in congress, and test it.
+* Fix congress _get_url to conform to new Service.get requirements
+  (42782a8eed). May close #13.
+* Update capitolwords endpoint with version number; Fix _get_url to conform to
+  new Service.get requirements. See also #13.
+
 2014-03-12  Thom Neale  <tneale@sunlightfoundation.com>
 
 * sunlight/service.py
