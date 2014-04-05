@@ -31,9 +31,9 @@ LEGISLATOR_ID_TYPES = (
 # Stolen from http://codereview.stackexchange.com/a/21035/28391
 def flatten_dict(d):
     def flat_items():
-        for k, v in d.items():
+        for k, v in list(d.items()):
             if isinstance(v, dict):
-                for kk, vv in flatten_dict(v).items():
+                for kk, vv in list(flatten_dict(v).items()):
                     yield '{0}.{1}'.format(k, kk), vv
             else:
                 yield k, v
@@ -42,7 +42,7 @@ def flatten_dict(d):
 
 
 def preencode_values(d):
-    for k, v in d.items():
+    for k, v in list(d.items()):
         if isinstance(v, bool):
             d[k] = str(v).lower()
     return d
