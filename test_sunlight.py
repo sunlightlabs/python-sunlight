@@ -14,6 +14,8 @@ class TestCongress(unittest.TestCase):
         self.bioguide_id = 'L000551'
         self.thomas_id = '01501'
         self.ocd_id = 'ocd-division/country:us/state:ca/cd:13'
+        self.lat = 35.933333
+        self.lon = -79.033333
 
     def test_get_badpath(self):
         with self.assertRaises(BadRequestException):
@@ -82,6 +84,31 @@ class TestCongress(unittest.TestCase):
             self.assertEqual(page.get('count', None), 20)
         self.assertNotEqual(len(results), 0)
 
+    def test_all_legislators_in_office(self):
+        results = sunlight.congress.all_legislators_in_office()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            # In this case, page should be None
+            self.assertEqual(page.get('page', 0), None)
+            # Should be more then 20, but I don't want to compare to 538, do I?
+            self.assertGreater(page.get('count', None), 100)
+        self.assertNotEqual(len(results), 0)
+
+    def test_locate_legislators_by_lat_lon(self):
+        results = sunlight.congress.locate_legislators_by_lat_lon(self.lat, self.lon)
+        count = results._meta.get('count', None)
+        # For a state, there should be 2 senators and 1 representative.
+        self.assertEqual(len(results), 3)
+        self.assertEqual(len(results), count)
+
+    def test_locate_districts_by_zip(self):
+        results = sunlight.congress.locate_districts_by_zip(27514)
+        count = results._meta.get('count', None)
+        # There is a potential for more than 3 legislators to match on a zipcode
+        self.assertNotEqual(len(results), 0)
+        self.assertEqual(len(results), count)
+
     def test_search_bills(self):
         results = sunlight.congress.search_bills('Affordable Care Act')
         page = results._meta.get('page', None)
@@ -91,11 +118,59 @@ class TestCongress(unittest.TestCase):
             self.assertEqual(page.get('count', None), 20)
         self.assertNotEqual(len(results), 0)
 
-    def test_locate_districts_by_zip(self):
-        results = sunlight.congress.locate_districts_by_zip(27514)
-        count = results._meta.get('count', None)
+    def test_committees(self):
+        results = sunlight.congress.committees()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
         self.assertNotEqual(len(results), 0)
-        self.assertEqual(len(results), count)
+
+    def test_amendments(self):
+        results = sunlight.congress.amendments()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_votes(self):
+        results = sunlight.congress.votes()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_floor_updates(self):
+        results = sunlight.congress.floor_updates()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_hearings(self):
+        results = sunlight.congress.hearings()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_nominations(self):
+        results = sunlight.congress.nominations()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
 
 
 class TestCapitolWords(unittest.TestCase):
