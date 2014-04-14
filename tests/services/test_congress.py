@@ -3,10 +3,10 @@ try:
 except ImportError:
     import unittest
 
-import sunlight
+from sunlight.services.congress import Congress
+import sunlight.config
 from sunlight.service import EntityDict, EntityList
 from sunlight.errors import BadRequestException
-
 
 class TestCongress(unittest.TestCase):
 
@@ -16,13 +16,14 @@ class TestCongress(unittest.TestCase):
         self.ocd_id = 'ocd-division/country:us/state:ca/cd:13'
         self.lat = 35.933333
         self.lon = -79.033333
+        self.service = Congress()
 
     def test_get_badpath(self):
         with self.assertRaises(BadRequestException):
-            resp = sunlight.congress.get(['foo', 'bar'])
+            resp = self.service.get(['foo', 'bar'])
 
     def test__get_url(self):
-        url = sunlight.congress._get_url(['bills'],
+        url = self.service._get_url(['bills'],
                                          sunlight.config.API_KEY)
 
         expected_url = "{base_url}/bills?apikey={apikey}".format(
@@ -32,7 +33,7 @@ class TestCongress(unittest.TestCase):
         self.assertEqual(url, expected_url)
 
     def test_pathlist__get_url(self):
-        url = sunlight.congress._get_url(['legislators', 'locate'],
+        url = self.service._get_url(['legislators', 'locate'],
                                          sunlight.config.API_KEY)
 
         expected_url = "{base_url}/legislators/locate?apikey={apikey}".format(
@@ -42,7 +43,7 @@ class TestCongress(unittest.TestCase):
         self.assertEqual(url, expected_url)
 
     def test_legislator(self):
-        results = sunlight.congress.legislator(self.bioguide_id)
+        results = self.service.legislator(self.bioguide_id)
         self.assertIsNotNone(results)
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
@@ -52,7 +53,7 @@ class TestCongress(unittest.TestCase):
         self.assertIsInstance(results, EntityDict)
 
     def test_legislator_thomas_id(self):
-        results = sunlight.congress.legislator(self.thomas_id, id_type='thomas')
+        results = self.service.legislator(self.thomas_id, id_type='thomas')
         self.assertIsNotNone(results)
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
@@ -62,7 +63,7 @@ class TestCongress(unittest.TestCase):
         self.assertIsInstance(results, EntityDict)
 
     def test_legislator_ocd_id(self):
-        results = sunlight.congress.legislator(self.ocd_id, id_type='ocd')
+        results = self.service.legislator(self.ocd_id, id_type='ocd')
         self.assertIsNotNone(results)
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
@@ -72,11 +73,11 @@ class TestCongress(unittest.TestCase):
         self.assertIsInstance(results, EntityDict)
 
     def test_legislator_bad_bioguideid(self):
-        results = sunlight.congress.legislator('foo')
+        results = self.service.legislator('foo')
         self.assertIsNone(results)
 
     def test_legislators(self):
-        results = sunlight.congress.legislators()
+        results = self.service.legislators()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -85,7 +86,7 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_all_legislators_in_office(self):
-        results = sunlight.congress.all_legislators_in_office()
+        results = self.service.all_legislators_in_office()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -96,21 +97,21 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_locate_legislators_by_lat_lon(self):
-        results = sunlight.congress.locate_legislators_by_lat_lon(self.lat, self.lon)
+        results = self.service.locate_legislators_by_lat_lon(self.lat, self.lon)
         count = results._meta.get('count', None)
         # For a state, there should be 2 senators and 1 representative.
         self.assertEqual(len(results), 3)
         self.assertEqual(len(results), count)
 
     def test_locate_districts_by_zip(self):
-        results = sunlight.congress.locate_districts_by_zip(27514)
+        results = self.service.locate_districts_by_zip(27514)
         count = results._meta.get('count', None)
         # There is a potential for more than 3 legislators to match on a zipcode
         self.assertNotEqual(len(results), 0)
         self.assertEqual(len(results), count)
 
     def test_search_bills(self):
-        results = sunlight.congress.search_bills('Affordable Care Act')
+        results = self.service.search_bills('Affordable Care Act')
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -119,7 +120,7 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_committees(self):
-        results = sunlight.congress.committees()
+        results = self.service.committees()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -128,7 +129,7 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_amendments(self):
-        results = sunlight.congress.amendments()
+        results = self.service.amendments()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -137,7 +138,7 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_votes(self):
-        results = sunlight.congress.votes()
+        results = self.service.votes()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -146,7 +147,7 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_floor_updates(self):
-        results = sunlight.congress.floor_updates()
+        results = self.service.floor_updates()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -155,7 +156,7 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_hearings(self):
-        results = sunlight.congress.hearings()
+        results = self.service.hearings()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -164,55 +165,10 @@ class TestCongress(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_nominations(self):
-        results = sunlight.congress.nominations()
+        results = self.service.nominations()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
             self.assertEqual(page.get('page', None), 1)
             self.assertEqual(page.get('count', None), 20)
         self.assertNotEqual(len(results), 0)
-
-
-class TestCapitolWords(unittest.TestCase):
-
-    def setUp(self):
-        self.phrases_kwargs = {
-            'entity_type': 'legislator',
-            'entity_value':  'L000551'
-        }
-
-    def test__get_url(self):
-        url = sunlight.capitolwords._get_url(['phrases'],
-                                             sunlight.config.API_KEY,
-                                             **self.phrases_kwargs)
-
-        expected_url = '{base_url}/phrases.json?apikey={apikey}&{args}'.format(
-            base_url='http://capitolwords.org/api/1',
-            apikey=sunlight.config.API_KEY,
-            args=sunlight.service.safe_encode(self.phrases_kwargs)).strip('&')
-
-        self.assertEqual(url, expected_url)
-
-    def test_dates(self):
-        results = sunlight.capitolwords.dates('Obamacare')
-        self.assertNotEqual(len(results), 0)
-
-    def test_phrases_by_entity(self):
-        results = sunlight.capitolwords.phrases_by_entity('state',
-                                                          phrase='Obamacare')
-        self.assertNotEqual(len(results), 0)
-
-    def test_legislator_phrases(self):
-        results = sunlight.capitolwords.phrases(
-            self.phrases_kwargs['entity_type'],
-            self.phrases_kwargs['entity_value'])
-
-        self.assertNotEqual(len(results), 0)
-
-    def test_text(self):
-        results = sunlight.capitolwords.text('Christmas')
-        self.assertNotEqual(len(results), 0)
-
-
-if __name__ == '__main__':
-    unittest.main()
