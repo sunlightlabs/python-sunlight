@@ -18,6 +18,7 @@ import functools
 
 backends = {}
 
+
 class _BackendMeta(type):
     def __new__(meta, name, bases, attrs):
         cls = type.__new__(meta, name, bases, attrs)
@@ -89,7 +90,7 @@ class MongoBackend(BaseBackend):
             spec = {}
         else:
             spec = {'_id': {'$in': keys}}
-        self.mongo.reponses.remove(keys)
+        self.mongo.reponses.remove(spec)
 
 
 class BaseCache(object):
@@ -131,6 +132,7 @@ class BaseCache(object):
         '''Returns a class decorator.
         '''
         cache = self
+
         @functools.wraps(method)
         def memoizer(self, *args, **kwargs):
             # If no backend is set, do nothing.
