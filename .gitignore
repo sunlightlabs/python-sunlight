@@ -3,3 +3,4 @@
 docs/build
 dist/
 sunlight.egg-info/
+.coverage
