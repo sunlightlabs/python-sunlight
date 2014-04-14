@@ -3,7 +3,7 @@
 
 import sunlight.service
 from sunlight.errors import BadRequestException
-from sunlight.service import EntityList, EntityDict
+from sunlight.service import EntityDict
 import json
 
 module_name = "opencivic"
