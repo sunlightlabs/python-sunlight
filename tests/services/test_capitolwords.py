@@ -3,6 +3,11 @@ try:
 except ImportError:
     import unittest
 
+try:
+    from urllib.parse import urlparse, parse_qsl
+except ImportError:
+    from urlparse import urlparse, parse_qsl
+
 from sunlight.services.capitolwords import CapitolWords
 import sunlight.config
 from sunlight.service import EntityDict, EntityList
@@ -19,16 +24,24 @@ class TestCapitolWords(unittest.TestCase):
         self.service = CapitolWords()
 
     def test__get_url(self):
+        '''This is probably a bad idea and should be replaced.'''
         url = self.service._get_url(['phrases'],
                                              sunlight.config.API_KEY,
                                              **self.phrases_kwargs)
 
-        expected_url = '{base_url}/phrases.json?apikey={apikey}&{args}'.format(
-            base_url='http://capitolwords.org/api/1',
-            apikey=sunlight.config.API_KEY,
-            args=sunlight.service.safe_encode(self.phrases_kwargs)).strip('&')
+        expected_hostname = 'capitolwords.org'
+        expected_path = '/api/1/phrases.json'
+        expected_query = {
+            'apikey': sunlight.config.API_KEY
+        }
+        expected_query.update(self.phrases_kwargs)
 
-        self.assertEqual(url, expected_url)
+        parsed_url = urlparse(url)
+        parsed_query = dict(parse_qsl(parsed_url.query))
+
+        self.assertEqual(parsed_url.hostname, expected_hostname)
+        self.assertEqual(parsed_url.path, expected_path)
+        self.assertDictEqual(parsed_query, expected_query)
 
     def test_dates(self):
         results = self.service.dates('Obamacare')
