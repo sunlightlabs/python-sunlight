@@ -63,7 +63,7 @@ class Openstates(sunlight.service.Service):
         The fields and keyword arguments can be found on the
         `Open States Bill API docs <http://openstates.org/api/bills/>`_.
         """
-        lss = ["bills", state, session]
+        lss = ["bills", state, str(session)]
         if chamber:
             lss.append(chamber)
         lss.append(bill_id)
