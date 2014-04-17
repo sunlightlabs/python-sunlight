@@ -3,10 +3,52 @@ try:
 except ImportError:
     import unittest
 
-from sunlight.services.congress import Congress
+from sunlight.services.congress import Congress, flatten_dict, preencode_values
 import sunlight.config
-from sunlight.service import EntityDict, EntityList
+from sunlight.service import EntityDict
 from sunlight.errors import BadRequestException
+
+
+class TestCongressHelpers(unittest.TestCase):
+
+    def test_flatten_dict(self):
+        bioguide_id = 'L000551'
+        thomas_id = '01501'
+        lat = 35.933333
+        lon = -79.033333
+        nested_dict = {
+            'foo': 'bar',
+            'legislator': {
+                'bioguide_id': bioguide_id,
+                'lat': lat,
+                'lon': lon,
+                'thomas_id': thomas_id
+            }
+        }
+        flat_dict = flatten_dict(nested_dict)
+
+        self.assertIn('legislator.bioguide_id', flat_dict)
+        self.assertIn('legislator.lat', flat_dict)
+        self.assertIn('legislator.lon', flat_dict)
+        self.assertNotIn('legislator', flat_dict)
+        self.assertIn('foo', flat_dict)
+        self.assertEqual(flat_dict.get('legislator.bioguide_id'), bioguide_id)
+        self.assertEqual(flat_dict.get('legislator.lat'), lat)
+        self.assertEqual(flat_dict.get('legislator.lon'), lon)
+        self.assertEqual(flat_dict.get('foo'), 'bar')
+
+    def test_preencode_values(self):
+        unencoded_dict = {
+            'foo': False,
+            'bar': True,
+            'baz': 'false'
+        }
+        encoded_dict = preencode_values(unencoded_dict)
+
+        self.assertEqual(encoded_dict.get('foo'), 'false')
+        self.assertEqual(encoded_dict.get('bar'), 'true')
+        self.assertEqual(encoded_dict.get('baz'), 'false')
+
 
 class TestCongress(unittest.TestCase):
 
@@ -20,11 +62,10 @@ class TestCongress(unittest.TestCase):
 
     def test_get_badpath(self):
         with self.assertRaises(BadRequestException):
-            resp = self.service.get(['foo', 'bar'])
+            self.service.get(['foo', 'bar'])
 
     def test__get_url(self):
-        url = self.service._get_url(['bills'],
-                                         sunlight.config.API_KEY)
+        url = self.service._get_url(['bills'], sunlight.config.API_KEY)
 
         expected_url = "{base_url}/bills?apikey={apikey}".format(
             base_url='https://congress.api.sunlightfoundation.com',
@@ -33,8 +74,7 @@ class TestCongress(unittest.TestCase):
         self.assertEqual(url, expected_url)
 
     def test_pathlist__get_url(self):
-        url = self.service._get_url(['legislators', 'locate'],
-                                         sunlight.config.API_KEY)
+        url = self.service._get_url(['legislators', 'locate'], sunlight.config.API_KEY)
 
         expected_url = "{base_url}/legislators/locate?apikey={apikey}".format(
             base_url='https://congress.api.sunlightfoundation.com',
