@@ -26,8 +26,8 @@ class TestCapitolWords(unittest.TestCase):
     def test__get_url(self):
         '''This is probably a bad idea and should be replaced.'''
         url = self.service._get_url(['phrases'],
-                                             sunlight.config.API_KEY,
-                                             **self.phrases_kwargs)
+                                    sunlight.config.API_KEY,
+                                    **self.phrases_kwargs)
 
         expected_hostname = 'capitolwords.org'
         expected_path = '/api/1/phrases.json'
@@ -48,8 +48,7 @@ class TestCapitolWords(unittest.TestCase):
         self.assertNotEqual(len(results), 0)
 
     def test_phrases_by_entity(self):
-        results = self.service.phrases_by_entity('state',
-                                                          phrase='Obamacare')
+        results = self.service.phrases_by_entity('state', phrase='Obamacare')
         self.assertNotEqual(len(results), 0)
 
     def test_legislator_phrases(self):
@@ -62,3 +61,11 @@ class TestCapitolWords(unittest.TestCase):
     def test_text(self):
         results = self.service.text('Christmas')
         self.assertNotEqual(len(results), 0)
+
+    def test_text_title(self):
+        results = self.service.text(title='Christmas')
+        self.assertNotEqual(len(results), 0)
+
+    def test_text_bad_request(self):
+        with self.assertRaises(BadRequestException):
+            self.service.text()
