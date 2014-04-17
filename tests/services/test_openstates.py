@@ -22,9 +22,11 @@ class TestOpenStates(unittest.TestCase):
         self.a_committee_id = 'NCC000169'
         self.a_state_with_events = 'tx'
         self.an_event_id = 'TXE00026474'
+        self.a_boundary_id = 'sldl/nc-1'
 
-    def test__get_url(self):
-        pass
+    def test_bad__get_url(self):
+        with self.assertRaises(BadRequestException):
+            self.service._get_url(['districts', None], sunlight.config.API_KEY)
 
     def test_all_metadata(self):
         all_metadata = self.service.all_metadata()
@@ -60,10 +62,10 @@ class TestOpenStates(unittest.TestCase):
         self.assertEqual(result.get('state'), self.a_state_abbreviation)
         self.assertEqual(result.get('bill_id'), self.a_bill_official_id)
 
-    # def test_bill_detail_with_chamber(self):
-    #     result = self.service.bill_detail('nc', '2013', self.a_bill_official_id, 'upper')
-    #     self.assertEqual(result.get('state'), self.a_state_abbreviation)
-    #     self.assertEqual(result.get('bill_id'), self.a_bill_official_id)
+    def test_bill_detail_with_chamber(self):
+        result = self.service.bill_detail('nc', '2013', self.a_bill_official_id, 'lower')
+        self.assertEqual(result.get('state'), self.a_state_abbreviation)
+        self.assertEqual(result.get('bill_id'), self.a_bill_official_id)
 
     def test_legislators_search_by_last_name(self):
         last_name = 'Smith'
@@ -113,3 +115,13 @@ class TestOpenStates(unittest.TestCase):
             self.assertIsNotNone(item.get('name'))
             self.assertEqual(item.get('abbr'), self.a_state_abbreviation)
 
+    def test_districts_boundary(self):
+        item = self.service.district_boundary(self.a_boundary_id)
+        self.assertIsNotNone(item.get('id'))
+        self.assertIsNotNone(item.get('name'))
+        self.assertIsNotNone(item.get('bbox'))
+        self.assertIsNotNone(item.get('chamber'))
+        self.assertIsNotNone(item.get('num_seats'))
+        self.assertIsNotNone(item.get('region'))
+        self.assertIsNotNone(item.get('shape'))
+        self.assertEqual(item.get('boundary_id'), self.a_boundary_id)
