@@ -55,9 +55,12 @@ class TestCongress(unittest.TestCase):
     def setUp(self):
         self.bioguide_id = 'L000551'
         self.thomas_id = '01501'
+        self.fec_id = 'H8CA09060'
         self.ocd_id = 'ocd-division/country:us/state:ca/cd:13'
         self.lat = 35.933333
         self.lon = -79.033333
+        self.zipcode = 27514
+        self.bill_id = 'hr3590-111'
         self.service = Congress()
 
     def test_get_badpath(self):
@@ -112,9 +115,29 @@ class TestCongress(unittest.TestCase):
             self.assertEqual(page.get('count', None), 1)
         self.assertIsInstance(results, EntityDict)
 
+    def test_legislator_fec_id(self):
+        results = self.service.legislator(self.fec_id, id_type='fec')
+        self.assertIsNotNone(results)
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 1)
+        self.assertIsInstance(results, EntityDict)
+
     def test_legislator_bad_bioguideid(self):
         results = self.service.legislator('foo')
         self.assertIsNone(results)
+
+    def test_legislator_bioguide_id_incorrect_type(self):
+        results = self.service.legislator(self.bioguide_id, id_type='krampus')
+        self.assertIsNotNone(results)
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 1)
+        self.assertIsInstance(results, EntityDict)
 
     def test_legislators(self):
         results = self.service.legislators()
@@ -143,12 +166,51 @@ class TestCongress(unittest.TestCase):
         self.assertEqual(len(results), 3)
         self.assertEqual(len(results), count)
 
+    def test_locate_legislators_by_zip(self):
+        results = self.service.locate_legislators_by_zip(self.zipcode)
+        count = results._meta.get('count', None)
+        # A zipcode may overlap multiple districts, so can return more then 3 results
+        self.assertGreaterEqual(len(results), 3)
+        self.assertEqual(len(results), count)
+
     def test_locate_districts_by_zip(self):
-        results = self.service.locate_districts_by_zip(27514)
+        results = self.service.locate_districts_by_zip(self.zipcode)
         count = results._meta.get('count', None)
         # There is a potential for more than 3 legislators to match on a zipcode
         self.assertNotEqual(len(results), 0)
         self.assertEqual(len(results), count)
+
+    def test_locate_districts_by_lat_lon(self):
+        results = self.service.locate_districts_by_lat_lon(self.lat, self.lon)
+        count = results._meta.get('count', None)
+        # We should get 1 and only one district for a lat/lon
+        self.assertEqual(len(results), 1)
+        self.assertEqual(len(results), count)
+
+    def test_bills(self):
+        results = self.service.bills(congress=113, history={'enacted':True}, bill_type__in='hjres|sjres')
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertLessEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_bill_by_id(self):
+        result = self.service.bill(self.bill_id)
+        page = result._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 1)
+        self.assertEqual(result._meta.get('count', None), 1)
+        self.assertNotEqual(len(result), 1)
+        self.assertIsNotNone(result.get('introduced_on'))
+        self.assertIsNotNone(result.get('number'))
+
+    def test_bill_using_bad_id(self):
+        result = self.service.bill('abadbillid')
+        self.assertIsNone(result)
 
     def test_search_bills(self):
         results = self.service.search_bills('Affordable Care Act')
@@ -158,6 +220,17 @@ class TestCongress(unittest.TestCase):
             self.assertEqual(page.get('page', None), 1)
             self.assertEqual(page.get('count', None), 20)
         self.assertNotEqual(len(results), 0)
+
+    def test_upcoming_bills(self):
+        results = self.service.upcoming_bills()
+        if results:
+            page = results._meta.get('page', None)
+            self.assertIsNotNone(page)
+            if page:
+                self.assertEqual(page.get('page', None), 1)
+                self.assertEqual(page.get('count', None), 20)
+        else:
+            self.assertIsNone(results)
 
     def test_committees(self):
         results = self.service.committees()
