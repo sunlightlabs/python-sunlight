@@ -64,7 +64,7 @@ Extras
 Useful utilities for working with the services.
 
 .. toctree::
-   :maxdepth 2
+   :maxdepth: 2
 
    sunlight/cache.rst
    sunlight/pagination.rst
