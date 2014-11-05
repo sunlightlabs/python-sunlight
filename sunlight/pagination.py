@@ -16,9 +16,10 @@ class PagingService(object):
         from sunlight import congress
         from sunlight.pagination import PagingService
 
-        congress = PagingService(congress)
+        paging_service = PagingService(congress)
 
-        print(len(list(congress.legislators(limit=55))))   # page more than a single page
+        print(len(list(paging_service.legislators(limit=55))))   # page more than a single page
+
 
     """
 
