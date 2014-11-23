@@ -72,7 +72,7 @@ class PagingService(object):
 
                     if not resp:
                         logger.debug('!   %s returned 0 results this iteration, stopping' % name)
-                        stopthepresses = True
+                        break
 
                     for rec in resp:
 
