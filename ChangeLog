@@ -1,3 +1,8 @@
+2014-11-25  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* Merge pull request #20, fixing pagination for the congress API.
+* Bump version to 1.2.7
+
 2014-04-04  Daniel Cloud  <dcloud@sunlightfoundation.com>
 
 * Fix for congress.legislator methods, including adding support for OCD id.
