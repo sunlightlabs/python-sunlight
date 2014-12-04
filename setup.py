@@ -12,7 +12,7 @@ setup(
     version    = __version__,
     packages   = ['sunlight', 'sunlight.services'],
 
-    install_requires = ['clint<=0.3.1'],
+    install_requires = ['clint'],
     entry_points     = {'console_scripts': ['sunlight = sunlight.cli:main']},
 
     author       = "Paul Tagliamonte",

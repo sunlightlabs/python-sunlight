@@ -1,3 +1,6 @@
+2014-12-04 Daniel Cloud <dcloud@sunlightfoundation.com>
+* Fix cli parsing of arguments, use newer version of clint.
+
 2014-11-25  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
 * Merge pull request #20, fixing pagination for the congress API.
