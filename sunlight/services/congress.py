@@ -278,6 +278,28 @@ class Congress(sunlight.service.Service):
         """
         return self.get(['nominations'], **kwargs)
 
+    @pageable
+    def congressional_documents(self, **kwargs):
+        """
+        Search congressional documents including House witness documents and
+        House committee reports.
+
+        For details see `Congressional documents API docs
+        <https://sunlightlabs.github.io/congress/congressional_documents.html>`_
+        """
+        return self.get(['congressional_documents', 'search'], **kwargs)
+
+    @pageable
+    def documents(self, **kwargs):
+        """
+        Search oversight documents including Government Accountability Office reports and
+        Inspectors General reports.
+
+        For details see `Documents API docs
+        <https://sunlightlabs.github.io/congress/documents.html>`_
+        """
+        return self.get(['documents'], **kwargs)
+
     # implementation methods
     def _get_url(self, pathparts, apikey, **kwargs):
         url_args = preencode_values(flatten_dict(kwargs))

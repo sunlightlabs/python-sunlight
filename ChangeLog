@@ -2,6 +2,8 @@
 * Fix cli parsing of arguments, use newer version of clint.
 * Make EntityList and EntityDict subclass list and dict directly.
 * Fix logging configuration in cache.py
+* Add 'documents' and 'congressional_documents' methods to congress module for new endpoints.
+* Update documentation for congress module
 
 2014-11-25  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 

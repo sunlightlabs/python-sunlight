@@ -18,7 +18,7 @@ upcoming bills.
 Legislators
 ===========
 
-This set of Congress API methods deal with federal legislators.
+This set of method provides various ways to search or look up federal legislators.
 For detailed documentaion on the return value of these methods see
 `legislator fields <http://sunlightlabs.github.io/congress/legislators.html#fields>`_.
 
@@ -31,7 +31,7 @@ For detailed documentaion on the return value of these methods see
 Bills
 =====
 
-This set of Congress API methods deal with Congressional bills.
+This set of method provides various ways to search or look up Congressional bills.
 For detailed documentaion on the return value of these methods see
 `bill fields <http://sunlightlabs.github.io/congress/bills.html#fields>`_.
 
@@ -53,7 +53,7 @@ Pair of methods for retrieving districts.  District dictionaries have a `'state'
 Committees
 ==========
 
-This set of Congress API methods deal with legislative committees.
+The following methods search legislative committees.
 For detailed documentaion on the return value of these methods see
 `committee fields <http://sunlightlabs.github.io/congress/committees.html#fields>`_.
 
@@ -62,7 +62,7 @@ For detailed documentaion on the return value of these methods see
 Amendments
 ==========
 
-This set of Congress API methods deal with amendments.
+The following methods search amendments.
 For detailed documentaion on the return value of these methods see
 `committee fields <http://sunlightlabs.github.io/congress/amendments.html#fields>`_.
 
@@ -71,7 +71,7 @@ For detailed documentaion on the return value of these methods see
 Votes
 =====
 
-This set of Congress API methods deal with votes.
+The following methods search votes.
 For detailed documentaion on the return value of these methods see
 `vote fields <http://sunlightlabs.github.io/congress/votes.html#fields>`_.
 
@@ -80,7 +80,7 @@ For detailed documentaion on the return value of these methods see
 Floor Updates
 =============
 
-This set of Congress API methods deal with floor updates.
+The following methods search floor updates.
 For detailed documentaion on the return value of these methods see
 `floor update fields <http://sunlightlabs.github.io/congress/floor_updates.html#fields>`_.
 
@@ -89,7 +89,7 @@ For detailed documentaion on the return value of these methods see
 Hearings
 ========
 
-This set of Congress API methods deal with committee hearings.
+The following methods search committee hearings.
 For detailed documentaion on the return value of these methods see
 `hearing fields <http://sunlightlabs.github.io/congress/hearings.html#fields>`_.
 
@@ -98,8 +98,29 @@ For detailed documentaion on the return value of these methods see
 Nominations
 ===========
 
-This set of Congress API methods deal with nominations made by the President of the United States.
+The following methods search nominations made by the President of the United States.
 For detailed documentaion on the return value of these methods see
 `nominations fields <http://sunlightlabs.github.io/congress/nominations.html#fields>`_.
 
 .. automethod:: sunlight.services.congress.Congress.nominations
+
+Congressional Documents
+=======================
+
+The following methods search congressional documents including House witness documents and
+House committee reports.
+For detailed documentaion on the return value of these methods see
+`congressional documents fields <http://sunlightlabs.github.io/congress/congressional_documents.html#fields>`_.
+
+.. automethod:: sunlight.services.congress.Congress.congressional_documents
+
+Documents
+=========
+
+The following methods search a wide range of documents including Government Accountability
+Office (GAO) Reports and Inspector General Reports. These government oversight documents investigate
+misconduct, waste and programs.
+For detailed documentaion on the return value of these methods see
+`documents fields <http://sunlightlabs.github.io/congress/documents.html#fields>`_.
+
+.. automethod:: sunlight.services.congress.Congress.documents
