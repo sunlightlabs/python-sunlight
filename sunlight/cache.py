@@ -97,9 +97,11 @@ class BaseCache(object):
 
     def __init__(self):
         self.backend = None
-        logging.basicConfig(
-            format='%(asctime)s %(levelname)s %(message)s')
         self.logger = logging.getLogger('cache')
+        ch = logging.StreamHandler()
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        ch.setFormatter(formatter)
+        self.logger.addHandler(ch)
 
     def set_backend(self, backend_name):
         try:

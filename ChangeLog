@@ -1,6 +1,7 @@
 2014-12-04 Daniel Cloud <dcloud@sunlightfoundation.com>
 * Fix cli parsing of arguments, use newer version of clint.
 * Make EntityList and EntityDict subclass list and dict directly.
+* Fix logging configuration in cache.py
 
 2014-11-25  Paul Tagliamonte  <paultag@sunlightfoundation.com>
 
