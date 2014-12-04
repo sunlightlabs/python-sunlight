@@ -22,7 +22,14 @@ def main():
             ])
             fn_args = [g.split(',') for g in args.grouped.get('_')[2:]]
             fn_args = list(itertools.chain.from_iterable(fn_args))
-            resp = getattr(service, args.get(1))(*fn_args, **params)
+            try:
+                resp = getattr(service, args.get(1))(*fn_args, **params)
+            except Exception as e:
+                error_name = e.__class__.__name__ if e.__class__.__name__ != 'type' else 'Error'
+                puts_err(colored.red("{}:".format(error_name)))
+                with indent(4):
+                    puts_err(colored.yellow(e.message.decode()))
+                return
             meta = getattr(resp, '_meta', None)
             if meta:
                 puts(colored.yellow(json.dumps(meta, indent=2)))
