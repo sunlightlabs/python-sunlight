@@ -67,9 +67,27 @@ class TestCongress(unittest.TestCase):
         with self.assertRaises(BadRequestException):
             self.service.get(['foo', 'bar'])
 
-    def test__get_url(self):
+    def test_get_url(self):
         url = self.service._get_url(['bills'], sunlight.config.API_KEY)
 
+        expected_url = "{base_url}/bills?apikey={apikey}".format(
+            base_url='https://congress.api.sunlightfoundation.com',
+            apikey=sunlight.config.API_KEY)
+
+        self.assertEqual(url, expected_url)
+
+    def test_http_vs_https(self):
+        service = Congress(use_https=False)
+
+        http_url = service._get_url(['bills'], sunlight.config.API_KEY)
+        expected_url = "{base_url}/bills?apikey={apikey}".format(
+            base_url='http://congress.api.sunlightfoundation.com',
+            apikey=sunlight.config.API_KEY)
+
+        self.assertEqual(http_url, expected_url)
+
+        service.use_https = True
+        url = service._get_url(['bills'], sunlight.config.API_KEY)
         expected_url = "{base_url}/bills?apikey={apikey}".format(
             base_url='https://congress.api.sunlightfoundation.com',
             apikey=sunlight.config.API_KEY)
@@ -188,7 +206,8 @@ class TestCongress(unittest.TestCase):
         self.assertEqual(len(results), count)
 
     def test_bills(self):
-        results = self.service.bills(congress=113, history={'enacted':True}, bill_type__in='hjres|sjres')
+        results = self.service.bills(congress=113, history={'enacted': True},
+                                     bill_type__in='hjres|sjres')
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
@@ -223,14 +242,11 @@ class TestCongress(unittest.TestCase):
 
     def test_upcoming_bills(self):
         results = self.service.upcoming_bills()
-        if results:
-            page = results._meta.get('page', None)
-            self.assertIsNotNone(page)
-            if page:
-                self.assertEqual(page.get('page', None), 1)
-                self.assertEqual(page.get('count', None), 20)
-        else:
-            self.assertIsNone(results)
+        self.assertIsNotNone(results)
+        page = results._meta.get('page', None)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
 
     def test_committees(self):
         results = self.service.committees()
@@ -279,6 +295,44 @@ class TestCongress(unittest.TestCase):
 
     def test_nominations(self):
         results = self.service.nominations()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_documents(self):
+        results = self.service.documents()
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if page:
+            self.assertEqual(page.get('page', None), 1)
+            self.assertEqual(page.get('count', None), 20)
+        self.assertNotEqual(len(results), 0)
+
+    def test_documents_gao_reports(self):
+        results = self.service.documents(document_type='gao_report')
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if len(results):
+            for item in results:
+                self.assertIsInstance(item, dict)
+                self.assertEqual(item.get('document_type', None), 'gao_report')
+        self.assertNotEqual(len(results), 0)
+
+    def test_documents_ig_reports(self):
+        results = self.service.documents(document_type='ig_report')
+        page = results._meta.get('page', None)
+        self.assertIsNotNone(page)
+        if len(results):
+            for item in results:
+                self.assertIsInstance(item, dict)
+                self.assertEqual(item.get('document_type', None), 'ig_report')
+        self.assertNotEqual(len(results), 0)
+
+    def test_congressional_documents(self):
+        results = self.service.congressional_documents()
         page = results._meta.get('page', None)
         self.assertIsNotNone(page)
         if page:
