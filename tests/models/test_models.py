@@ -16,5 +16,5 @@ class TestEntityList(unittest.TestCase):
 class TestEntityDict(unittest.TestCase):
 
     def test_dict_meta(self):
-        obj = EntityDict({'foo' : 'bar'}, meta={'number': 20})
+        obj = EntityDict({'foo': 'bar'}, meta={'number': 20})
         self.assertIsNotNone(obj._meta)

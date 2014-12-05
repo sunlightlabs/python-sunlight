@@ -3,10 +3,14 @@ try:
 except ImportError:
     import unittest
 
+import httpretty
+import pytest
+import json
+
 from sunlight.services.congress import Congress, flatten_dict, preencode_values
 import sunlight.config
 from sunlight.service import EntityDict
-from sunlight.errors import BadRequestException
+import sunlight.errors
 
 
 class TestCongressHelpers(unittest.TestCase):
@@ -50,7 +54,7 @@ class TestCongressHelpers(unittest.TestCase):
         self.assertEqual(encoded_dict.get('baz'), 'false')
 
 
-class TestCongress(unittest.TestCase):
+class TestCongressBase(unittest.TestCase):
 
     def setUp(self):
         self.bioguide_id = 'L000551'
@@ -63,8 +67,11 @@ class TestCongress(unittest.TestCase):
         self.bill_id = 'hr3590-111'
         self.service = Congress()
 
+
+class TestCongress(TestCongressBase):
+
     def test_get_badpath(self):
-        with self.assertRaises(BadRequestException):
+        with self.assertRaises(sunlight.errors.BadRequestException):
             self.service.get(['foo', 'bar'])
 
     def test_get_url(self):
@@ -339,3 +346,62 @@ class TestCongress(unittest.TestCase):
             self.assertEqual(page.get('page', None), 1)
             self.assertEqual(page.get('count', None), 20)
         self.assertNotEqual(len(results), 0)
+
+
+# class TestCongressWithMocks(TestCongressBase):
+
+#     @classmethod
+#     def tearDownClass(cls):
+#         httpretty.disable()  # disable after local tests are done.
+#         httpretty.reset()    # reset HTTPretty state (clean up registered urls and request history)
+
+#     @pytest.mark.httpretty
+#     def test_malformed_response(self):
+#         httpretty.register_uri(httpretty.GET,
+#                                'https://congress.api.sunlightfoundation.com/legislators',
+#                                body='This is a bad response body',)
+
+#         with self.assertRaises(sunlight.errors.SunlightException):
+#             self.service.legislators()
+
+#     @pytest.mark.httpretty
+#     def test_error_exception(self):
+#         httpretty.register_uri(httpretty.GET,
+#                                'https://congress.api.sunlightfoundation.com/legislators',
+#                                body='500 Server Error',
+#                                status=500)
+
+#         with self.assertRaises(sunlight.errors.BadRequestException):
+#             self.service.legislators()
+
+#     @pytest.mark.httpretty
+#     def test_response_parse(self):
+#         response = {
+#             "results": [{"foo": "bar"}],
+#             "count": 919,
+#             "page": {
+#                 "count": 20,
+#                 "per_page": 20,
+#                 "page": 1
+#             }
+#         }
+#         response_string = json.dumps(response)
+
+#         httpretty.register_uri(httpretty.GET,
+#                                'https://congress.api.sunlightfoundation.com/legislators',
+#                                body=response_string)
+
+#         results = self.service.legislators()
+
+#         self.assertIsInstance(results, list)
+#         self.assertEqual(len(results), 1)
+
+#         self.assertIsNotNone(results._meta)
+#         self.assertIsInstance(results._meta, dict)
+#         self.assertEqual(results._meta.get('count', None), 919)
+
+#         page = results._meta.get('page', None)
+#         self.assertIsInstance(page, dict)
+#         self.assertEqual(page.get('count'), 20)
+#         self.assertEqual(page.get('per_page'), 20)
+#         self.assertEqual(page.get('page'), 1)
