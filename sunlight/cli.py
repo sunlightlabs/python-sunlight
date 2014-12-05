@@ -11,9 +11,12 @@ def main():
     services = sunlight.available_services()
     service = services.get(args.get(0), None)
 
+    def is_exposable_method(object, m):
+        return (not m.startswith('_') and m != 'get' and callable(getattr(service, m, None)))
+
     if service is not None:
         available_methods = [
-            m for m in dir(service) if not m.startswith('_') and m != 'get' and m != 'is_pageable'
+            m for m in dir(service) if is_exposable_method(service, m)
         ]
         if args.get(1) in available_methods:
 
