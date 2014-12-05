@@ -14,7 +14,7 @@ from sunlight.pagination import pageable
 import json
 
 
-API_ROOT = "https://congress.api.sunlightfoundation.com"
+API_DOMAIN = "congress.api.sunlightfoundation.com"
 
 LEGISLATOR_ID_TYPES = (
     'bioguide',
@@ -53,9 +53,32 @@ class Congress(sunlight.service.Service):
     Bindings to the `Congress API <http://sunlightlabs.github.io/congress/>`_.
     Keep in mind this is a thin wrapper around the API so the API documentation
     is the place to look for help on field names and examples.
+
+    By default, the API runs over https. You can set `congress.use_https = False` or
+    `congress = Congress(use_https=False)` to use regular http.
     """
 
     is_pageable = True
+
+    def __init__(self, use_https=True):
+        super(Congress, self).__init__()
+        self._selected_protocol = 'https'
+        self.use_https = use_https
+
+    @property
+    def use_https(self):
+        """
+            This API supports https and regular http. Default is to use https
+        """
+        return self._use_https
+
+    @use_https.setter
+    def use_https(self, value):
+        self._use_https = value
+        if self._use_https:
+            self._selected_protocol = 'https'
+        else:
+            self._selected_protocol = 'http'
 
     @pageable
     def legislators(self, **kwargs):
@@ -307,8 +330,9 @@ class Congress(sunlight.service.Service):
         # join pieces by slashes and add a trailing slash
         endpoint_path = "/".join(pathparts)
 
-        url = "{api_root}/{path}?apikey={apikey}&{url_args}".format(
-            api_root=API_ROOT,
+        url = "{api_protocol}://{api_domain}/{path}?apikey={apikey}&{url_args}".format(
+            api_protocol=self._selected_protocol,
+            api_domain=API_DOMAIN,
             path=endpoint_path,
             apikey=apikey,
             url_args=sunlight.service.safe_encode(url_args)
