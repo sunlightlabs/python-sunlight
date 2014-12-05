@@ -35,7 +35,7 @@ def safe_encode(kwargs):
     return urlencode(kwargs)
 
 
-class Service:
+class Service(object):
     """
     Base class for all the API implementations, as well as a bunch of common
     code on how to actually fetch text over the network.
