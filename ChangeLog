@@ -1,3 +1,10 @@
+2014-12-05 Daniel Cloud <dcloud@sunlightfoundation.com>
+* Add option for choosing http/https in Congress service. Still https by default.
+* Improve detection of exposable methods for services in command line.
+* Write tests that can use httpretty (but keep commented out bc bug in httpretty)
+* Fix subclassing of Service class
+* Expose an error parsing response as a SunlightException (in Congress service)
+
 2014-12-04 Daniel Cloud <dcloud@sunlightfoundation.com>
 * Fix cli parsing of arguments, use newer version of clint.
 * Make EntityList and EntityDict subclass list and dict directly.

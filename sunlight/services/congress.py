@@ -11,6 +11,7 @@ Sunlight Congress API Implementation inside ``python-sunlight``.
 import sunlight.service
 from sunlight.service import EntityDict, EntityList
 from sunlight.pagination import pageable
+from sunlight.errors import SunlightException
 import json
 
 
@@ -340,7 +341,10 @@ class Congress(sunlight.service.Service):
         return url
 
     def _decode_response(self, response):
-        data = json.loads(response)
+        try:
+            data = json.loads(response)
+        except Exception:
+            raise SunlightException('Error parsing response! Something must be wrong with our Congress... API')
         results = data.pop('results', None)
         if results:
             return EntityList(results, data)
