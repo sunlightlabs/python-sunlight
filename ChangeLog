@@ -1,3 +1,7 @@
+2015-01-09  Paul Tagliamonte  <paultag@sunlightfoundation.com>
+
+* Bump version to 1.2.8
+
 2014-12-05  Daniel Cloud  <dcloud@sunlightfoundation.com>
 * Add option for choosing http/https in Congress service. Still https by default.
 * Improve detection of exposable methods for services in command line.
