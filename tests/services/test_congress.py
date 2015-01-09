@@ -253,7 +253,7 @@ class TestCongress(TestCongressBase):
         page = results._meta.get('page', None)
         if page:
             self.assertEqual(page.get('page', None), 1)
-            self.assertEqual(page.get('count', None), 20)
+            self.assertLessEqual(page.get('count', None), 20)
 
     def test_committees(self):
         results = self.service.committees()
