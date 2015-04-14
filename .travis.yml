@@ -1,0 +1,12 @@
+language: python
+python:
+- '2.7'
+- '3.4'
+install: pip install -r dev-requirements.txt
+script: py.test sunlight
+notifications:
+  email:
+  - jturk@sunlightfoundation.com
+env:
+  global:
+    secure: tZG/BC42iOQb0hf7dVLPJkdHlmkwXeecF9MEiLaB1U/Gelna45JZQplO3h0vfzbFRqnOoGPAUWhEtHeenKfcHivdOc07YfdPbSjoUlyXdsIIMvHBd559D7wnKo75tzHMrg8Pgn73CabzoVPa0orjknYe8eyMZxXMXGdKwC7HQSQ=
