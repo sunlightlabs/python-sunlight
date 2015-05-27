@@ -22,7 +22,7 @@ class TestOpenStates(unittest.TestCase):
         self.a_committee_id = 'NCC000169'
         self.a_state_with_events = 'tx'
         self.an_event_id = 'TXE00026474'
-        self.a_boundary_id = 'sldl/nc-1'
+        self.a_boundary_id = 'ocd-division/country:us/state:nc/sldl:1'
 
     def test_bad__get_url(self):
         with self.assertRaises(BadRequestException):
